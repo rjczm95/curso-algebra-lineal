@@ -1,0 +1,24 @@
+---
+title: "Empleo Octave en RStudio"
+author: "Ramon Ceballos"
+date: "13/2/2021"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(engine.path = list(octave ="C:/Program Files/GNU Octave/Octave-6.1.0/mingw64/bin/octave-cli-6.1.0.exe"), echo = TRUE)
+
+```
+
+Vamos a emplear octave según lo dictado arriba.
+
+```{octave }
+z1 = complex(1,2)
+class(z1)
+```
+
+Solo funciona al hacer el knitr.
+

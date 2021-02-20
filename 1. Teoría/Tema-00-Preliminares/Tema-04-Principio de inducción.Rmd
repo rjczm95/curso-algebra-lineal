@@ -1,0 +1,54 @@
+---
+title: "Preliminares en Algebra Lineal"
+author: "Ramon Ceballos"
+date: "16/2/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# 1.Principio de inducción
+
+Se puede comparar con el efecto del domino, donde primero tiramos una ficha y luego caen una tras otra.
+
+<l class = "prop">**Principio de Inducción.**</l> El principio de inducción afirma que si $P(n)$ es una propiedad sobre $n\in\mathbb{N}$ y se cumple que:
+
+- $P(1)$ es cierta (Caso base) para el priemr número.
+
+- Si $P(n)$ es cierta, entonces $P(n+1)$ es cierta (Caso inductivo). Por tanto será cierta para cualquier numero natural.
+
+Entonces $P(n)$ es cierta para todo $n\in\mathbb{N}$.
+
+
+El **principio de Inducción** también es válido si $n\in\mathbb{Z}$ del siguiente modo:
+
+Si $P(n)$ es una propiedad sobre $n\in\mathbb{Z}$, con $n_0\in\mathbb{Z}$ y se cumple que:
+
+- $P(n_0)$ es cierta.
+
+- Si $P(n)$ es cierta, entonces $P(n+1)$ es cierta.
+
+Entonces $P(n)$ es cierta para todo $n\in\mathbb{Z},\ n\ge n_0$.
+
+# 2. Principio de inducción completa
+
+<l class = "prop">**Principio de Inducción completa.**</l> Si $P(n)$ es una propiedad sobre $n\in\mathbb{N}$ y se cumple que:
+
+- $P(1)$ es cierta (Caso base).
+
+- Si $P(n)$ es cierta para $1,2,\dots, n$, entonces $P(n+1)$ es cierta (Caso inductivo).
+
+entonces $P(n)$ es cierta para todo $n\in\mathbb{N}$.
+
+El principio de Inducción completa también es válido si $n\in\mathbb{Z}$ del siguiente modo: 
+
+Si $P(n)$ es una propiedad sobre $n\in\mathbb{Z}$, $n_0\in\mathbb{Z}$ y se cumple que:
+
+- $P(n_0)$ es cierta.
+
+- Si $P(n)$ es cierta para $n_0\le n$, entonces $P(n+1)$ es cierta.
+
+entonces $P(n)$ es cierta para todo $n\in\mathbb{Z}\ n\ge n_0$.
+

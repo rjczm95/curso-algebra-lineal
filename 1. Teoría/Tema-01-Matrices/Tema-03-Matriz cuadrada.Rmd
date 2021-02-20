@@ -1,0 +1,180 @@
+---
+title: "Tema 1 - Matrices"
+author: "Ramon Ceballos"
+date: "20/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# MATRICES CUADRADAS
+
+Nótese que la transposición, en el caso de matrices cuadradas, es una operación interna.
+
+<l class="prop">
+**Transposición como operación interna.**
+</l> La transpuesta de una matriz cuadrada $A\in\mathcal{M}_n(\mathbb{K})$ es otra matriz cuadrada $A^t\in\mathcal{M}_n(\mathbb{K})$
+
+<div class = "dem">
+
+**Demostración**
+
+$$A\in\mathcal{M}_n(\mathbb{K})\equiv A\in\mathcal{M}_{n\times n}(\mathbb{K})\Rightarrow A^t\in\mathcal{M}_{n\times n}$$
+
+</div>
+
+Por lo tanto, tienen sentido las siguientes definiciones.
+
+## 1. Tipos de matrices cuadradas
+
+Sea $A=(a_{ij})\in\mathcal{M}_n(\mathbb{K})$ una matriz cuadrada.
+
+<l class="definition">
+- **Matriz simétrica.**
+</l> $A$ es simétrica si coincide con su transpuesta. Esto causa la simetría de la matriz respecto a su diagonal.
+
+$$A\text{ simétrica }\Leftrightarrow A=A^t\Leftrightarrow a_{ij}=a_{ji}\ \forall i,j$$
+
+<div class="example">
+**Ejemplo 32**
+
+
+$$A = \begin{pmatrix}1&2&3&4\\2&-1&5&6\\3&5&1&7\\4&6&7&-1\end{pmatrix}$$ 
+es una matriz simétrica.
+</div>
+
+<div class="exercise">
+**Ejercicio 19.** Calculad $A^t$ y veréis que $A^t=A$.
+</div>
+
+
+<l class="definition">
+- **Matriz antisimétrica.**
+</l> $A$ es antisimétrica si su transpuesta coincide con su opuesta, lo cual exige que la diagonal esté compuesta únicamente por ceros y que los elementos simétricos sean opuestos entre sí.
+
+$$A\text{ antisimétrica }\Leftrightarrow A^t=-A\Leftrightarrow a_{ij}=-a_{ji}\ \forall i,j$$
+
+<div class="example">
+**Ejemplo 33**
+
+
+$$A = \begin{pmatrix}0&2&3&4\\-2&0&5&6\\-3&-5&0&7\\-4&-6&-7&0\end{pmatrix}$$ 
+es una matriz antisimétrica.
+</div>
+
+<div class="exercise">
+**Ejercicio 20.** Calculad $A^t$ y veréis que $A^t=-A$.
+</div>
+
+
+<l class="definition">
+- **Matriz regular.**
+</l> $A$ es invertible o regular si existe otra matriz cuadrada $A^{-1}\in\mathcal{M}_n(\mathbb{K})$ tal que $AA^{-1}=A^{-1}A=I_n$. Cuando existe esta matriz $A^{-1}$ es siempre única, con la propiedad mencionada y se llama **matriz inversa** de $A$.
+
+<l class = "observ">*Observación.* </l>Nótese que no basta con cumplir solo $AA^{-1}=I_n$ (o solo $A^{-1}A=I_n$) ya que el producto no es en general conmutativo. Por tanto, la matriz inversa ha de verificar que los resultados de los dos productos son la matriz identidad.
+
+
+<div class="example">
+**Ejemplo 34**
+
+$A = \begin{pmatrix}1&1&0\\0&1&0\\1&0&1\end{pmatrix}$ es una matriz regular cuya inversa es $A^{-1}=\begin{pmatrix}1&-1&0\\0&1&0\\-1&1&1\end{pmatrix}$
+</div>
+
+<div class="exercise">
+**Ejercicio 21.** Comprobad que efectivamente $AA^{-1}=A^{-1}A=I_3$
+</div>
+
+
+<l class="definition">
+- **Matriz singular.**
+</l> $A$ es singular si no tiene inversa, es decir, cuando no es regular.
+
+<div class="example">
+**Ejemplo 35**
+
+$$A = \begin{pmatrix}1&2&3\\4&5&6\\7&8&9\end{pmatrix}$$ 
+es una matriz singular. Más adelante, cuando hablemos de determinantes, veremos el por qué.
+</div>
+
+
+<l class="definition">
+- **Matriz ortogonal.**
+</l> $A$ es ortogonal si es regular y además su inversa coincide con su transpuesta. Dicho de otra manera:
+
+$$A\text{ ortogonal }\Leftrightarrow AA^t=A^tA = I_n$$
+
+<div class="example">
+**Ejemplo 36**
+
+$$A = \frac{1}{3}\begin{pmatrix}2&-2&1\\2&1&-2\\1&2&2\end{pmatrix}$$ 
+es una matriz ortogonal ya que:
+
+$$AA^t=\frac{1}{3}\begin{pmatrix}2&-2&1\\2&1&-2\\1&2&2\end{pmatrix}\frac{1}{3}\begin{pmatrix}2&2&1\\-2&1&2\\1&-2&2\end{pmatrix}=\frac{1}{9}\begin{pmatrix}9&0&0\\0&9&0\\0&0&9\end{pmatrix}=I_3$$
+</div>
+
+<div class="exercise">
+**Ejercicio 22.** Comprobad que $A^tA=I_3$
+</div>
+
+
+<l class="prop">
+**Proposición.**
+</l> Sean $A,B\in\mathcal{M}_n(\mathbb{K})$. Entonces si $A$ y $B$ son invertibles, también lo es su producto y se cumple:
+
+$$(AB)^{-1}=B^{-1}A^{-1}$$
+
+<div class="exercise">
+**Ejercicio 23.** Sean:
+$$A = \begin{pmatrix}1&2\\7&8\end{pmatrix}\qquad B=\begin{pmatrix}1&3\\-1&0\end{pmatrix}$$ 
+de donde:
+$$A^{-1} = -\frac{1}{6}\begin{pmatrix}8&-2\\-7&1\end{pmatrix}\qquad B^{-1}=\frac{1}{3}\begin{pmatrix}0&-3\\1&1\end{pmatrix}$$
+Comprobad que $B^{-1}A^{-1}=(AB)^{-1}$
+donde $(AB)^{-1}=-\frac{1}{18}\begin{pmatrix}21&-3\\1&-1\end{pmatrix}$
+</div>
+
+
+<div class = "dem">
+
+**Demostración**
+
+Para probar $(AB)^{-1}=B^{-1}A^{-1}$, lo que haremos será ver que: $$(AB)(B^{-1}A^{-1}) = (B^{-1}A^{-1})(AB) = I_n$$
+
+Por un lado, por la propiedad asociativa y como $B^{-1}$ es la inversa de $B$, tenemos:
+
+$$(AB)(B^{-1}A^{-1}) = A(BB^{-1})A^{-1} = AI_nA^{-1} = AA^{-1}$$
+ya que, recordemos, la matriz identidad $I_n$ actúa como elemento neutro del producto de matrices. Ahora, como $A^{-1}$ es la inversa de $A$, se tiene que:
+
+$$(AB)(B^{-1}A^{-1}) = AA^{-1} = I_n$$ tal y como queríamos demostrar.
+
+</div>
+
+<div class = "exercise">
+
+**Ejercicio 24.** Acabar la demostración siguiendo como modelo la parte que se ha llevado a cabo hasta el momento.
+
+</div>
+
+
+# RESUMEN GENERAL DE MATRICES
+
+Las operaciones anteriores conforman el llamado **álgebra matricial**. Este nombre es adecuado ya que gracias a ellas es posible realizar la manipulación habitual de ecuaciones con matrices igual que se hace con los números reales siempre y cuando se tenga precaución con aquellas propiedades que no se verifican, vistas todas ellas anteriormente.
+
+Por ejemplo, en una ecuación con matrices todo lo que esté sumando pasa al otro término restando y viceversa.
+
+De esta manera, se pueden resolver ecuaciones del tipo: encuentre una matriz $X$ tal que $A+\lambda X=\mu B$ donde $A$ y $B$ son matrices conocidas y $\lambda\ne 0$ y $\mu$ son valores de $\mathbb{K}$ también conocidos. La solución será $X=\frac{1}{\lambda}(\mu B-A)$.
+
+
+Nótese sin embargo que las ecuaciones de la forma $AX=B$ no se pueden manipular de la forma habitual a no ser que la matriz $A$ sea cuadrada e invertible. Entonces se  tendrá $X=A^{-1}B$. Nótese que valdría multiplicar a la izquierda por $A^{-1}$ pero no valdría hacerlo a la derecha. Si la ecuación que tiene es de la forma $XA=B$ entonces, si $A$ es invertible, será $X=BA^{-1}$, multiplicando a la derecha por $A^{-1}$.
+
+
+Se pueden calcular también las potencias $n$-ésimas de las matrices de la forma habitual $A^n=A\cdot A\cdot\cdots A$ ($n$ veces). Nótese que el binomio de Newton para calcular $(A+B)^n$ solo se verifica en los casos en que $A$ y $B$ conmuten. Por ejemplo:
+
+$$(A+B)^2=A^2+AB+BA+B^2$$
+
+Si $A$ y $B$ conmutan, entonces $(A+B)^2=A^2+2AB+B^2$
+
+

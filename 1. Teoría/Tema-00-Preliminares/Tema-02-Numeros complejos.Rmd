@@ -1,0 +1,291 @@
+---
+title: "Preliminares en Algebra Lineal"
+author: "Ramon Ceballos"
+date: "15/2/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(reticulate)
+
+knitr::opts_chunk$set(engine.path = list(octave ="C:/Program Files/GNU Octave/Octave-6.1.0/mingw64/bin/octave-cli-6.1.0.exe"), echo = TRUE)
+```
+
+# 1. Definición números complejos
+
+Los numeros complejos son un tipo especial de cuerpo. Se definen:
+
+<l class = "definition">**Conjunto de Números Complejos**.</l> $\mathbb{C}=\{(a,b):a,b\in\mathbb{R}\}$ dotado de las operaciones:
+
+  - suma: $(a,b)+(c,d) = (a+c,b+d)$ $\qquad a,b,c,d\in\mathbb{R}$
+  - producto: $(a,b)\cdot(c,d) = (ac-bd,ad+bc)$ $\qquad a,b,c,d\in\mathbb{R}$
+  
+Estos números complejos constan de una parte real y de otra parte imaginaria. A continuación, se define la forma binómica de un nº complejo:
+
+<l class = "definition">**Forma Binómica**</l>. Si $z\in\mathbb{C}$ tal que $z=(a,b)$, su forma binómica es $z=a+bi$.
+
+Esto números existen porque no se pueden calcular raíces negativas, siendo $i=\sqrt{-1}$. La forma binómica aparece al definir la unidad imaginaria, $i$:
+
+<l class = "definition">**Unidad Imaginaria**</l>. $i=(0,1)$
+
+Entonces, si $z=(a,b)$, tenemos que:
+$$z=(a,b)=(a,0)+(0,b)=(a,0)+(b,0)\cdot(0,1)=a+bi$$
+
+Separamos y sumamos la parte real e imaginaria según lo dictado en las propiedades de los números complejos. Luego atendiendo a las propiedades del producto se reescribe.
+
+## 1.1 Partes y expresiones de números complejos
+
+<l class = "definition">**Parte Real.**</l> Si $z=a+bi$, Re$(z)=a$
+
+<l class = "definition">**Parte Imaginaria.**</l> Si $z=a+bi$, Im$(z)=b$
+
+<l class = "definition">**Conjugado de z ($\bar{z}$).**</l> Si $z=a+bi$, $\bar{z}=a-bi$. Tendrá la misma parte real, pero la parte imaginaria cambiada de signo.
+
+<l class = "definition">**Módulo.**</l> $|z|=\sqrt{z\cdot\bar{z}}$. La raíz cuadrada del nº complejo multiplicado por su conjugado.La expresión final es $|z|= \sqrt{a^2+b^2}$.
+
+<l class = "definition">**Argumento.**</l> Si $z=a+bi$,  $\text{arg}(z)=\arctan\left(\frac{b}{a}\right)$. Se da en radianes. Se define como el ángulo que forma el vector que une el pto (0,0) con el nº complejo y el eje positivo de los nºs reales.
+
+<l class = "definition">**Argumento principal.**</l> $\text{Arg}(z)\in(-\pi,\pi]$. El que está comprendido entre $(-\pi,\pi]$.
+
+## 1.2 Plano Complejo
+
+Los números complejos se suelen representar en un plano, denominado <l class = "definition">**plano complejo**</l>, donde el eje de las abcisas es el <l class = "definition">**eje Real**</l> y, el de las ordenadas, el <l class = "definition">**eje Imaginario**</l>.
+
+
+<div class = "center">
+![](Images/complex.png)
+
+</div>
+
+## 1.3 Forma polar
+
+Ya hemos visto que los nºs complejos se pueden representar en forma de tupla y en forma binómica. Otra manera de representarlos es en forma polar.
+
+<l class = "definition">**Fórmula de Euler.**</l> $e^{i\theta}=\cos(\theta)+i\sin(\theta)$
+
+<l class = "definition">**Forma polar.**</l> $z=re^{i\varphi}$ donde $r = |z|$ y $\varphi = \text{arg}(z)$
+
+En la fórmula polar $r$ representa el modulo del nº complejo, e $\varphi$ representa el argumento (ángulo).
+
+<div class = "center">
+![](Images/comlpex2.png)
+
+</div>
+
+# 2. Números complejos con `R`
+
+Podemos definir números complejos de diferentes formas:
+
+```{r}
+z1 = 2+1i #Definimos el complejo en forma binómica
+z1
+
+z2 = complex(real = 2, imaginary = -1) #Definimos mediante parte real e imaginaria
+z2
+
+z3 = complex(modulus = 2, argument = pi) #Definimos mediante módulo y argumento (forma polar)
+z3
+```
+
+<l class = "observ">**¡Observación!**</l> Si queremos escribir los números complejos $a+i$ o $a-i$ en `R`, donde $a$ puede ser cualquier número real, lo tenemos que hacer del siguiente modo: `a+1i` o `a-1i`, ya que si no la consola nos devolverá error.
+
+La función **`typeof()`** es útil a la hora de comprobar el tipo de dato con el que estamos trabajando:
+
+```{r}
+typeof(z1)
+typeof(z2)
+typeof(z3)
+```
+
+## 2.1 Obtener diferentes parámetros de números complejos con `R`
+
+Para obtener la *parte real y la parte imaginaria* de cualquier número complejo, utilizamos, respectivamente, las funciones **`Re()` e `Im()`**:
+
+```{r}
+#Parte Real
+Re(z1)
+
+#Parte Imaginaria
+Im(z3) # es menos infinito
+```
+
+El conjugado de un número complejo se obtiene mediante la función **`Conj()`**:
+
+```{r}
+Conj(z1)
+Conj(z2)
+Conj(z3)
+```
+
+Para obtener el módulo y el argumento (principal) de cualquier número complejo, utilizamos, respectivamente, las funciones **`Mod()` y `Arg()`**:
+
+```{r}
+#Módulo
+Mod(z2)
+
+#Argumento principal
+Arg(z3)
+```
+
+## 2.2 Operaciones con números complejos con `R`
+
+Las operaciones básicas con números complejos se realizan del siguiente modo:
+
+```{r}
+z1+z2 #Suma de números complejos
+
+3*z3 #Producto por un escalar
+
+z2*z3 #Producto de números complejos
+```
+
+# 3. Números complejos con `Python`
+
+En primer lugar, tendréis que instalar el paquete de `R` llamado `reticulate` del siguiente modo: 
+
+<div class = "center">
+`install.packages("reticulate")`
+</div>
+
+Si en algúm momento necesitáis instalar una librería de `Python` en `Rstudio`, se debe ejecutar la siguiente función:
+
+<div class = "center">
+`py_install("NombreDelPaquete")`
+</div>
+
+Para poder utilizar `Python` en un Markdown, en el chunk de ajustes deberéis añadir las instrucciones que se muestran a continuación
+
+- `library(reticulate)`
+- `use_python("path de python")`
+
+La primera para cargar la librería `reticulate` y la segunda para ubicar donde está `Python` en nuestro ordenador
+
+## 3.1 Definir números complejos con `Python`
+
+Podemos definir números complejos de diferentes formas:
+
+```{python}
+z1 = 4+3j #Se emplea la j en vez de i
+z1
+
+z2 = complex(1,7)
+z2
+```
+
+<l class = "observ">**¡Observación!**</l> Si queremos escribir los números complejos $a+i$ o $a-i$ en `Python`, donde $a$ puede ser cualquier número real, lo tenemos que hacer del siguiente modo: `a+ji` o `a-ji`, ya que si no la consola nos devolverá error.
+
+La función **`type()`** es útil a la hora de comprobar el tipo de dato con el que estamos trabajando:
+
+```{python}
+type(z1)
+type(z2)
+```
+
+## 3.2 Obtener diferentes parámetros de números complejos con `Python`
+
+Para obtener la parte real y la parte imaginaria de cualquier número complejo, utilizamos, **`.real` y `.imag`**. Estas son propiedades, por ello no se pone paréntesis.
+
+```{python}
+z1.real #Parte real
+z2.imag #Parte imaginaria
+```
+
+El conjugado de un número complejo se obtiene mediante **`.conjugate()`**:
+
+```{python}
+z1.conjugate()
+z2.conjugate()
+```
+
+Para obtener el módulo y el argumento (principal) de cualquier número complejo, utilizamos, respectivamente, las funciones **`abs()` y `cmath.phase()`**:
+
+```{python}
+import cmath
+abs(z1) # modulo del complejo
+
+cmath.phase(z2) #da el argumento
+```
+
+## 3.3 Operaciones con números complejos con `Python`
+
+Las operaciones básicas con números complejos se realizan del siguiente modo:
+
+```{python}
+z1+z2 #Suma de numeros complejos
+5*z2 #Producto por un escalar
+z1*z2 #Producto de numeros complejos
+```
+
+# 4. Números complejos con `Octave` 
+
+Para poder utilizar `Octave` en Markdown deberéis introducir en el chunk de ajustes el siguiente código:
+
+`knitr::opts_chunk$set(echo = TRUE, engine.path = list( octave = "C:/Program Files/GNU Octave/Octave-6.1.0/mingw64/bin/octave-cli-6.1.0.exe"))`
+
+Lo que está entre comillas es la dirección donde se encuentra el lenguaje `Octave` en nuestro ordenador.
+
+<l class = "important">**¡Ojo!**</l> A la hora de utilizar chunks de `Octave`, tendréis que introducir las variables cada vez. Es decir, no se guarda la información de un chunk a otro.
+
+## 4.1 Definir números complejos con `Octave` 
+
+Podemos definir números complejos de diferentes formas:
+
+```{octave}
+z1 = complex(1,2)
+z2 = 2-i
+tipoDato1 = class(z1)
+tipoDato2 = class(z2)
+```
+
+La función **`class()`** es útil a la hora de comprobar el tipo de dato con el que estamos trabajando.
+
+## 4.2 Obtener diferentes parámetros de números complejos con `Octave` 
+
+Para obtener la parte real y la parte imaginaria de cualquier número complejo, utilizamos, respectivamente, las funciones **`real()` e `imag()`**.
+
+```{octave}
+z1 = complex(1,2);
+z2 = 2-i;
+
+real(z1)
+imag(z2)
+```
+
+<l class = "observ">**Observación.**</l> Para trabajar con los números complejos anteriormente definidos, hemos tenido que crearlos de nuevo porque `Octave` trata cada chunk por separado.
+
+El conjugado de un número complejo se obtiene mediante la función **`conj()`**:
+
+```{octave}
+z1 = complex(1,2);
+z2 = 2-i;
+
+conj(z1)
+abs(z2)
+arg(z1)
+angle(z2)
+```
+
+Para obtener el módulo y el argumento (principal) de cualquier número complejo, utilizamos, respectivamente, las funciones **`abs()` y `arg()` o `angle()`**.
+
+## 4.3 Operaciones con números complejos con `Octave` 
+
+Las operaciones básicas con números complejos se realizan del siguiente modo:
+
+```{octave}
+z1 = complex(1,2);
+z2 = 2-i;
+
+#Suma de numeros complejos
+z1+z2
+# Producto por un escalar
+8*z2
+# Producto de numeros complejos
+z1*z2
+```
+
+
+
+
+

@@ -1,0 +1,700 @@
+---
+title: "Tema 1 - Matrices"
+author: "Ramon Ceballos"
+date: "18/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# MATRICES
+
+## 1. Definiciones generales de matrices
+
+### **¿Qué es una matriz?**
+
+<l class="definition">
+**Matriz.**
+</l> Sea $(\mathbb{K},+,.)$ un cuerpo conmutativo y $m,n\ge1$ enteros. Una matriz $m\times n$ sobre $\mathbb{K}$ (o de orden $m\times n$ sobre $\mathbb{K}$) es una tabla formada por elementos de $\mathbb{K}$ dispuestos en $m$ filas y $n$ columnas de la forma:
+
+$$\begin{pmatrix}a_{11} & a_{12} & \cdots & a_{1n}\\  a_{21} & a_{22} & \cdots & a_{2n}\\ \vdots & \vdots & \ddots & \vdots\\ a_{m1} & a_{m2} & \cdots & a_{mn}\\ \end{pmatrix}$$ 
+
+con  $a_{ij}\in\mathbb{K};\ i=1,2,\dots,m;\ j=1,2,\dots,n$.
+
+<l class="definition">
+**Coeficientes de la matriz.**
+</l> Cada $a_{ij}$ se denomina **término, coeficiente o entrada** de la matriz $A$. El primer subíndice, $i$, indica el número de la fila y el segundo, $j$, el de la columna que ocupa el término de la matriz.
+
+<div class="example">
+**Ejemplo 1**
+
+$$A = \begin{pmatrix}5 & 0 & 3\\ 9 & 7 & 11\end{pmatrix}$$
+$A$ es una matriz de orden $2\times 3$ ya que tiene 2 filas y 3 columnas
+
+El elemento $a_{12}=0$, el elemento $a_{23}=11$
+</div>
+
+<div class="exercise">
+**Ejercicio 1.** ¿Cuáles serían los elementos $a_{11}$ y $a_{13}$?
+</div>
+
+Es 5 y 3.
+
+### **¿Dónde están las matrices?**
+
+<l class="definition">
+**Conjunto de matrices.**
+</l> Se denotará por $\mathcal{M}_{m\times n}(\mathbb{K})$ el conjunto de todas las matrices de orden $m \times n$ sobre $\mathbb{K}$.
+
+Una matriz cualquiera de $\mathcal{M}_{m\times n}(\mathbb{K})$ se denotará indistintamente por $A$, $(a_{ij})_{m\times n}$ o $(a_{ij})$.
+
+Cuando $m=n$, el conjunto de todas las matrices de orden $n \times n$, $\mathcal{M}_{n\times n}(\mathbb{K})$, se denota simplemente por $\mathcal{M}_{n}(\mathbb{K})$. Las matrices pertenecientes a este conjunto se dice que son de orden $n$ en vez de $n\times n$. 
+
+### **¿Cuándo dos matrices son iguales?**
+
+<l class="definition">
+**Igualdad de matrices.**
+</l> Dadas dos matrices del mismo orden $m\times n$, $A = (a_{ij})_{m\times n}$ y $B = (b_{ij})_{m\times n}$, son iguales si:
+
+$$a_{ij} = b_{ij}\ \forall i = 1,\dots,m,\ \forall j=1,\dots,n$$
+
+<div class="example">
+**Ejemplo 2**
+
+$$A = \begin{pmatrix}3 & 2 & 1\\ 1& 2& 3\end{pmatrix}\quad B=\begin{pmatrix}3 & 1\\ 2 & 2\\ 1 &3\end{pmatrix}\quad C = \begin{pmatrix}3 & 2 & 1\\ 1& 2& 3\end{pmatrix}\quad D = \begin{pmatrix}3 & 2\\ 1& 2\end{pmatrix}$$
+
+$A$ y $C$ son las únicas matrices que son iguales.
+
+El resto de pares de matrices son diferentes porque tienen órdenes diferentes: $A,C\in\mathcal{M}_{2\times 3}(\mathbb{R})$, $B\in\mathcal{M}_{3\times 2}(\mathbb{R})$ y $D\in\mathcal{M}_{2}(\mathbb{R})$
+</div>
+
+
+## 2. Tipos de Matrices
+
+<l class="definition">
+**Matriz fila.**
+</l> Se denomina matriz fila a toda matriz que consta de una única fila. $$A = (a_{11} \ a_{12}\ a_{13}\ \cdots \ a_{1n})\in\mathcal{M}_{1\times n}(\mathbb{K})$$
+
+<div class="example">
+**Ejemplo 3**
+
+$$A =\begin{pmatrix}1&-2&3&0&-1&2\end{pmatrix}\in\mathcal{M}_{1\times 6}(\mathbb{R})$$
+
+Es una matriz fila (llamado también vector).
+</div>
+
+<l class="definition">
+**Matriz columna.**
+</l> Se denomina matriz columna a toda matriz que consta de una única columna. $$A = \begin{pmatrix}a_{11} \\ a_{21}\\ \vdots \\ a_{m1}\end{pmatrix}\in\mathcal{M}_{m\times 1}(\mathbb{K})$$
+
+<div class="example">
+**Ejemplo 4**
+
+$$A =\begin{pmatrix}1\\0\\2\end{pmatrix}\in\mathcal{M}_{3\times 1}(\mathbb{R})$$
+
+Es una matriz columna.
+</div>
+
+
+<l class="definition">
+**Matriz nula.**
+</l> Se denota como $O$ a la matriz nula, matriz con todos sus coeficientes nulos.
+
+$$O = \begin{pmatrix}0&0&\cdots&0\\0&0&\cdots&0\\\ \vdots & \vdots & \ddots& \vdots\\0&0&\cdots&0\end{pmatrix}\in\mathcal{M}_{m\times n}(\mathbb{K})$$
+
+
+<l class="definition">
+**Matriz cuadrada.**
+</l> Se denomina matriz cuadrada de orden $n$ a toda matriz que consta de $n$ filas y $n$ columnas.
+
+$$A = \begin{pmatrix}a_{11}&a_{12}&\cdots&a_{1n}\\a_{21}&a_{22}&\cdots&a_{2n}\\\ \vdots & \vdots & \ddots& \vdots\\a_{n1}&a_{n2}&\cdots&a_{nn}\end{pmatrix}\in\mathcal{M}_n(\mathbb{K})$$
+
+<div class="example">
+**Ejemplo 5**
+
+$$A =\begin{pmatrix}1 & 2\\0&-1\end{pmatrix}\in\mathcal{M}_2(\mathbb{R})$$
+
+Es una matriz cuadrada de orden 2.
+</div>
+
+### 2.1 Matrices cuadradas
+
+Dentro del ámbito de las matrices cuadradas caben las siguientes definiciones y tipos particulares de matrices:
+
+<l class="definition">
+**Diagonal principal.**
+</l> Se denomina diagonal principal de una matriz cuadrada $A$ a los elementos $a_{ii}$ con $i = 1,\dots, n$.
+
+$$A = \begin{pmatrix}\bf{a_{11}}&a_{12}&\cdots&a_{1n}\\a_{21}&\bf{a_{22}}&\cdots&a_{2n}\\\ \vdots & \vdots & \ddots& \vdots\\a_{n1}&a_{n2}&\cdots&\bf{a_{nn}}\end{pmatrix}\in\mathcal{M}_n(\mathbb{K})$$
+
+
+<l class="definition">
+**Matriz diagonal.**
+</l> Una matriz diagonal es aquella en la cual $a_{ij}=0$ siempre que $i\ne j$.
+
+$$A = \begin{pmatrix}a_{11}&0&\cdots&0\\0&a_{22}&\cdots&0\\\ \vdots & \vdots & \ddots& \vdots\\0&0&\cdots&a_{nn}\end{pmatrix}\in\mathcal{M}_n(\mathbb{K})$$
+
+<div class="example">
+**Ejemplo 6**
+
+$$A=\begin{pmatrix}1&0&0\\0&-2&0\\0&0&5\end{pmatrix}\in\mathcal{M}_3(\mathbb{R})$$
+Es una matriz diagonal de orden 3.
+</div>
+
+
+
+<l class="definition">
+**Matriz escalar.**
+</l> Una matriz escalar es una matriz diagonal en la cual $a_{ii}=\lambda,\ \forall i=1,\dots,n$.
+
+$$A = \begin{pmatrix}\lambda&0&\cdots&0\\0&\lambda&\cdots&0\\\ \vdots & \vdots & \ddots& \vdots\\0&0&\cdots&\lambda\end{pmatrix}\in\mathcal{M}_n(\mathbb{K})$$
+
+<div class="example">
+**Ejemplo 7**
+
+$$A=\begin{pmatrix}7&0&0\\0&7&0\\0&0&7\end{pmatrix}\in\mathcal{M}_3(\mathbb{R})$$
+Es una matriz escalar con escalar $\lambda=7\in\mathbb{R}$ de orden 3.
+</div>
+
+
+<l class="definition">
+**Matriz identidad.**
+</l> Se denomina matriz unidad o matriz identidad de orden $n$, y se denota como $I_n$ a la matriz escalar en la cual todos los elementos de la diagonal son $1$.
+
+$$A = \begin{pmatrix}1&\cdots&0\\ \vdots & \ddots& \vdots\\0&\cdots&1\end{pmatrix}\in\mathcal{M}_n(\mathbb{K})$$
+
+<div class="example">
+**Ejemplo 8**
+
+$$I_2=\begin{pmatrix}1&0\\0&1\end{pmatrix}\qquad I_3 = \begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix}$$
+Son las matrices identidad de orden 2 y 3, respectivamente
+</div>
+
+<l class="definition">
+**Matriz triangular superior.**
+</l> Se denomina matriz triangular superior a toda matriz en la cual $a_{ij}=0,\ \forall i>j$. Es decir, todos los elementos situados por debajo de la diagonal principal son nulos.
+
+$$A = \begin{pmatrix}a_{11}&a_{12}&\cdots&a_{1n}\\0&a_{22}&\cdots&a_{2n}\\\ \vdots & \vdots & \ddots& \vdots\\0&0&\cdots&a_{nn}\end{pmatrix}\in\mathcal{M}_n(\mathbb{K})$$
+
+
+<l class="definition">
+**Matriz triangular inferior.**
+</l> Se denomina matriz triangular inferior a toda matriz en la cual $a_{ij}=0,\ \forall i<j$. Es decir, todos los elementos situados por encima de la diagonal principal son nulos.
+
+$$A = \begin{pmatrix}a_{11}&0&\cdots&0\\a_{21}&a_{22}&\cdots&0\\\ \vdots & \vdots & \ddots& \vdots\\a_{n1}&a_{n2}&\cdots&a_{nn}\end{pmatrix}\in\mathcal{M}_n(\mathbb{K})$$
+
+
+**Ejemplo 9**
+
+Esta es una matriz triangular superior de orden 4.
+
+$$A = \begin{pmatrix}1&4&-3&2\\0&3&2&5\\0&0&8&-1\\0&0&0&-7\end{pmatrix}$$
+
+y esta es una matriz triangular inferior también de orden 4.
+
+$$B = \begin{pmatrix}1&0&0&0\\7&3&0&0\\1&-1&1&0\\5&8&9&3\end{pmatrix}$$
+
+### 2.2 Caso general
+
+Para matrices en general (no necesariamente cuadradas) se mantendrá la denominación de matriz triangular superior cuando $a_{ij}=0,\forall\ i>j$. Más adelante se estudiarán en profundidad unos tipos especiales de estas matrices (las matrices escalonadas) que tendrán una importancia determinante en nuestros estudios.
+
+Las matrices triangulares superiores, si no son cuadradas, se corresponden con los siguientes casos, dependiendo si $m<n$ o $n<m$ respectivamente:
+
+$$\begin{pmatrix}a_{11}&a_{12}&\cdots&a_{1m}&\cdots&a_{1n}\\0&a_{22}&\cdots&a_{2m}&\cdots&a_{2n}\\\vdots & \vdots & \ddots& \vdots&\ddots&\vdots\\0&0&\cdots&a_{mm}&\cdots&a_{mn}\end{pmatrix}\quad \begin{pmatrix}a_{11}&a_{12}&\cdots&a_{1n}\\0&a_{22}&\cdots&a_{2n}\\\vdots & \vdots & \ddots& \vdots\\0&0&\cdots&a_{nn}\\0&0&\cdots&0\\\vdots&\vdots&\ddots&\vdots\\0&0&\cdots&0\end{pmatrix}$$
+
+**Ejemplo 10**
+
+Estas son matrices triangulares superiores de orden $4\times 6$ y $5\times 3$ respectivamente:
+
+$$A = \begin{pmatrix}1&4&-3&2&3&1\\0&3&2&5&2&-1\\0&0&8&-1&2&-2\\0&0&0&-7&1&3\end{pmatrix}\qquad B = \begin{pmatrix}1&3&-1\\0&3&5\\0&0&1\\0&0&0\\0&0&0\end{pmatrix}$$
+
+## 3. Operaciones con matrices
+
+### 3.1 Suma
+
+<l class="definition">
+**Suma de matrices.**
+</l> La suma de dos matrices $A$ y $B$ solo es posible si ambas son del mismo orden $m\times n$, entonces se suman término a término. Es decir, dadas $A=(a_{ij})_{m\times n}$ y $B=(b_{ij})_{m\times n}$, se define la suma de $A$ y $B$ como la matriz:
+
+$$C = (c_{ij})_{m\times n}\ \text{ donde}\  c_{ij}=a_{ij}+b_{ij},\\ \forall i=1,\dots,m\ \forall j=1,\dots,n$$ 
+
+
+**Ejemplo 11**
+
+Sean:
+$$A = \begin{pmatrix}3&5&-2&0\\0&1&2&-1\\3&2&7&4\end{pmatrix}\qquad B=\begin{pmatrix}1&-4&5&2\\3&2&-4&6\\1&-3&-5&0\end{pmatrix}$$
+
+entonces la suma es:
+
+$$A+B = \begin{pmatrix}4&1&3&2\\3&3&-2&5\\4&-1&2&4\end{pmatrix}$$
+
+
+
+### 3.2 Producto de un escalar por matriz
+
+<l class="definition">
+**Producto por un escalar.**
+</l> Sean $\lambda\in\mathbb{K}$ y $A=(a_{ij})_{m\times n}\in\mathcal{M}_{m\times n}(\mathbb{K})$, se define el producto $\lambda A$ como una nueva matriz de orden $m\times n$ dada por:
+$$\lambda A = (\lambda\cdot a_{ij})_{m\times n}$$
+
+<div class="example">
+**Ejemplo 12**
+
+Dados $\lambda = 3$ y $A=\begin{pmatrix}1&2&3\\4&5&6\end{pmatrix}$, entonces:
+
+$$\lambda A=3A = \begin{pmatrix}3&6&9\\12&15&18\end{pmatrix}$$
+</div>
+
+### 3.3 Producto de matrices
+
+<l class="definition">
+**Producto de matrices.**
+</l> Para poder realizar el producto de una matriz $A$ por una matriz $B$, el número de columnas de $A$ ha de coincidir con el número de filas de $B$, entonces cada entrada $ij$ de la matriz producto se obtiene multiplicando la fila $i$ de $A$ por la columna $j$ de $B$ y sumando los números resultantes.
+
+Concretamente, si $A\in\mathcal{M}_{m\times n}(\mathbb{K})$ y $B\in\mathcal{M}_{n\times p}(\mathbb{K})$, el producto $AB$ es una  matriz $C\in\mathcal{M}_{m\times p}(\mathbb{K})$ definida como:
+
+$$\begin{pmatrix}a_{11}&a_{12}&a_{13}&\cdots & a_{1n}\\ a_{21}&a_{22}&a_{23}&\cdots & a_{2n}\\\vdots&\vdots&\vdots&\ddots&\vdots\\a_{i1}&a_{i2}&a_{i3}&\cdots & a_{in}\\\vdots&\vdots&\vdots&\ddots&\vdots\\a_{m1}&a_{m2}&a_{m3}&\cdots & a_{mn}\end{pmatrix}\begin{pmatrix}b_{11}&b_{12}&\cdots&b_{1j}&\cdots & b_{1p}\\ b_{21}&b_{22}&\cdots&b_{2j}&\cdots & b_{2p}\\b_{31}&b_{32}&\cdots&b_{3j}&\cdots & b_{3p}\\\vdots&\vdots&\ddots&\vdots&\ddots&\vdots\\b_{n1}&b_{n2}&\cdots&b_{nj}&\cdots & b_{np}\end{pmatrix} = (c_{ij})$$
+
+con $c_{ij}=a_{i1}b_{1j}+a_{i2}b_{2j}+\cdots+a_{in}b_{nj}=\sum_{k=1}^na_{ik}b_{kj}$. Nótese que $A_{m\times \textbf{n}}\cdot B_{\textbf{n}\times p}=C_{m\times p}$.
+
+**Ejemplo 13**
+
+Dadas:
+$$A=\begin{pmatrix}-1&2&3&1\\3&-2&1&0\end{pmatrix}\qquad B=\begin{pmatrix}2&1\\0&2\\-1&3\\0&1\end{pmatrix}$$
+
+Entonces, el producto de $A$ por $B$ es una matriz cuadrada de orden 2:
+
+$$AB =  \begin{pmatrix}-1\cdot 2+2\cdot 0 + 3\cdot(-1)+1\cdot 0&-1\cdot 1+2\cdot2+3\cdot3+1\cdot 1\\3\cdot2-2\cdot0+1\cdot(-1)+0\cdot0&3\cdot1-2\cdot2+1\cdot3+0\cdot1\end{pmatrix} =\begin{pmatrix}-5&13\\5&2\end{pmatrix}$$
+
+Mientras que el producto de $B$ por $A$ es una matriz de orden 4:
+
+
+$$BA=\begin{pmatrix}2\cdot(-1)+1\cdot3&2\cdot2+1\cdot(-2)&2\cdot3+1\cdot1&2\cdot1+1\cdot0\\0\cdot(-1)+2\cdot3&0\cdot2+2\cdot(-2)&0\cdot3+2\cdot1&0\cdot1+2\cdot0\\-1\cdot(-1)+3\cdot3&-1\cdot2+3\cdot(-2)&-1\cdot3+3\cdot1&-1\cdot1+3\cdot0\\0\cdot(-1)+1\cdot3&0\cdot2+1\cdot(-2)&0\cdot3+1\cdot1&0\cdot1+1\cdot0\end{pmatrix}=$$
+
+$$\begin{pmatrix}1&2&7&2\\6&-4&2&0\\10&-8&0&-1\\3&-2&1&0\end{pmatrix}$$
+
+### 3.4 Traza de una matriz
+
+<l class="definition">
+**Traza.**
+</l> Es la suma de los elementos de la diagonal principal. Solo existe para matrices cuadradas.
+
+$$A = \begin{pmatrix}\bf{a_{11}}&a_{12}&\cdots&a_{1n}\\a_{21}&\bf{a_{22}}&\cdots&a_{2n}\\\ \vdots & \vdots & \ddots& \vdots\\a_{n1}&a_{n2}&\cdots&\bf{a_{nn}}\end{pmatrix}\in\mathcal{M}_n(\mathbb{K})$$
+
+$$\text{tr}(A) = a_{11}+\cdots+a_{nn} = \sum_{i = 1}^na_{ii}$$
+
+## 4. Propiedades características de matrices
+
+Siempre que tengan sentido las operaciones indicadas (es decir, que las matrices son de los órdenes adecuados para poder realizarlas) se satisfacen las siguientes propiedades.
+
+
+### 4.1 Propiedades de la suma de matrices
+
+<l class="prop">
+- **Propiedad conmutativa.**
+</l> $A+B=B+A$
+
+<div class = "example">
+**Ejemplo 14**
+
+$$A = \begin{pmatrix}2&3&5\\3&2&-1\end{pmatrix}\qquad B=\begin{pmatrix}1&0&-2\\-1&3&6\end{pmatrix}$$
+
+$$A+B = \begin{pmatrix}3&3&3\\2&5&5\end{pmatrix} = B+A$$
+<div>
+
+**Demostración**
+
+Dadas dos matrices $A,B\in\mathcal{M}_{m\times n}$, con $A = (a_{ij})$, $B=(b_{ij})$, queremos demostrar que: $$A+B = B+A$$
+
+Por un lado, $A+B = C$ donde $C = (c_{ij})$ con $c_{ij} = a_{ij}+b_{ij}\quad\forall i=1,\dots,m,\ j=1,\dots,n$
+
+Por otro lado, $B+A = D$ donde $D = (d_{ij})$ con $d_{ij} = b_{ij}+a_{ij}\quad\forall i=1,\dots,m,\ j=1,\dots,n$
+
+Pero $a_{ij}+b_{ij} = b_{ij}+a_{ij}$ ya que $a_{ij},b_{ij}\in\mathbb{K}$ con $\mathbb{K}$ un cuerpo.
+
+Por lo tanto: $$c_{ij} = d_{ij}\quad\forall i=1,\dots,m,\ j=1,\dots,n\Leftrightarrow C = D $$
+
+
+<l class="prop">
+- **Propiedad asociativa de la suma.**
+</l> $(A+B)+C=A+(B+C)$
+
+<div class="example">
+**Ejemplo 15**
+
+$$A = \begin{pmatrix}2&3\\3&2\\-1&0\end{pmatrix}\qquad B=\begin{pmatrix}1&0\\3&6\\3&-2\end{pmatrix}\qquad C = \begin{pmatrix}-2&4\\0&5\\7&2\end{pmatrix}$$
+
+$$(A+B)+C = \begin{pmatrix}3&3\\6&8\\2&-2\end{pmatrix}+ \begin{pmatrix}-2&4\\0&5\\7&2\end{pmatrix}= \begin{pmatrix}1&7\\6&13\\9&0\end{pmatrix}=\begin{pmatrix}2&3\\3&2\\-1&0\end{pmatrix}+\begin{pmatrix}-1&4\\3&11\\10&0\end{pmatrix} = A+(B+C)$$
+</div>
+
+**Demostración**
+
+Dadas las matrices $A,B,C\in\mathcal{M}_{m\times n}$, con $A = (a_{ij})$, $B=(b_{ij})$, $C = (c_{ij})$ queremos demostrar que: $$(A+B) + C = A+(B+C)$$
+
+Por un lado, $(A+B) + C = D$ donde $D = (d_{ij})$ con $d_{ij} =( a_{ij}+b_{ij}) +c_{ij}\quad\forall i=1,\dots,m,\ j=1,\dots,n$
+
+Por otro lado, $A+(B+C) = E$ donde $E = (e_{ij})$ con $e_{ij} = a_{ij}+(b_{ij}+c_{ij})\quad\forall i=1,\dots,m,\ j=1,\dots,n$
+
+Pero $(a_{ij}+b_{ij})+c_{ij} = a_{ij}+(b_{ij}+c_{ij})$ ya que $a_{ij},b_{ij},c_{ij}\in\mathbb{K}$ con $\mathbb{K}$ un cuerpo.
+
+Por lo tanto: $$d_{ij} = e_{ij}\quad\forall i=1,\dots,m,\ j=1,\dots,n\Leftrightarrow D= E $$
+
+
+
+<l class="prop">
+- **Elemento neutro de la suma o elemento nulo.**
+</l> $A+O=O+A=A$
+
+<div class="example">
+**Ejemplo 16**
+
+$$A = \begin{pmatrix}2&3&-1\\-1&0&4\\1&-3&7\end{pmatrix}$$
+
+$$A+O = \begin{pmatrix}2&3&-1\\-1&0&4\\1&-3&7\end{pmatrix}+\begin{pmatrix}0&0&0\\0&0&0\\0&0&0\end{pmatrix}=\begin{pmatrix}2&3&-1\\-1&0&4\\1&-3&7\end{pmatrix}=A$$
+$$O+A = \begin{pmatrix}0&0&0\\0&0&0\\0&0&0\end{pmatrix}+\begin{pmatrix}2&3&-1\\-1&0&4\\1&-3&7\end{pmatrix}=\begin{pmatrix}2&3&-1\\-1&0&4\\1&-3&7\end{pmatrix}=A$$
+</div>
+
+**Demostración**
+
+Dadas las matrices $A,O\in\mathcal{M}_{m\times n}$, con $A = (a_{ij})$ y $O$ la matriz nula, queremos demostrar que: $$A+O = A$$
+
+Sabemos que, $A+0 = B$ donde $B = (b_{ij})$ con $b_{ij} = a_{ij}+0\quad\forall i=1,\dots,m,\ j=1,\dots,n$
+
+Pero $a_{ij} + 0 = a_{ij}$ ya que $a_{ij}\in\mathbb{K}$ con $\mathbb{K}$ un cuerpo y 0 es el elemento neutro para la suma.
+
+Por lo tanto: $$ A+O= A $$
+
+<l class="prop">
+- **Matriz opuesta.**
+</l> $\forall\ A=(a_{ij})_{m\times n}$ existe $-A = (-a_{ij})_{m\times n}$ tal que: $$A+(-A)=(-A)+A=O$$
+
+<div class="example">
+**Ejemplo 17**
+
+$$A = \begin{pmatrix}2&3&-1&2\\3&2&5&0\\-1&7&0&4\\-4&1&-3&7\end{pmatrix}\Rightarrow -A = \begin{pmatrix}-2&-3&1&-2\\-3&-2&-5&0\\1&-7&0&-4\\4&-1&3&-7\end{pmatrix}$$
+</div>
+
+**Demostración**
+
+Dadas las matrices $A,-A\in\mathcal{M}_{m\times n}$, con $A = (a_{ij}),\ -A = (-a_{ij})$, queremos demostrar que: $$A+(-A) = 0$$
+
+Sabemos que, $A+(-A) = B$ donde $B = (b_{ij})$ con $b_{ij} = a_{ij}+(-a_{ij})\quad\forall i=1,\dots,m,\ j=1,\dots,n$.
+
+Pero $a_{ij} + (-a_{ij}) = 0$ ya que $a_{ij}\in\mathbb{K}$ con $\mathbb{K}$ un cuerpo y $-a_{ij}$ es el elemento opuesto de $a_{ij}$.
+
+Por lo tanto: $$ A+(-A)= 0 $$
+
+
+### 4.2 Propiedades del producto de matrices
+
+<l class="prop">
+- **Propiedad asociativa del producto.**
+</l> $(AB)C=A(BC)$
+
+Sea $A\in\mathcal{M}_{m\times n}(\mathbb{K}),\ B\in\mathcal{M}_{n\times p}(\mathbb{K}),\ C\in\mathcal{M}_{p\times q}(\mathbb{K})$.
+
+Se puede realizar el producto $AB$, el resultado será una matriz $m\times p$ que se podrá multiplicar por $C$ y el producto $(AB)C$ será una matriz $m\times q$.
+
+Análogamente, se puede realizar el producto $BC$ que dará una matriz $n\times q$ y se puede realizar el producto $A(BC)$ que dará una matriz $m\times q$.
+
+Entonces, la propiedad se puede expresar como:
+$$(AB)C=A(BC)$$
+
+<div class="example">
+**Ejemplo 18**
+
+$$A = \begin{pmatrix}2&3\\5&2\end{pmatrix}\qquad B=\begin{pmatrix}1&0&-1\\2&3&5\end{pmatrix}\qquad C=\begin{pmatrix}2&0\\-1&-2\\0&3\end{pmatrix}$$
+
+$$(AB)C=\begin{pmatrix}8&9&13\\9&6&5\end{pmatrix}\begin{pmatrix}2&0\\-1&-2\\0&3\end{pmatrix}=\begin{pmatrix}7&21\\12&3\end{pmatrix}$$
+$$A(BC)=\begin{pmatrix}2&3\\5&2\end{pmatrix}\begin{pmatrix}2&-3\\1&9\end{pmatrix}=\begin{pmatrix}7&21\\12&3\end{pmatrix}$$
+</div>
+
+**Demostración**
+
+Dadas $A\in\mathcal{M}_{m\times n}$, $B\in\mathcal{M}_{n\times p}$, $C\in\mathcal{M}_{p\times q}$ con $A = (a_{ij})$, $B = (b_{jk})$, $C = (c_{kl})$ tenemos que:
+
+$$AB = D\Rightarrow d_{ik} = \sum_{j = 1}^n a_{ij}b_{jk}$$
+$$(AB)C = DC = E\Rightarrow e_{il} = \sum_{k = 1}^pd_{ik}c_{kl} = \sum_{k = 1}^p\left(\sum_{j = 1}^n a_{ij}b_{jk}\right)c_{kl}$$
+
+Por otro lado:
+
+$$BC = F\Rightarrow f_{jl} = \sum_{k = 1}^lb_{jk}c_{kl}$$
+
+$$A(BC) = AF = G\Rightarrow g_{il} = \sum_{j=1}^na_{ij}f_{jl} = \sum_{j=1}^na_{ij}\left(\sum_{k = 1}^pb_{jk}c_{kl}\right)$$
+
+Ahora, la pregunta es $E = G$. De momento vamos bien ya que $E,G\in\mathcal{M}_{n\times q}$. Por su parte:
+
+$$e_{il} = \sum_{k = 1}^p\left(\sum_{j = 1}^n a_{ij}b_{jk}\right)c_{kl} = \sum_{k = 1}^p\sum_{j = 1}^n a_{ij}b_{jk}c_{kl} = \sum_{j = 1}^n\sum_{k = 1}^p a_{ij}b_{jk}c_{kl} = \sum_{j = 1}^na_{ij}\sum_{k = 1}^p b_{jk}c_{kl} = \sum_{j = 1}^na_{ij}\left(\sum_{k = 1}^p b_{jk}c_{kl}\right) = g_{il}$$
+
+y esta cadena de igualdades es cierta por las propiedades del cuerpo $\mathbb{K}$ vistas en el `Tema 0`.
+
+
+
+<div class = "exercise">
+**Ejercicio 3**
+
+Se consideran las matrices con coeficientes en $\mathbb{R}$:
+
+$$A = \begin{pmatrix}1&2\\3&4\end{pmatrix}\quad B = \begin{pmatrix}1&0&1\\0&1&0\end{pmatrix}\quad C = \begin{pmatrix}1&-1\\0&1\\-1&0\end{pmatrix}$$
+
+Probar que $(AB)C = A(BC)$.
+
+</div>
+
+En primer lugar:
+
+$$AB = \begin{pmatrix}1&2\\3&4\end{pmatrix}\begin{pmatrix}1&0&1\\0&1&0\end{pmatrix} = \begin{pmatrix}1 & 2 & 1\\3 & 4 & 3\end{pmatrix}$$
+
+Por tanto:
+
+$$(AB)C = \begin{pmatrix}1 & 2 & 1\\3 & 4 & 3\end{pmatrix}\begin{pmatrix}1&-1\\0&1\\-1&0\end{pmatrix} = \begin{pmatrix}0 & 1\\0 & 1\end{pmatrix}$$
+
+Por otro lado:
+
+$$BC = \begin{pmatrix}1&0&1\\0&1&0\end{pmatrix}\begin{pmatrix}1&-1\\0&1\\-1&0\end{pmatrix} = \begin{pmatrix}0 & -1\\0 & 1\end{pmatrix}$$
+
+Con lo cual:
+
+$$A(BC) = \begin{pmatrix}1&2\\3&4\end{pmatrix}\begin{pmatrix}0 & -1\\0 & 1\end{pmatrix} = \begin{pmatrix}0 & 1\\0 & 1\end{pmatrix}$$
+
+Entonces, se ve que $(AB)C = A(BC)$.
+
+
+<l class="prop">
+- **Propiedad distributiva del producto respecto de la suma.**
+</l> $A(B+C) = AB+AC$
+
+<div class="example">
+**Ejemplo 19**
+
+$$A = \begin{pmatrix}2&3\\5&2\end{pmatrix}\qquad B=\begin{pmatrix}1&0&-1\\2&3&5\end{pmatrix}\qquad C=\begin{pmatrix}2&0&3\\-1&-2&0\end{pmatrix}$$
+$$A(B+C) = \begin{pmatrix}2&3\\5&2\end{pmatrix}\begin{pmatrix}3&0&2\\1&1&5\end{pmatrix} =\begin{pmatrix}9&3&19\\17&2&20\end{pmatrix} $$
+
+$$AB+AC = \begin{pmatrix}8&9&13\\9&6&5\end{pmatrix}+\begin{pmatrix}1&-6&6\\8&-4&15\end{pmatrix} = \begin{pmatrix}9&3&19\\17&2&20\end{pmatrix}$$
+</div>
+
+<div class = "exercise">
+**Ejercicio 4**
+
+Escribe paso a paso la demostración de esta propiedad tomando como ejemplo las demostraciones anteriores.
+
+</div>
+
+
+<l class="prop">
+- **Elemento neutro del producto o elemento unidad.**
+</l>  $$AI_n = A\qquad I_nB = B$$
+
+Sean $A\in\mathcal{M}_{m\times n}(\mathbb{K})$ y $B\in\mathcal{M}_{n\times p}(\mathbb{K})$.
+
+Se puede realizar el producto $AI_n$ y el resultado será una matriz $m\times n$.
+
+Análogamente, se puede realizar el producto $I_nB$ y el resultado será una matriz $n\times p$.
+
+Además, se puede comprobar que se verifica que:
+$$AI_n = A\qquad\text{y}\qquad I_nB=B$$
+
+<div class ="example">
+**Ejemplo 20**
+
+$$A = \begin{pmatrix}2&3\\3&2\\-1&0\end{pmatrix}\qquad B=\begin{pmatrix}1&0&3&-1&5\\3&6&-1&-4&2\\3&-2&1&-1&0\end{pmatrix}$$
+
+$$AI_2 = \begin{pmatrix}2&3\\3&2\\-1&0\end{pmatrix}\begin{pmatrix}1&0\\0&1\end{pmatrix} = \begin{pmatrix}2&3\\3&2\\-1&0\end{pmatrix} = A$$
+
+$$I_3B = \begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix}\begin{pmatrix}1&0&3&-1&5\\3&6&-1&-4&2\\3&-2&1&-1&0\end{pmatrix}=\begin{pmatrix}1&0&3&-1&5\\3&6&-1&-4&2\\3&-2&1&-1&0\end{pmatrix}=B$$
+</div>
+
+<div class = "exercise">
+
+**Ejercicio 5**
+
+Considerad las matrices con coeficientes en $\mathbb{R}$:
+
+$$A=\begin{pmatrix}1&0&1\\0&1&0\end{pmatrix}\quad B = \begin{pmatrix}1&-1\\0&1\\-1&0\end{pmatrix}$$
+
+Probar que:
+
+$$AI_3 = A$$
+$$I_3B=B$$
+
+</div>
+
+<div class = "exercise">
+**Ejercicio 6**
+
+Escribe paso a paso la demostración de esta propiedad tomando como ejemplo las demostraciones anteriores.
+
+</div>
+
+<l class = "observ">**Observación.**</l>Nótese que, en particular, para matrices cuadradas $A\in\mathcal{M}_n(\mathbb{K})$, $I_n$ es un elemento neutro del producto, es decir: $AI_n=I_nA=A$ para toda matriz cuadrada $A$ de orden $n$.
+
+<div class="example">
+**Ejemplo 21**
+
+$$AI_2 = \begin{pmatrix}2&3\\-1&0\end{pmatrix}\begin{pmatrix}1&0\\0&1\end{pmatrix} = \begin{pmatrix}2&3\\-1&0\end{pmatrix} =\begin{pmatrix}1&0\\0&1\end{pmatrix}\begin{pmatrix}2&3\\-1&0\end{pmatrix}=I_2A$$
+</div>
+
+<div class = "exercise">
+**Ejercicio 7**
+
+Escribe paso a paso la demostración de esta propiedad tomando como ejemplo las demostraciones anteriores.
+
+</div>
+
+### 4.3 Propiedades asociativas y distributivas de matrices
+
+<l class="prop">
+- **Propiedad distributiva del producto por escalares respecto de la suma.**
+</l> $$\lambda(A+B) = \lambda A+\lambda B,\ \lambda\in\mathbb{K}$$
+
+<div class = "exercise">
+**Ejercicio 8**
+
+Escribe paso a paso la demostración de esta propiedad tomando como ejemplo las demostraciones anteriores.
+
+</div>
+
+<div class="example">
+**Ejemplo 22**
+
+$$A = \begin{pmatrix}7&1&5\\-1&-2&6\end{pmatrix},\  B=\begin{pmatrix}2&1&0\\-1&-2&-3\end{pmatrix}\in\mathcal{M}_{2\times 3}(\mathbb{R})\qquad \lambda = 3\in\mathbb{R}$$
+
+$$\lambda(A+B)=3\begin{pmatrix}9&2&5\\-2&-4&3\end{pmatrix}=\begin{pmatrix}27&6&15\\-6&-12&9\end{pmatrix}$$
+$$\lambda A+\lambda B=\begin{pmatrix}21&3&15\\-3&-6&18\end{pmatrix}+\begin{pmatrix}6&3&0\\-3&-6&-9\end{pmatrix} =\begin{pmatrix}27&6&15\\-6&-12&9\end{pmatrix} $$
+</div>
+
+
+<l class="prop">
+- **Elemento neutro del producto por escalar.**
+</l> $1A=A$
+
+<div class="example">
+**Ejemplo 23**
+
+$$A = \begin{pmatrix}3&-5&2&0&1\\7&4&1&-3&-2\\6&9&-5&1&0\end{pmatrix}$$
+
+$$1A = \begin{pmatrix}1\cdot3&1\cdot(-5)&1\cdot2&1\cdot0&1\cdot1\\1\cdot7&1\cdot4&1\cdot1&1\cdot(-3)&1\cdot(-2)\\1\cdot6&1\cdot9&1\cdot(-5)&1\cdot1&1\cdot0\end{pmatrix}=\begin{pmatrix}3&-5&2&0&1\\7&4&1&-3&-2\\6&9&-5&1&0\end{pmatrix}=A$$
+</div>
+
+
+**Demostración**
+
+Por definición, $$1A = (1\cdot a_{ij}) = (a_{ij}) = A$$
+
+ya que $a_{ij}\in\mathbb{K}$ y $1$ es el elemento neutro para el producto
+
+
+
+
+<l class="prop">
+- **Propiedades distributiva del producto por matrices respecto de la suma de escalares.**
+</l>
+
+$$(\lambda +\mu)A = \lambda A+\mu A,\ \lambda,\mu\in\mathbb{K}$$
+
+<div class = "exercise">
+**Ejercicio 9**
+
+Escribe paso a paso la demostración de esta propiedad tomando como ejemplo las demostraciones anteriores.
+
+</div>
+
+
+<div class="example">
+**Ejemplo 24**
+
+$$A =\begin{pmatrix}1&-1\\0&1\end{pmatrix}\qquad \lambda=5,\mu=-7$$
+
+$$(\lambda +\mu)A=-2A = \begin{pmatrix}-2&2\\0&-2\end{pmatrix}$$
+
+$$\lambda A+\mu A=5A+(-7)A=\begin{pmatrix}5&-5\\0&5\end{pmatrix}+\begin{pmatrix}-7&7\\0&-7\end{pmatrix}=\begin{pmatrix}-2&2\\0&-2\end{pmatrix}$$
+</div>
+
+<l class="prop">
+- **Propiedad asociativa del producto de escalares por una matriz.**
+</l> $$(\lambda\mu)A = \lambda(\mu A), \ \lambda,\mu\in\mathbb{K}$$
+
+<div class = "exercise">
+**Ejercicio 10**
+
+Escribe paso a paso la demostración de esta propiedad tomando como ejemplo las demostraciones anteriores.
+
+</div>
+
+
+
+<div class="example">
+**Ejemplo 25**
+
+$$A =\begin{pmatrix}1&-1\\0&1\end{pmatrix}\qquad \lambda=5,\mu=-7$$
+$$(\lambda\mu)A = -35A = \begin{pmatrix}-35&35\\0&-35\end{pmatrix}$$ 
+$$\lambda(\mu A)=5(-7A)=5\begin{pmatrix}-7&7\\0&-7\end{pmatrix}=\begin{pmatrix}-35&35\\0&-35\end{pmatrix}$$
+</div>
+
+
+<l class="prop">
+- **Propiedad asociativa del producto de un escalar por dos matrices.**
+</l> $$\lambda(AB) = (\lambda A)B,\ \lambda\in\mathbb{K}$$
+
+<div class="example">
+**Ejemplo 26**
+$$A = \begin{pmatrix}2&3\\5&2\end{pmatrix}\qquad B=\begin{pmatrix}1&0&-1\\2&3&5\end{pmatrix}\qquad \lambda=3$$
+$$(\lambda A)B=\begin{pmatrix}6&9\\15&6\end{pmatrix}\begin{pmatrix}1&0&-1\\2&3&5\end{pmatrix}=\begin{pmatrix}24&27&39\\27&18&15\end{pmatrix}$$
+$$\lambda(AB)=3\cdot\begin{pmatrix}8&9&13\\9&6&5\end{pmatrix}=\begin{pmatrix}24&27&39\\27&18&15\end{pmatrix}$$
+</div>
+
+<div class = "exercise">
+**Ejercicio 11**
+
+Escribe paso a paso la demostración de esta propiedad tomando como ejemplo las demostraciones anteriores.
+
+</div>
+
+### 4.4 Excepciones de cumplimiento de propiedades
+
+En general, no se cumplen las siguientes propiedades:
+
+<l class="prop">
+- **Propiedad conmutativa de productos de matrices.**
+</l> La multiplicación de matrices no es conmutativa.
+
+<div class="example">
+**Ejemplo 27** 
+$$A = \begin{pmatrix}0&1\\0&0\end{pmatrix},\ B=\begin{pmatrix}0&0\\1&0\end{pmatrix}\in\mathcal{M}_2(\mathbb{R})$$
+
+$$AB = \begin{pmatrix}1&0\\0&0\end{pmatrix}\ne\begin{pmatrix}0&0\\0&1\end{pmatrix}=BA$$
+</div>
+
+
+<l class="prop">
+- **Ley de simplificación.**
+</l> No se cumple la ley de simplificación en un producto.
+
+<div class="example">
+**Ejemplo 28**
+
+$$A = \begin{pmatrix}0&1\\0&2\end{pmatrix},\ B=\begin{pmatrix}1&1\\3&4\end{pmatrix},\ C=\begin{pmatrix}2&5\\3&4\end{pmatrix}\in\mathcal{M}_2(\mathbb{R})$$
+
+satisfacen $AB=AC$, pero en cambio $B\ne C$
+</div>
+
+<div class="exercise">
+**Ejercicio 12.** Comprueba que efectivamente $AB=AC$
+</div>
+
+
+<l class="prop">
+- **Divisores de cero.**
+</l> Existen divisores de 0, es decir $AB=0\not\Rightarrow A=0\text{ o }B=0$.
+
+<div class="example">
+**Ejemplo 29**
+
+$$A = \begin{pmatrix}0&3\\0&0\end{pmatrix},\ B=\begin{pmatrix}0&2\\0&0\end{pmatrix}\in\mathcal{M}_2(\mathbb{R})$$
+
+pero en cambio $$AB=O=\begin{pmatrix}0&0\\0&0\end{pmatrix}$$
+

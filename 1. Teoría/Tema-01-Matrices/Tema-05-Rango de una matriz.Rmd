@@ -1,0 +1,42 @@
+---
+title: "Tema 1 - Matrices"
+author: "Ramon Ceballos"
+date: "20/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Rango de una matriz
+
+Dada la unicidad de la matriz escalonada reducida, se pueden definir conceptos sobre una matriz $A$ mediante su matriz escalonada reducida por filas (o por columnas) equivalente a la original. Uno de estos conceptos es el rango.
+
+<l class="definition">
+**Rango.**
+</l> Sea $A\in\mathcal{M}_{m\times n}(\mathbb{K})$. Se denomina rango de $A$ y se denota como $\text{rg}(A)$, al número de filas no nulas que tiene su única matriz escalonada (o su escalonada reducida) por filas (o columnas) equivalentes.
+
+<div class="example">
+**Ejemplo 38**
+
+La matriz $$A = \begin{pmatrix}1&2&2&5&8\\0&1&-1&7&-3\\0&0&1&10&2\end{pmatrix}$$
+tiene rango 3.
+</div>
+
+<l class="prop">
+*Teorema.*
+</l> Sea $A\in\mathcal{M}_{m\times n}(\mathbb{K})$. El rango de $A$ coincidirá con el número de columnas no nulas de su única matriz escalonada reducida por columnas equivalente.
+
+En realidad, el número de filas (o columnas) no nulas es siempre el mismo en cualquier matriz equivalente por filas (por columnas) a la dada. Por tanto, para calcular el rango de una matriz $A$ bastará con encontrar una matriz $B$ escalonada por filas (o columnas) equivalente a $A$ y contar el número de filas (columnas) no nulas de $B$.
+
+
+**Ejercicio 28**
+
+- Calculad el rango de $$A=\begin{pmatrix}1&1&3&5\\2&4&3&-2\\-2&2&-1&3\end{pmatrix}$$
+
+- Calculad el rango de 
+$$B = \begin{pmatrix}1&3&1\\0&3&-2\\2&2&3\end{pmatrix}$$
+

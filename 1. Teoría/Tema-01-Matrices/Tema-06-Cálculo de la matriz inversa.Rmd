@@ -1,0 +1,57 @@
+---
+title: "Tema 1 - Matrices"
+author: "Ramon Ceballos"
+date: "20/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# MATRIZ INVERSA
+
+## 1. Caracterización de las matrices invertibles
+
+Con las matrices escalonadas y las operaciones elementales, no solo se puede calcular el rango de una matriz sino que también resultan útiles en el cálculo de matrices inversas como veremos a continuación. 
+
+El primer aporte que pueden hacer es la caracterización de las matrices invertibles a través de su rango y de su matriz escalonada reducida.
+
+## 2. Teorema de caracterización
+
+<l class="prop">
+**Teorema.**
+</l> Sea $A$ una matriz cuadrada $A\in\mathcal{M}_n(\mathbb{K})$. Entonces son equivalentes:
+
+- $A$ es invertible
+- $rg(A)=n$
+- La matriz escalonada reducida por filas (por columnas) equivalente a $A$ es la matriz identidad $I_n$
+
+
+Además, la tercera equivalencia aporta un método para calcular la matriz inversa de una matriz invertible $A\in\mathcal{M}_n(\mathbb{K})$: 
+
+Este consiste en escribir la matriz identidad $I_n$ a la derecha de la matriz (escrito de forma abreviada $(A|I_n)$) y a través de transformaciones elementales por filas (o por columnas), calcular la matriz escalonada reducida que será de la forma $(I_n|B)$. La matriz $B$ resultante es precisamente la matriz inversa de $A$, es decir $A^{-1}=B$.
+
+
+**Ejercicio 29**
+
+Sea $A$ la matriz cuadrada $A\in\mathcal{M}_n(\mathbb{K})$ dada por 
+
+$$\begin{pmatrix}1&3&-1\\0&2&3\\ -1&0&2\end{pmatrix}$$
+
+Razonad si $A$ es invertible y, si lo es, calculad su inversa.
+
+# Aplicaciones de las matrices
+
+## 1. Aplicaciones de las matrices
+
+- Álgebra lineal y geometría
+- Modelos lineales en ingeniería y economía
+- Ecuaciones en diferencias
+- Tratamiento de imágenes y diseño asistido por ordenador
+- Matrices booleanas, grafos y relaciones
+- Matrices estocásticas y estadística
+- Ecuaciones diferenciales y sistemas dinámicos
+

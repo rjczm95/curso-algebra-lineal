@@ -1,0 +1,91 @@
+---
+title: "Preliminares en Algebra Lineal"
+author: "Ramon Ceballos"
+date: "15/2/2021"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# CUERPOS
+
+## 1. La estructura de cuerpo
+
+<l class="definition">
+Cuerpo.
+</l> Sea $\mathbb{K}$ un conjunto dotado de dos operaciones, adición ($+$) y multiplicación ($\cdot$). Diremos que $\mathbb{K}$ es un cuerpo si para todo $a,b\in\mathbb{K}$ se cumplen las condiciones o propiedades siguientes:
+
+- "$+$" y "$\cdot$" son operaciones internas sobre $\mathbb{K}$: $a+b\in\mathbb{K}$ y $a\cdot b\in\mathbb{K}$
+
+- "$+$" y "$\cdot$" son operaciones conmutativas: $a+b=b+a$ y $a\cdot b=b\cdot a$
+
+- "$+$" y "$\cdot$" son operaciones asociativas: $(a+b)+c=a+(b+c)$ y $(a\cdot b)\cdot c=a\cdot(b\cdot c)$
+- Hay un elemento neutro para la adición o suma: $a+0=0+a=a\quad \forall a\in\mathbb{K}$
+
+- Hay un elemento neutro para la multiplicación (distinto del neutro de la adición): $a\cdot 1=1\cdot a=a\quad \forall a\in\mathbb{K}$
+
+- Elemento opuesto: $\forall a\in\mathbb{K}$ hay otro elemento $-a\in\mathbb{K}$ tal que $a+(-a)=(-a)+a=0$
+
+- Elemento inverso: $\forall a\in\mathbb{K},\ a\ne 0$ hay otro elemento $a^{-1}\in\mathbb{K}$ tal que $a\cdot a^{-1}=a^{-1}\cdot a=1$
+
+- La operación "$\cdot$" es distributiva respecto "$+$": $a\cdot(b+c)=a\cdot b+a\cdot c$
+
+<l class = "observ">Observación. </l>Cuando no pueda haber confusión quitaremos el signo $\cdot$ para denotar la operación de multiplicación. Es decir, denotaremos $a\cdot b$ como $ab$.
+
+</l> En un cuerpo $\mathbb{K}$ se verifican las siguientes propiedades:
+
+- Propiedad de simplificación para la suma: $a+b=a+c\Rightarrow\ b=c$
+
+- Los neutros (0 y 1) son únicos.
+
+- Cada elemento tienen un único opuesto.
+
+- Cada elemento diferente de 0 tiene un único inverso.
+
+- 0 es absorbente para la multiplicación: $a\cdot 0 = 0\quad \forall a\in\mathbb{K}$
+
+- $\mathbb{K}$ no tiene divisores de 0: $ab=0\Rightarrow a=0$ o $b=0$
+
+<l class = "important">¡Atención!</l> La demostración de esta proposición se encuentra en pdf. Este pdf lo podréis encontrar en el Github, en la carpeta demostraciones, o bien como material de esta clase.
+
+<div class = "example">
+**Ejemplo 1**
+
+Algunos de los cuerpos más conocidos son:
+
+- $\mathbb{Z}_2=\{0,1\}$: Cuerpo finito de dos elementos
+- $\mathbb{Q}$: Los números racionales
+    - suma: $\frac{a}{b}+\frac{c}{d} = \frac{ad+bc}{bd}$ $\qquad a,b,c,d\in\mathbb{Z}$
+    - producto: $\frac{a}{b}\cdot\frac{c}{d} = \frac{ac}{bd}$ $\qquad a,b,c,d\in\mathbb{Z}$
+- $\mathbb{R}$: Los números reales
+- $\mathbb{C}$: Los números complejos
+    - suma: $(a+bi)+(c+di) = (a+c)+(b+d)i$ $\qquad a,b,c,d\in\mathbb{R}$
+    - producto: $(a+bi)\cdot(c+di) = (ac-bd)+(ad+bc)i$ $\qquad a,b,c,d\in\mathbb{R}$
+</div>
+
+<div class = "example">
+**Ejemplo 2**
+
+Los números naturales, $\mathbb{N}:=\{0,1,2,...\}$, no son un cuerpo. No hay elementos opuestos para ningún elemento del conjunto.
+</div>
+
+## 2. El cuerpo $\mathbb{Z}_2$
+
+Entremos un poquito más en detalle en este cuerpo tan interesante:
+
+- Consta de 2 elementos: el 0 y el 1
+- Sus tablas de suma y producto son las siguientes 
+
+<div class = "center">
+![<l class = "phototext">Tabla de la suma</l>](Images/Sum.gif)
+
+</div>
+
+<div class = "center">
+![<l class = "phototext">Tabla del producto</l>](Images/Prod.gif)
+
+</div>

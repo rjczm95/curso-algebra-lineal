@@ -1,0 +1,188 @@
+---
+title: "Tema 1 - Matrices"
+author: "Ramon Ceballos"
+date: "20/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# OPERACIONES ELEMENTALES Y MATRICES ESCALONADAS
+
+## 1. Matrices escalonadas
+
+Vamos a introducir ahora un tipo especial de matrices triangulares superiores (o inferiores), las llamadas **matrices escalonadas por filas (o por columnas)**.
+
+<l class="definition">
+A. **Matriz escalonada por filas.**
+</l> Una matriz $A\in\mathcal{M}_{m\times n}(\mathbb{K})$ es escalonada por filas cuando se cumplen simultáneamente las dos condiciones siguientes:
+
+  - El primer elemento no nulo de cada fila, denominado **pivote**, está a la derecha del pivote de la fila superior.
+  - Las filas nulas están en la parte inferior de la matriz.
+  
+**Ejemplo 37**
+
+Estas matrices son escalonadas por filas:
+
+$$\begin{pmatrix}2&1&-1&2\\0&1&-2&1\\0&0&0&2\\0&0&0&0\end{pmatrix}\qquad \begin{pmatrix}3&2&2&5&8\\0&2&-1&9&-3\\0&0&5&3&2\end{pmatrix} $$
+
+
+
+<l class="definition">
+B. **Matriz escalonada reducida por filas.**
+</l> Una matriz $A\in\mathcal{M}_{m\times n}(\mathbb{K})$ es escalonada reducida por filas si es escalonada y además cumple los siguientes requisitos:
+  
+  - Los pivotes son todos 1's.
+  - Todos los elementos que están en la misma columna del pivote son nulos.
+  
+
+**Ejemplo 38**
+
+Estas matrices son escalonadas reducidas por filas:
+
+$$\begin{pmatrix}1&0&0&2\\0&1&0&1\\0&0&1&-1\\0&0&0&0\end{pmatrix}\qquad \begin{pmatrix}1&0&0&5&8\\0&1&0&7&-3\\0&0&1&10&2\end{pmatrix} $$
+
+
+<l class="definition">
+C. **Matriz escalonada por columnas.**
+</l> Una matriz $A\in\mathcal{M}_{m\times n}(\mathbb{K})$ es escalonada por columnas cuando se cumplen simultáneamente las dos condiciones siguientes:
+
+- El primer elemento no nulo de cada columna (denominado **pivote**) está una o más filas abajo del pivote de la columna anterior.
+
+- Las columnas no nulas están en la parte izquierda de la matriz.
+
+Ejemplo:
+
+$$\begin{pmatrix}2&0&0&0\\1&3&0&0\\-1&6&8&0\end{pmatrix}$$
+
+<l class="definition">
+D. **Matriz escalonada reducida por columnas.**
+</l> Es una matriz que aparte de ser escalonada por columnas, todos los pivotes son 1's y todos los elementos que están en la misma fila que el pivote son nulos.
+
+$$\begin{pmatrix}1&0&0&0\\0&1&0&0\\0&0&1&0\\0&0&0&1\\-1&6&0&1\end{pmatrix}$$
+
+
+## 2. Operaciones elementales de una matriz
+
+<l class="definition">
+**Operaciones elementales por filas.**
+</l> Sea $A\in\mathcal{M}_{m\times n}(\mathbb{K})$. Las operaciones que se llaman operaciones elementales por filas de la matriz $A$ son las siguientes:
+
+a. Multiplicar una fila por un $\lambda\in\mathbb{K},\ \lambda\ne 0$ (escalar).
+b. Intercambiar dos filas.
+c. Sumar un múltiplo de una fila a otra.
+
+De manera análoga se pueden definir las operaciones elementales por columnas.
+
+## 3. Matrices equivalentes
+
+<l class="definition">
+**Matrices equivalentes por filas.**
+</l> Dos matrices $A,B\in\mathcal{M}_{m\times n}(\mathbb{K})$ son equivalentes por filas (por columnas) si una de ellas se puede obtener a partir de la otra mediante un número finito de operaciones elementales por filas (o columnas).
+
+<l class="prop">
+*TEOREMA*
+</l> 
+
+- Toda matriz es equivalente por filas (o columnas) a una matriz escalonada por filas (o columnas).
+
+- Toda matriz es equivalente por filas (columnas) a una única matriz escalonada reducida por filas (columnas).
+
+
+La demostración la haremos de manera constructiva. Es decir, hallaremos un algoritmo (<l class="definition">**Método de Gauss**</l>) para encontrar la matriz escalonada en este caso.
+
+<div class="dem">
+**DEMOSTRACIÓN**
+
+Sea $A=(a_{ij})\in\mathcal{M}_{m\times n}(\mathbb{K})$, entonces procederemos de la siguiente manera:
+
+1. Si $a_{11}\ne 0$, se divide la primera fila por $a_{11}$ y se obtiene una matriz equivalente en la que $a_{11}=1$. Entonces este nuevo $a_{11}$ será el primer pivote. Ahora, se resta a cada fila $i$ la primera fila multiplicada por $a_{i1}$. Así, la primera resta de elementos de la primera columna será 0 y se pasa al punto 4.
+
+2. Si $a_{11}=0$, se busca el primer $i$ tal que $a_{i1}\ne 0$. Entonces, se intercambian la primera fila y la $i$ obteniendo una matriz equivalente con un nuevo $a_{11}\ne 0$. A partir de aquí, volvemos al punto 1 y repetimos el proceso.
+
+3. Si $a_{i1}=0$ para todo $i=1,\dots,m$, entonces dejamos esta primera columna de ceros y aplicamos el algoritmo del paso 1 a la matriz resultante de eliminar la primera columna.
+
+4. Se repite el proceso a la matriz obtenida de eliminar la primera fila y la primera columna de nuestra matriz.
+</div>
+
+Nótese que con el método de la demostración se obtiene la única matriz escalonada equivalente por filas cuyos pivotes son todos unos. 
+
+Para obtener la matriz escalonada reducida, si hay algún elemento $a_{ij}$ distinto de cero por encima de algún determinado pivote, se resta a la fila de este elemento (la fila $i$), la fila del pivote multiplicada por $a_{ij}$.
+
+Se repite el paso anterior tantas veces como sea necesario y se llega así a la matriz escalonada reducida equivalente.
+
+
+**Ejercicio 26**
+
+Considerad la matriz $A\in\mathcal{M}_{3\times 4}(\mathbb{R})$ dada por
+
+$$A=\begin{pmatrix}1&1&3&5\\2&4&3&-2\\-2&2&-1&3\end{pmatrix}$$
+
+Calculad su matriz escalonada y su escalonada reducida por filas.
+
+### Solución
+
+$$A\sim_{f_2-2f_1}\begin{pmatrix}
+1&1&3&5\\
+0&2&-3&-12\\
+-2&2&-1&3\end{pmatrix}\sim_{f_3+2f_1}\begin{pmatrix}
+1&1&3&5\\
+0&2&-3&-12\\
+0&4&5&13\end{pmatrix}$$
+
+$$\sim_{\frac{1}{2}f_2}\begin{pmatrix}
+1&1&3&5\\
+0&1&-\frac{3}{2}&-6\\
+0&4&5&13\end{pmatrix}\sim_{f_3-4f_2}\begin{pmatrix}
+1&1&3&5\\
+0&1&-\frac{3}{2}&-6\\
+0&0&11&37\end{pmatrix}$$
+
+Una matriz escalonada equivalente a $A$ es $$\begin{pmatrix}
+1&1&3&5\\
+0&1&-\frac{3}{2}&-6\\
+0&0&11&37\end{pmatrix}$$
+
+Para encontrar la matriz escalonada reducida, debemos seguir realizando operaciones elementales:
+
+$$\begin{pmatrix}
+1&1&3&5\\
+0&1&-\frac{3}{2}&-6\\
+0&0&11&37\end{pmatrix}\sim_{\frac{1}{11}f_3}\begin{pmatrix}
+1&1&3&5\\
+0&1&-\frac{3}{2}&-6\\
+0&0&1&\frac{37}{11}\end{pmatrix}\sim_{f_2+\frac{3}{2}f_3}\begin{pmatrix}
+1&1&3&5\\
+0&1&0&-\frac{21}{22}\\
+0&0&1&\frac{37}{11}\end{pmatrix}$$
+
+$$\sim_{f_1-3f_3}\begin{pmatrix}
+1&1&0&-\frac{56}{11}\\
+0&1&0&-\frac{21}{22}\\
+0&0&1&\frac{37}{11}\end{pmatrix}\sim{f_1-f_2}\begin{pmatrix}
+1&0&0&-\frac{91}{22}\\
+0&1&0&-\frac{21}{22}\\
+0&0&1&\frac{37}{11}\end{pmatrix}$$
+
+Con lo cual, la matriz reducida equivalente a $A$ es $$\begin{pmatrix}
+1&0&0&-\frac{91}{22}\\
+0&1&0&-\frac{21}{22}\\
+0&0&1&\frac{37}{11}\end{pmatrix}$$
+
+**Ejercicio 27**
+
+Considerad la matriz $A\in\mathcal{M}_{3\times 5}(\mathbb{R})$ dada por
+
+$$A=\begin{pmatrix}0&0&3&5&-1\\1&0&4&-1&2\\2&3&0&-2&3\end{pmatrix}$$
+
+Calculad su matriz escalonada y su escalonada reducida por filas.
+
+
+
+
+
+

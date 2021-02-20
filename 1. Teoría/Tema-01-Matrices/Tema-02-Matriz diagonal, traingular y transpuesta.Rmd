@@ -1,0 +1,103 @@
+---
+title: "Tema 1 - Matrices"
+author: "Ramon Ceballos"
+date: "20/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# 1. MATRICES DIAGONALES Y TRIANGULARES
+
+<l class="prop">
+**Proposición.**
+</l> Sean $A,B$ dos matrices cuadradas de orden $n$.
+
+  - Si $A,B$ son matrices diagonales, entonces $A$ y $B$ conmutan y la matriz producto $AB=BA$ también es diagonal.
+  - Si $A,B$ son matrices triangulares superiores (inferiores) entonces el producto $AB$ es también una matriz triangular superior (inferior).
+  
+<div class = "exercise">
+
+**Ejercicio 13.** Dadas
+$$A=\begin{pmatrix}1&0&0&0\\0&5&0&0\\0&0&-3&0\\0&0&0&2\end{pmatrix}\qquad B=\begin{pmatrix}-2&0&0&0\\0&6&0&0\\0&0&3&0\\0&0&0&9\end{pmatrix}$$
+comprobad que $AB$ y $BA$ son matrices diagonales.
+
+</div>
+
+<div class = "exercise">
+
+**Ejercicio 14.** Dadas
+$$A=\begin{pmatrix}1&-1&4&3\\0&5&-2&1\\0&0&-3&7\\0&0&0&2\end{pmatrix}\qquad B=\begin{pmatrix}-2&1&-1&2\\0&6&0&3\\0&0&3&-5\\0&0&0&-2\end{pmatrix}$$
+comprobad que $AB$ y $BA$ son matrices triangulares superiores.
+</div>
+
+
+# 2. MATRIZ TRANSPUESTA
+
+<l class="definition">
+**Transpuesta de una matriz.**
+</l> Sea $A=(a_{ij})_{m\times n}\in\mathcal{M}_{m\times n}(\mathbb{K})$. Se denomina transpuesta de la matriz $A$ y se denota como $A^t$ a la matriz $A^t=(a_{ji})_{n\times m}\in\mathcal{M}_{n\times m}(\mathbb{K})$. Es decir, la matriz obtenida a partir de $A$ intercambiando filas por columnas.
+
+
+<div class="example">
+**Ejemplo 30**
+
+La matriz transpuesta de $A = \begin{pmatrix}1&0&3\\2&1&-1\end{pmatrix}$ es $$A^t=\begin{pmatrix}1&2\\0&1\\3&-1\end{pmatrix}$$
+</div>
+
+
+## 2.1 Propiedades matriz transpuesta
+
+Entre las propiedades de las matrices transpuestas destacan las siguientes
+
+<l class="prop">
+- **Idempotencia.**
+</l> Para toda matriz $A$, $(A^t)^t = A$.
+
+<div class="example">
+**Ejemplo 31**
+
+Teníamos que lLa matriz transpuesta de $A = \begin{pmatrix}1&0&3\\2&1&-1\end{pmatrix}$ es $A^t=\begin{pmatrix}1&2\\0&1\\3&-1\end{pmatrix}$. Pues la matriz transpuesta de $A^t$ es 
+
+$$(A^t)^t = \begin{pmatrix}1&0&3\\2&1&-1\end{pmatrix}=A$$
+</div>
+
+<div class = "dem">
+**Demostración**
+
+$$A\in\mathcal{M}_{m\times n}(\mathbb{K}),\quad A = (a_{ij})\Rightarrow A^t\in\mathcal{M}_{n\times m}(\mathbb{K}),\quad A^t = (a_{ji})\Rightarrow (A^t)^t\in\mathcal{M}_{n\times m}(\mathbb{K}),\quad (A^t)^t = (a_{ij}) = A$$
+
+</div>
+
+<l class="prop">
+- **Transpuesta de una suma.**
+</l> Si $A$ y $B$ son matrices del mismo orden $m\times n$, entonces $(A+B)^t = A^t+B^t$. Es decir, la transpuesta de una suma de matrices es la matriz obtenida por la suma de sus respectivas transpuestas. Además, el resultado se puede generalizar a $r$ sumandos y se tiene que si $A_i$ son todas del mismo orden, entonces:
+
+$$\left(\sum_{i=1}^r A_i\right)^t=\sum_{i=1}^rA_i^t$$
+
+<div class = "exercise">
+**Ejercicio 15.** Escribe paso a paso la demostración de esta propiedad
+
+</div>
+
+**Ejercicio 16.** Comprobar que dadas $$A = \begin{pmatrix}2&3\\3&2\\-1&0\end{pmatrix}\qquad B=\begin{pmatrix}1&0\\3&6\\3&-2\end{pmatrix}\qquad C = \begin{pmatrix}-2&4\\0&5\\7&2\end{pmatrix}$$
+$$(A+B+C)^t=A^t+B^t+C^t$$
+
+<l class="prop">
+- **Transpuesta de un producto.**
+</l> Si $A\in\mathcal{M}_{m\times n}(\mathbb{K})$ y $B\in\mathcal{M}_{n\times p}(\mathbb{K})$, entonces la traspuesta del producto de $A$ por $B$ es el producto de las traspuestas pero con orden cambiado, es decir:
+$$(AB)^t=B^tA^t\in\mathcal{M}_{p\times m}(\mathbb{K})$$
+
+<div class="exercise">
+**Ejercicio 17.** Probad que $(AB)^t=B^tA^t$ donde $$A=\begin{pmatrix}1&0&1\\0&1&0\end{pmatrix}\quad B = \begin{pmatrix}1&-1\\0&1\\-1&0\end{pmatrix}$$
+</div>
+
+<div class = "exercise">
+**Ejercicio 18.** Escribe paso a paso la demostración de esta propiedad
+
+</div>
+
