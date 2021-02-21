@@ -119,3 +119,158 @@ Y, si queremos la **dimensión de la matriz**, utilizamos la función **`dim()`*
 dim(M)
 ```
 
+
+# 2. **Manipulación de matrices en R**
+
+La función **`sum()`** aplicada a una matriz calcula la suma de todos los elementos de dicha matriz:
+
+```{r}
+sum(M)
+```
+
+Las sumas por filas o por columnas se calculan del siguiente modo:
+
+```{r}
+rowSums(M) #sumas por filas
+colSums(M) #sumas por columnas
+```
+
+La función **`prod()`** aplicada a una matriz calcula el producto de todos los elementos de dicha matriz:
+
+```{r}
+prod(M)
+```
+
+La función **`mean()`** aplicada a una matriz calcula la media (aritmética) de todos los elementos de dicha matriz:
+
+```{r}
+mean(M)
+```
+
+Las medias por filas o por columnas se calculan del siguiente modo:
+
+```{r}
+rowMeans(M) #sumas por filas
+colMeans(M) #sumas por columnas
+```
+
+# 3. **Operaciones con matrices en R**
+
+## 3.1. Obtener la transpuesta de una matriz
+
+La transpuesta de una matriz se consIgue aplicando la función **`t()`**.
+
+```{r}
+M
+t(M)
+```
+
+## 3.2. Obtener la traza de una matriz
+
+Para calcular la traza de la matriz (la suma de los elementos de la diagonal):
+
+```{r}
+sum(diag(M))
+```
+
+## 3.3. Suma de matrices
+
+La suma de matrices:
+
+```{r}
+A = rbind(c(1,2,3),c(4,5,6),c(7,8,9))
+B = rbind(c(1,0,2),c(3,0,4),c(5,0,6))
+A+B
+B+A
+```
+
+## 3.4. Producto de un escalar
+
+El producto de un esclalar por una matriz:
+
+```{r}
+5*A
+```
+
+## 3.5. Producto de matrices
+
+El producto de matrices:
+
+```{r}
+A%*%B
+B%*%A
+```
+
+
+Fijaos que el producto de matrices se consigue aplicando **`%*%`** y *no `*`. 
+
+En el segundo caso, lo que hace `R` es devolver como resultado una matriz $C = (c_{ij})$ cuyos elementos son $c_{ij}=a_{ij}\cdot b_{ij}$.
+
+```{r}
+A*B
+```
+
+
+## 3.6. Comprobar igualdad de matrices
+
+Para comprobar que dos matrices son iguales, utilizamos el operador lógico `==`
+
+```{r}
+A+B == B+A
+A%*%B == B%*%A
+```
+
+Con que haya un `FALSE`, sabemos que son diferentes.
+
+## 3.7. Calcular potencias de matrices
+
+Para calcular la potencia $n$-ésima (aproximada) de una matriz, utilizamos la función **`mtx.exp()`, del paquete `Biodem`**.
+
+```{r}
+library(Biodem)
+mtx.exp(A,4)
+```
+
+
+Para calcular la potencia $n$-ésima (aproximada) de una matriz, utilizamos **`%^%`, del paquete `expm`**.
+
+```{r}
+library(expm)
+A%^%4
+```
+
+
+# 4. **Rango e inversa de una matriz en R**
+
+## 4.1 Rango de la matriz
+
+El rango de una matriz se calcula con la función **`qr()$rank`**.
+
+```{r}
+qr(A)$rank
+```
+
+## 4.2 Inversa de una matriz
+
+La inversa (aproximada) de una matriz (invertible) se calcula mediante la función **`solve()`**.
+
+```{r}
+solve(M)
+
+```
+
+Comprobamos si realmente da la identidad al multiplicar M por su inversa.
+
+```{r}
+round(M%*%solve(M))
+round(solve(M)%*%M)
+```
+
+
+
+
+
+
+
+
+

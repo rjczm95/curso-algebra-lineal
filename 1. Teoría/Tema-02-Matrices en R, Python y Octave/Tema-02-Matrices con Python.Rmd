@@ -1,0 +1,286 @@
+---
+title: "MATRICES CON PYTHON"
+author: "Ramon Ceballos"
+date: "21/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(reticulate)
+```
+
+# 1. **Definir Matrices en Python**
+
+Utilizaremos la librería **`numpy`**.
+
+```{python}
+import numpy as np
+```
+
+
+Para crear una matriz fila, se realiza lo siguiente: 
+
+```{python}
+row = [1,2,3]
+row
+```
+
+Para crear una matriz columna, se realiza lo siguiente: 
+
+```{python}
+col = [[1],[2],[3]]
+col
+```
+
+
+Para crear una matriz, se realiza lo siguiente: 
+
+```{python}
+M = [[1,2,3],[4,5,6],[7,8,9]]
+M
+```
+
+## 1.1 Acceso a los elementos de una matriz
+
+Para llamar a un elemento, utilizamos la sintaxis siguiente:
+
+```{python}
+M[1][1]
+```
+
+La primera posición indica la fila y, la segunda, la columna. 
+
+<l class = "observ">*Observación.*</l> En `Python`, al contrario que en `R`, las posiciones empiezan en 0.
+
+```{python}
+M[0][0]
+```
+
+Para llamar a una fila, se realiza lo siguiente: 
+
+```{python}
+M[0]
+```
+
+## 1.2 Empleo de NumPy para matrices
+
+Cambiémosle la sintaxis a la matriz, para poder trabajar correctamente con ella:
+
+```{python}
+import numpy as np
+M = np.array([[1,2,3],[4,5,6],[7,8,9]])
+print(M)
+```
+
+
+La función **`np.array()`** tiene un parámetro, **`dtype`**, en el cual podemos indicar el tipo de dato de la matriz: int, float, complex...
+
+```{python}
+M = np.array([[1,2,3],[4,5,6],[7,8,9]], dtype = complex)
+print(M)
+
+M = np.array([[1,2,3],[4,5,6],[7,8,9]], dtype = float)
+print(M)
+```
+
+Para llamar a un elemento, utilizamos la sintaxis mostrada anteriormente:
+
+```{python}
+M = np.array([[1,2,3],[4,5,6],[7,8,9]])
+M[0][2]
+```
+
+Para llamar a una fila, utilizamos la sintaxis mostrada anteriormente:
+
+```{python}
+print(M[1])
+```
+
+También nos sirve la sintaxis siguiente para llamar una fila:
+
+```{python}
+M[1,:]
+```
+
+
+Para llamar a una columna, se realiza lo siguiente: 
+
+```{python}
+M[:,0]
+```
+
+
+## 1.3 Definir tipos de matrices con NumPy
+
+Para crear una **matriz de ceros**, utilizamos la función **`np.zeros((fil,col))`**:
+
+```{python}
+print(np.zeros((5,7)))
+```
+
+
+Para crear una **matriz de unos**, utilizamos la función **`np.ones((fil,col))`**:
+
+```{python}
+print(np.ones((5,10)))
+```
+
+Para crear una **matriz diagonal** hacemos lo siguiente:
+
+```{python}
+x = [1,2,3,4]
+N = np.diag(x)
+N
+```
+
+## 1.4 Obtener la diagonal y dimensión de una matriz en Python
+
+Y para obtener **la diagonal principal** de una matriz, utilizamos de nuevo la función **`numpy.diag()`**.
+
+```{python}
+np.diag(N)
+```
+
+
+Para saber **la dimensión de una matriz**, utilizamos la función **`np.shape()`**:
+
+```{python}
+np.shape(M)
+```
+
+# 2. **Manipulación de matrices con Python**
+
+Si queremos la suma de todos los elementos de una matriz:
+
+```{python}
+np.sum(M)
+```
+
+Si queremos la suma por columnas, haremos:
+
+```{python}
+np.sum(M, axis = 0)
+```
+
+Si queremos la suma por filas,  haremos:
+
+```{python}
+np.sum(M, axis = 1)
+```
+
+Si queremos el producto de todos los elementos de una matriz:
+
+```{python}
+np.prod(M)
+```
+
+
+Si queremos la media aritmética de todos los elementos de una matriz:
+
+```{python}
+np.mean(M)
+```
+
+Si queremos la media aritmética por filas o columnas:
+
+```{python}
+np.mean(M, axis = 0) #Por columnas
+np.mean(M, axis = 1) #Por filas
+```
+
+# 3. **Operaciones con matrices en Python**
+
+## 3.1 Transpuesta de una matriz
+
+Para calcular la **transpuesta de una matriz**, utilizamos la función **`.transpose()`**:
+
+```{python}
+print(M)
+print(M.transpose())
+```
+## 3.2 Traza de una matriz
+
+Para calcular la **traza de una matriz** (suma de los elementos de la diagonal):
+
+```{python}
+print(M.trace())
+```
+
+## 3.3 Suma de una matriz
+
+Suma de matrices:
+
+```{python}
+A = np.array([[1,2],[2,0]])
+B = np.array([[3,0],[1,4]])
+print(A+B)
+```
+
+## 3.4 Producto de una matriz por una escalar
+
+El producto de un escalar por una matriz:
+
+```{python}
+print(5*A)
+```
+
+
+## 3.5 Producto de matrices
+
+Producto de matrices: 
+
+```{python}
+print(A.dot(B))
+```
+
+Observad que si utilizáis la sintaxis `A*B`, se multiplican elemento a elemento, como ocurría en `R`.
+
+```{python}
+print(A*B)
+```
+
+
+## 3.6 Potencia de una matriz
+
+Para **calcular la potencia** de una matriz se emplea **np.linalg.matrix_power()**.
+
+```{python}
+print(np.linalg.matrix_power(A,5))
+```
+
+# 4. **Rango e inversa de una matriz**
+
+## 4.1 Rango de una matriz en `Python`
+
+Para calcular el rango de una matriz, utilizamos **`np.linalg.matrix_rank()`**.
+
+```{python}
+A
+np.linalg.matrix_rank(A)
+
+B
+np.linalg.matrix_rank(B)
+```
+
+## 4.2 Inversa de una matriz en `Python`
+
+Para calcular la inversa, se usa **`np.linalg.inv()`**.
+
+```{python}
+print(np.linalg.inv(A))
+
+```
+
+Comprobamos si da la matriz identidad.
+
+```{python}
+print(np.linalg.inv(A).dot(A)) #Comprobamos
+```
+
+
+
+
+

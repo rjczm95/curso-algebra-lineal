@@ -1,0 +1,133 @@
+---
+title: "Tema 2 - Ecuaciones y Sistemas Lineales"
+author: "Ramon Ceballos"
+date: "21/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# EJEMPLO: SISTEMA COMPATIBLE DETERMINADO
+
+Recordemos el sistema del ejemplo anterior: 
+
+$$\left\{\begin{matrix}
+x_1 &+& x_2 &+& 2x_3 &=& 9\\
+2x_1 &+& 4x_2 &-& 3x_3 &=& 1\\
+3x_1 &+& 6x_2 &-& 5x_3 &=& 0\end{matrix}\right.$$
+
+Habíamos concluido que era un sistema compatible determinado. Por tanto, ahora nos interesa calcular su solución, la cual sabemos que es única.
+
+Por otro lado, tenemos que la matriz ampliada del sistema es:
+
+$$(A|B) = \begin{pmatrix}
+1&1&2 &|& 9\\
+2&4&-3 &|& 1\\
+3&6&-5 &|& 0
+\end{pmatrix}$$
+
+
+Nuestro objetivo ahora es utilizar el Método de Gauss para encontrar un sistema equivalente mucho más sencillo de resolver. Para ello, mediante operaciones elementales aplicadas a la matriz ampliada, obtendremos una matriz escalonada por filas de la matriz ampliada del sistema. A continuación vienen los pasos que debemos de realizar.
+
+**1.** Eliminamos los coeficientes correspondientes a las variables $x_1$ de las dos últimas filas:
+
+  - A la segunda fila le sumamos la primera multiplicada por -2.
+  - A la última fila le sumamos la primera multiplicada por -3.
+
+Realizando las operaciones anteriores, obtenemos el sistema equivalente:
+
+$$\begin{pmatrix}
+1&1&2 &|& 9\\
+0&2&-7 &|& -17\\
+0&3&-11 &|& -27
+\end{pmatrix}$$
+
+
+**2.** Eliminamos los coeficientes respectivos a la variable $x_2$ de la última fila:
+
+- A la última fila de la matriz que acabamos de obtener, le sumamos la segunda multiplicada por $-\frac{3}{2}$.
+
+Así, obtenemos:
+
+$$\begin{pmatrix}
+1&1&2 &|& 9\\
+0&2&-7 &|& -17\\
+0&0&-\frac{1}{2} &|& -\frac{3}{2}
+\end{pmatrix}$$
+
+Esta última matriz ampliada que acabamos de obtener es equivalente a la matriz ampliada del sistema de ecuaciones lineales inicial y, lo más interesante de todo, se puede resolver de forma inmediata.
+
+El sistema equivalente que acabamos de obtener es:
+
+$$\begin{matrix}
+x_1&+&x_2&+&2x_3 &=& 9\\
+&&2x_2&-&7x_3 &=& -17\\
+&&&-&\frac{1}{2}x_3 &=& -\frac{3}{2}
+\end{matrix}$$
+
+De la última ecuación podemos aislar $x_3$ y obtenemos:
+
+$$x_3=3$$
+
+Sustituyendo el valor de $x_3$ en la segunda ecuación y aislando $x_2$ obtenemos:
+
+$$2x_2-21=-17$$
+$$x_2 = 2$$
+
+Finalmente, sustituyendo $x_2 = 2$ y $x_3=3$ en la primera ecuación y aislando $x_1$, obtenemos:
+
+$$x_1+2+6 = 9$$
+$$x_1 = 1$$
+
+
+Con lo cual, la única solución del sistema siguiente que es compatible determiando es $s = (1,2,3)$:
+
+
+$$\left\{\begin{matrix}
+x_1 &+& x_2 &+& 2x_3 &=& 9\\
+2x_1 &+& 4x_2 &-& 3x_3 &=& 1\\
+3x_1 &+& 6x_2 &-& 5x_3 &=& 0\end{matrix}\right.$$
+
+La solución es $s = (1,2,3)$.
+
+
+<div class = "exercise">
+
+**Ejercicio 2**
+
+Resolved paso a paso el sistema:
+
+$$\left\{\begin{matrix}x_1&+&x_2&&&=&3\\
+&&x_2&+&x_3&=&5\\
+x_1&&&+&x_3&=&4\\
+5x_1&-&x_2&+&x_3&=&6
+\end{matrix}\right.$$
+
+La solución es $s=(1,2,3)$.
+
+</div>
+
+
+Con lo cual, podemos concluir que los sistemas son equivalentes, ya que tienen el mismo conjunto de soluciones: $\{(1,2,3)\}$.
+
+$$\left\{\begin{matrix}
+x_1 &+& x_2 &+& 2x_3 &=& 9\\
+2x_1 &+& 4x_2 &-& 3x_3 &=& 1\\
+3x_1 &+& 6x_2 &-& 5x_3 &=& 0\end{matrix}\right.$$
+
+$$\left\{\begin{matrix}x_1&+&x_2&&&=&3\\
+&&x_2&+&x_3&=&5\\
+x_1&&&+&x_3&=&4\\
+5x_1&-&x_2&+&x_3&=&6
+\end{matrix}\right.$$
+
+
+
+
+
+
+

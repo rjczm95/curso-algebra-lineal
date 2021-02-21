@@ -1,0 +1,143 @@
+---
+title: "Tema 2 - Ecuaciones y Sistemas Lineales"
+author: "Ramon Ceballos"
+date: "21/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# SISTEMAS DE ECUACIONES LINEALES
+
+## 1. **Definiciones generales**
+
+<l class = "definition">**Sistema de $m$ ecuaciones con $n$ incógnitas.**</l> Es un sistema de la forma:
+
+$$\left\{\begin{matrix}a_{11}x_1+a_{12}x_2+\cdots+a_{1n}x_n & = & b_1\\
+a_{21}x_1+a_{22}x_2+\cdots+a_{2n}x_n & = & b_2\\
+\vdots & \  & \vdots\\
+a_{m1}x_1+a_{m2}x_2+\cdots+a_{mn}x_n & = & b_m\\\end{matrix}\right.$$
+
+Donde $a_{ij},b_i\in\mathbb{K},\ i=1,2,\dots,m$ y $j=1,2,\dots,n$
+
+<l class = "definition">**Incógnitas.**</l> $x_1,x_2,\dots,x_n$
+
+<l class = "definition">**Coeficientes del sistema.**</l> $a_{ij}\in\mathbb{K}$, $i=1,2,\dots,m$, $j=1,2,\dots,n$
+
+<l class = "definition">**Términos independientes.**</l> $b_i$, $i = 1,2,\dots,m$
+
+
+## 2. **Sistema homogéneo**
+
+<l class = "definition">**Sistema homogéneo.** </l> Sistema de ecuaciones lineales donde $b_i=0$, $\forall i=1,2,\dots,m$ 
+
+$$\left\{\begin{matrix}a_{11}x_1+a_{12}x_2+\cdots+a_{1n}x_n & = & 0\\
+a_{21}x_1+a_{22}x_2+\cdots+a_{2n}x_n & = & 0\\
+\vdots & \  & \vdots\\
+a_{m1}x_1+a_{m2}x_2+\cdots+a_{mn}x_n & = & 0\\\end{matrix}\right.$$
+
+## 3. **Forma matricial de un sistema de ecuaciones lineales**
+
+<l class = "definition">**Forma matricial de un sistema de ecuaciones lineales.**</l> $AX = B$ donde
+
+$$A = \begin{pmatrix}a_{11} & a_{12} & \cdots & a_{1n}\\
+a_{21} & a_{22} & \cdots & a_{2n}\\
+\vdots & \vdots & \ddots & \vdots\\
+a_{m1} & a_{m2} & \cdots & a_{mn}\\
+\end{pmatrix}\quad X = \begin{pmatrix}x_1\\x_2\\\vdots\\x_n\end{pmatrix}\quad B = \begin{pmatrix}b_1\\b_2\\\vdots\\b_m\end{pmatrix}$$
+
+<l class = "definition">**Matriz de coeficientes (del sistema).**</l> $A$
+
+<l class = "definition">**Matriz de términos independientes.**</l> $B$
+
+<l class = "definition">**Matriz de incógnitas.**</l> $X$
+
+
+<l class = "definition">**Matriz ampliada del sistema.**</l> Dado el sistema matricial $AX = B$, se define la matriz ampliada del sistema como $(A|B)$.
+
+$$(A|B) = \begin{pmatrix}a_{11} & a_{12} & \cdots & a_{1n} & | & b_1\\
+a_{21} & a_{22} & \cdots & a_{2n} & | & b_2\\
+\vdots & \vdots & \ddots & \vdots & | & \vdots\\
+a_{m1} & a_{m2} & \cdots & a_{mn} & | & b_m\\
+\end{pmatrix}$$
+
+Cada fila representa la ecuación correspondiente del sistema.
+
+## 4. **Solución de un sistema de $m$ ecuaciones con $n$ incógnitas**
+
+<l class = "definition">**Solución de un sistema de $m$ ecuaciones con $n$ incógnitas.**</l> Conjunto de $n$ valores $s_i\in\mathbb{K},\ i=1,2,\dots,n$ tales que al sutituir cada $x_i=s_i$, cada una de las $m$ ecuaciones se convierten en identidades.
+
+
+Dado un sistema de $m$ ecuaciones lineales con $n$ incógnitas $AX=B$, podemos clasificar los sistemas según tengan o no solución y, en caso de tener, según cuántas tienen:
+
+<l class = "definition">**Sistema compatible.**</l> Si tiene al menos una solución. Dsitinguimos entre:
+
+- <l class = "definition">**Sistema compatible determinado.**</l> Si la solución es única.
+
+- <l class = "definition">**Sistema compatible indeterminado.**</l> Si tiene infinitas soluciones.
+
+<l class = "definition">**Sistema incompatible.**</l> Si no tiene solución.
+
+<l class = "observ">*Observación.* </l> Notemos que un sistema homogéneo, $AX=0$, del tipo:
+
+$$\begin{pmatrix}a_{11} & a_{12} & \cdots & a_{1n}\\
+a_{21} & a_{22} & \cdots & a_{2n}\\
+\vdots & \vdots & \ddots & \vdots\\
+a_{m1} & a_{m2} & \cdots & a_{mn}\\
+\end{pmatrix}\cdot \begin{pmatrix}x_1\\x_2\\\vdots\\x_m\end{pmatrix} = \begin{pmatrix}0\\0\\\vdots\\0\end{pmatrix}$$
+
+Siempre tiene, al menos, la <l class = "definition">**solución trivial**</l>. Es decir, la solución $(0,0,\dots,0)$. 
+
+Con lo cual, el sistema homogéneo siempre es compatible.
+
+### 4.1. Teorema de Rouché-Frobenius
+
+Permite discernir si un sistema de ecuaciones lineales es compatible (determinado o indeterminado) o incompatible.
+
+<l class = "prop">**Teorema de Rouché-Frobenius.**</l> Un sistema de $m$ ecuaciones lineales y $n$ incógnitas, $AX=B$, es compatible si, y solo si, rg$(A)=$rg$(A|B)=r$ y, en este caso:
+
+- Si $r=n$, el sistema es determinado.
+
+- Si $r<n$, el sistema es indeterminado.
+
+Si rg$(A)<$rg$(A|B)$, entonces el sistema es incompatible.
+
+
+<div class = "example">
+**Ejemplo 2**
+
+Comprobemos si el siguiente sistema lineal tiene solución:
+
+$$\left\{\begin{matrix}
+x_1 &+& x_2 &+& 2x_3 &=& 9\\
+2x_1 &+& 4x_2 &-& 3x_3 &=& 1\\
+3x_1 &+& 6x_2 &-& 5x_3 &=& 0\end{matrix}\right.$$
+
+Observemos que se trata de un sistema $m = 3$ de ecuaciones y $n = 3$ incógnitas.
+
+Para averiguar de qué tipo de sistema se trata, calculemos rg$(A)$ y rg$(A|B)$, donde
+
+$$A = \begin{pmatrix}
+1&1&2\\
+2&4&-3\\
+3&6&-5
+\end{pmatrix},\qquad(A|B) = \begin{pmatrix}
+1&1&2 &|& 9\\
+2&4&-3 &|& 1\\
+3&6&-5 &|& 0
+\end{pmatrix}$$
+
+Tenemos que rg$(A)=$rg$(A|B)=3$. Por lo tanto, por el Teorema de Rouché-Frobenius, concluimos que el sistema es compatible determinado
+
+</div>
+
+## 5. **Sistemas equivalentes**
+
+<l class = "definition">**Sistemas equivalentes.**</l> Los sistemas $AX=B$ y $A'X=B'$ son equivalentes si tienen exactamente el mismo conjunto de soluciones.
+
+De este modo, para resolver sistemas de la forma $AX=B$, empezaremos comparando los rangos de las matrices $A$ y $(A|B)$. A continuación, en caso de que ambos rangos sean iguales, procederemos a encontrar una solución utilizando el <l class = "definition">**método de Gauss**</l>.
+

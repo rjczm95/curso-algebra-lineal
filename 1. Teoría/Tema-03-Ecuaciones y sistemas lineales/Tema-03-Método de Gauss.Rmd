@@ -1,0 +1,47 @@
+---
+title: "Tema 2 - Ecuaciones y Sistemas Lineales"
+author: "Ramon Ceballos"
+date: "21/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# METODO DE GAUSS
+
+En el `Tema 1` vimos cómo utilizar el método de Gauss para obtener matrices escalonadas, escalonadas reducidas y calcular el rango de una matriz. 
+
+En este tema, veremos como aplicar dicho método para encontrar las soluciones de los sistemas de ecuaciones lineales.
+
+## **Definiciones generales**
+
+<l class = "definition">**Sistema escalonado.**</l> Dado el sistema $AX=B$, se dice que es escalonado si la matriz ampliada $(A|B)$ es escalonada.
+
+<l class = "definition">**Variables dependientes.**</l> Variables que se corresponden con los pivotes.
+
+<l class = "definition">**Variables independientes.**</l> Variables no dependientes.
+
+
+## **Resolver un sistema de ecuaciones lineales**
+
+Los pasos para hallar la solución de un sistema compatible son:
+
+1. Se selecciona la fila que tenga el pivote lo más a la izquierda posible para colocarla como la primera fila.
+
+2. Con el pivote de la primera fila se reducen a 0 todos los elementos que se encuentran por debajo de él.
+
+3. Se repiten los pasos 1 y 2 con la submatriz formada por todas las filas, a excepción de la primera. La nueva matriz que se obtiene tendrá 0's por debajo del pivote de la fila 2.
+
+4. Se repite el proceso hasta obtener una matriz escalonada.
+
+El objetivo de alcanzar una matriz escalonada por filas equivalente es debido a que una matriz escalonada tiene solución inmediata. 
+
+
+
+
+
+

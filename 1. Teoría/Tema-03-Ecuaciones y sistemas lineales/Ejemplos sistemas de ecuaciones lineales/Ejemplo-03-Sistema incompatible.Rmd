@@ -1,0 +1,68 @@
+---
+title: "Tema 2 - Ecuaciones y Sistemas Lineales"
+author: "Ramon Ceballos"
+date: "21/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# EJEMPLO: SISTEMA INCOMPATIBLE 
+
+Consideremos el sistema:
+
+$$\left\{\begin{matrix}
+x &+&2y&+&z&=&1\\
+ &&2y&+&3z&=&-5\\
+x &+&4y&+&4z&=&3
+\end{matrix}\right.$$
+
+Tenemos que: $$A = \begin{pmatrix}
+1&2&1\\
+0&2&3\\
+1&4&4
+\end{pmatrix}$$
+
+Esta matriz  tiene rango 2.
+
+$$A = \begin{pmatrix}
+1&2&1\\
+0&2&3\\
+1&4&4
+\end{pmatrix}\sim f_3-f_1\begin{pmatrix}
+1&2&1\\
+0&2&3\\
+0&2&3
+\end{pmatrix}\sim f_3-f_2\begin{pmatrix}
+1&2&1\\
+0&2&3\\
+0&0&0
+\end{pmatrix}$$
+
+
+Mientras que la matriz ampliada del sistema tiene rango 3.
+
+$$(A|B) = \begin{pmatrix}
+1&2&1&|&1\\
+0&2&3&|&-5\\
+1&4&4&|&3
+\end{pmatrix}\sim f_3-f_1\begin{pmatrix}
+1&2&1&|&1\\
+0&2&3&|&-5\\
+0&2&3&|&2
+\end{pmatrix}\sim f_3-f_2\begin{pmatrix}
+1&2&1&|&1\\
+0&2&3&|&-5\\
+0&0&0&|&7
+\end{pmatrix}$$
+
+Con lo cual, por el teorema de Rouché-Frobenius, concluimos que el sistema es incompatible.
+
+
+
+
+

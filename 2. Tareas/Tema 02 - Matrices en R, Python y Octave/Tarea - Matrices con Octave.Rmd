@@ -1,0 +1,50 @@
+---
+title: 'Tarea - Matrices: Octave'
+author: "Ramon Ceballos"
+date: "21/2/2021"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+knitr::opts_chunk$set(engine.path = list(octave ="C:/Program Files/GNU Octave/Octave-6.1.0/mingw64/bin/octave-cli-6.1.0.exe"), echo = TRUE)
+```
+
+**Pregunta 1**
+
+Definimos las matrices del ejercicio con Octave y operamos.
+
+```{octave}
+A = [0 1 -2; 2 3 -1; 1 -1 5]
+B = [1 -1 2 1; 2 -2 2 -2; -1 2 1 2]
+C = [2; 0; 1; -4]
+
+# A*B
+A*B
+
+# B*C
+B*C
+
+# B^t
+B'
+
+# B^t * A
+B' * A
+
+# C^t * B^t
+C'*B'
+
+
+```
+
+
+
+
+
+
+
+
+

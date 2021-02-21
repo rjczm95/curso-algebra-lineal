@@ -1,0 +1,283 @@
+---
+title: "MATRICES CON OCTAVE"
+author: "Ramon Ceballos"
+date: "21/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+knitr::opts_chunk$set(engine.path = list(octave ="C:/Program Files/GNU Octave/Octave-6.1.0/mingw64/bin/octave-cli-6.1.0.exe"), echo = TRUE)
+```
+
+# 1. **Definir Matrices en Octave**
+
+Para crear una matriz fila, se hace:
+
+```{octave}
+row = [1 2 3]
+```
+
+Para crear una matriz columna, se hace:
+
+```{octave}
+col = [1;2;3]
+```
+
+
+Entonces, para crear una matriz:
+
+```{octave}
+M = [1 2 3; 4 5 6; 7 8 9]
+```
+
+
+Para llamar a un elemento, utilizamos la sintaxis siguiente:
+
+```{octave}
+M = [1 2 3; 4 5 6; 7 8 9];
+M(1,1)
+```
+
+Para llamar a una fila, utilizamos la sintaxis siguiente:
+
+```{octave}
+M = [1 2 3; 4 5 6; 7 8 9];
+M(2,:)
+```
+
+
+Para llamar a una columna, utilizamos la sintaxis siguiente:
+
+```{octave}
+M = [1 2 3; 4 5 6; 7 8 9];
+M(:,3)
+```
+
+## 1.1 Comprobar tipo de matriz
+
+Para saber el tipo de una matriz, lo que hacemos es utilizar la función **`matrix_type()`**.
+
+Matriz completa (**Full**) con todo lleno de números.
+
+```{octave}
+M = [1 2 3; 4 5 6; 7 8 9];
+matrix_type(M)
+
+```
+
+**Upper** refiere a una matriz triangular superior, aunque sea diagonal.
+
+```{octave}
+N = [1 0 0; 0 1 0; 0 0 9];
+matrix_type(N)
+```
+
+## 1.2 Crear diversos tipos de matrices
+
+Para crear una **matriz de ceros**, utilizamos la función **`repmat(0,m,n)`** (repetir matriz) donde $m$ son el número de filas y $n$ el de columnas:
+
+```{octave}
+O = repmat(0,5,8)
+```
+
+
+Para crear una **matriz de unos**, utilizamos una sintaxis similar a la anterior:
+
+```{octave}
+ones = repmat(1,3,7)
+```
+
+
+Para crear una **matriz diagonal**, se emplea:
+
+```{octave}
+N = diag([1 2 3 4 5])
+```
+
+## 1.3 Diagonal y dimensión de una matriz
+
+Para obtener la **diagonal principal de una matriz** se utiliza:
+
+```{octave}
+N = diag([1 2 3 4 5]);
+diagonal = diag(N)
+```
+
+
+Para saber la **dimensión de una matriz**, hacemos uso de la función **`size()`** se utiliza:
+
+```{octave}
+M = [1 2 3; 4 5 6; 7 8 9];
+size(M)
+```
+
+# 2. **Manipulación de matrices con Octave**
+
+Para **sumar todos los elementos de una matriz**, se emplea un doble sum() ya que el primero solo sumaría columnas y el segundo haría la suma ya total.
+
+```{octave}
+M = [1 2 3; 4 5 6; 7 8 9];
+suma = sum(sum(M))
+```
+
+
+Para **sumar los elementos de una matriz por filas**:
+
+```{octave}
+M = [1 2 3; 4 5 6; 7 8 9];
+sumaFil = sum(M,2)
+```
+
+
+Para **sumar los elementos de una matriz por columnas**, basta simplemente con hacer lo siguiente:
+
+```{octave}
+M = [1 2 3; 4 5 6; 7 8 9];
+sumaCol = sum(M)
+```
+
+O bien:
+
+```{octave}
+M = [1 2 3; 4 5 6; 7 8 9];
+sumaCol = sum(M, 1)
+```
+
+
+Para obtener el **productorio** de los eleemntos de una matriz se emplea:
+
+```{octave}
+M = [1 2 3; 4 5 6; 7 8 9];
+producto = prod(prod(M))
+```
+
+
+Para calcular la **media los elementos de una matriz** se usa:
+
+```{octave}
+M = [1 2 3; 4 5 6; 7 8 9];
+media = mean(mean(M))
+```
+
+
+Para calcular la **media los elementos de una matriz por fila*s se hace lo siguiente:
+
+```{octave}
+M = [1 2 3; 4 5 6; 7 8 9];
+mediaFil = mean(M,2)
+```
+
+
+Para calcular la **media los elementos de una matriz por columnas** basta simplemente con hacer lo siguiente:
+
+```{octave}
+M = [1 2 3; 4 5 6; 7 8 9];
+mediaCol = mean(M)
+```
+
+O bien:
+
+```{octave}
+M = [1 2 3; 4 5 6; 7 8 9];
+mediaCol = mean(M,1)
+```
+
+
+# 3. **Operaciones con matrices en Octave**
+
+## 3.1 Transpuesta de una matriz
+
+Para calcular la transpuesta de una matriz, utilizamos el apostrofe, **`'`**.
+
+```{octave}
+M = [1 2 3; 4 5 6; 7 8 9];
+M'
+```
+
+## 3.2 Traza de una matriz
+
+Para calcular la traza de una matriz, utilizamos la función **`trace()`**:
+
+```{octave}
+A = [1 -1; 0 3];
+B = [2 1; -1 0];
+trace(A)
+trace(B)
+```
+
+## 3.3 Suma de matrices
+
+Suma de matrices:
+
+```{octave}
+A = [1 -1; 0 3];
+B = [2 1; -1 0];
+A+B
+```
+
+## 3.4 Producto de un escalar por una matriz 
+
+Producto de un escalar por una matriz:
+
+```{octave}
+A = [1 -1; 0 3];
+2*A
+```
+
+## 3.5 Producto de matrices
+
+Producto de matrices:
+
+```{octave}
+A = [1 -1; 0 3];
+B = [2 1; -1 0];
+A*B
+```
+
+## 3.6 Potencia de matrices
+
+Potencia de matrices:
+
+```{octave}
+A = [1 -1; 0 3];
+B = [2 1; -1 0];
+A^3
+B^4
+```
+
+# 4. **Rango e inversa de una matriz con Octave**
+
+## 4.1 Rango de una matriz
+
+Para calcular el rango de una matriz, utilizamos la función **`rank()`**.
+
+```{octave}
+A = [1 -1; 0 3];
+B = [2 1; -1 0];
+rank(A)
+rank(B)
+```
+
+
+## 4.2 Inversa de una matriz
+
+Para calcular la inversa de una matriz, hacemos uso de la función **`inv()`**.
+
+```{octave}
+A = [1 -1; 0 3];
+B = [2 1; -1 0];
+inv(A)
+inv(A)*A
+```
+
+Comprobamos si el producto da la identidad.
+
+```{octave}
+A = [1 -1; 0 3];
+inv(A)*A
+```
+

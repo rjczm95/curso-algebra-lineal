@@ -1,0 +1,70 @@
+---
+title: "Tema 2 - Ecuaciones y Sistemas Lineales"
+author: "Ramon Ceballos"
+date: "21/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# ECUACIONES MATRICIALES
+
+<l class = "definition"> **Ecuación matricial.**</l> Ecuación donde la incógnita es una matriz.
+
+Se resuelven transformando la ecuación inicial en otra equivalente utilizando las propiedades y definiciones vistas en el *Tema 01 - Matrices*.
+
+Para hallar la incógnita necesitamos la matriz inversa.
+
+<div class = "dem">
+
+## **Método de resolución**
+
+Dada la ecuación matricial siguiente: $$XP = Q-R$$
+
+Donde $X\in\mathcal{M}_{n}(\mathbb{K})$ es nuestra incógnita y $P,Q,R\in\mathcal{M}_{n}(\mathbb{K})$ son matrices cuadradas conocidas.
+
+Multiplicamos por la derecha en ambos miembros de la igualdad por $P^{-1}$.
+
+$$XPP^{-1}=(Q-R)P^{-1}$$
+
+Como $P^{-1}$ es la inversa de $P$, se cumple que $PP^{-1}=I_n$, donde $I_n$ es la matriz identidad de orden $n$. Entonces:
+
+$$XI_n=(Q-R)P^{-1}$$
+
+Con lo cual $X=(Q-R)P^{-1}$
+
+</div>
+
+
+**Ejemplo 1**
+
+Resolver la ecuación matricial $P+QX=RS-TX$. ¿Qué condiciones tienen que cumplirse para poder hallar $X$?
+
+En primer lugar, intentemos aislar $X$:
+
+$$P+QX=RS-TX$$
+$$QX+TX=RS-P$$
+
+Ahora, podemos sacar factor común $X$, del siguiente modo:
+
+$$(Q+T)X = RS-P$$
+
+Con lo cuál, para poder hallar $X$, necesitamos que la matriz $(Q+T)$ sea invertible y así poder continuar multiplicando a la izquierda de cada miembro de la igualdad por $(Q+T)^{-1}$, de la forma:
+
+$$(Q+T)^{-1}(Q+T)X = (Q+T)^{-1}(RS-P)$$
+$$X = (Q+T)^{-1}(RS-P)$$
+
+
+
+
+
+
+
+
+
+
+
