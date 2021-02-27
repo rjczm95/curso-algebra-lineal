@@ -1,0 +1,90 @@
+---
+title: "Ejemplos de factorización LU"
+author: "Ramon Ceballos"
+date: "25/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# **Ejemplo de factorización LU con permutación**
+
+Encontremos la factorización LU de la matriz A.
+
+$$A = \begin{pmatrix}0 & 1 & 3\\
+1 & 3& -2\\
+-3 & -2 & -1
+\end{pmatrix}$$
+
+Calculemos su matriz escalonada reducida equivalente de A:
+
+$$A\sim_{f_2\rightarrow f_1}\begin{pmatrix}1 &3 & -2\\
+0 & 1& 3\\
+-3 & -2 & -1
+\end{pmatrix}\sim_{f_3+3f_1}\begin{pmatrix}1 &3 & -2\\
+0 & 1& 3\\
+0 & 7 & -7
+\end{pmatrix}\sim_{f_3-7f_2}\begin{pmatrix}1 &3 & -2\\
+0 & 1& 3\\
+0 & 0 & -28
+\end{pmatrix}\sim_{-\frac{1}{28}f_3}\begin{pmatrix}1 &3 & -2\\
+0 & 1& 3\\
+0 & 0 & 1
+\end{pmatrix} = U$$
+
+En este caso hemos llevado a cabo una permutación de filas. Más concretamente, hemos cambiado la fila $f_1$ por la fila $f_2$. Esto corresponde a multiplicar la matriz $A$ ppr la matriz $F_{12}$ por la izquierda. Con lo cual:
+
+$$P = F_{12} = \begin{pmatrix}0 &1 & 0\\
+1 & 0& 0\\
+0 & 0 & 1
+\end{pmatrix}$$
+
+
+Con lo cual, lo que tenemos es que la matriz $PA$ admite una factorización $LU$.
+
+Las operaciones elementales llevadas a cabo sobre la matriz siguiente: $$PA = \begin{pmatrix}1 & 3 & -2\\
+0 & 1& 3\\
+-3 & -2 & -1
+\end{pmatrix}$$ 
+
+Para obtener $U$ han sido:
+
+$$U = F_3\left(-\frac{1}{28}\right)\cdot F_{32}(-7)\cdot F_{31}(3)\cdot PA$$
+
+Con lo cual:
+
+$$L = F_{31}(-3)\cdot F_{32}(7)\cdot F_3(-28) = \begin{pmatrix}1 &0 & 0\\
+0 & 1& 0\\
+-3 & 0 & 1
+\end{pmatrix}\cdot
+\begin{pmatrix}1 &0 & 0\\
+0 & 1& 0\\
+0 & 7 & 1
+\end{pmatrix}\cdot
+\begin{pmatrix}1 &0 & 0\\
+0 & 1& 0\\
+0 & 0 & -28
+\end{pmatrix} = \begin{pmatrix}1 &0 & 0\\
+0 & 1& 0\\
+-3 & 7 & -28
+\end{pmatrix}$$
+
+
+Comprobemos que todo está bien:
+
+$$L\cdot U = \begin{pmatrix}1 &0 & 0\\
+0 & 1& 0\\
+-3 & 7 & -28
+\end{pmatrix}\begin{pmatrix}1 &3 & -2\\
+0 & 1& 3\\
+0 & 0 & 1
+\end{pmatrix} = \begin{pmatrix}1 & 3 & -2\\
+0 & 1& 3\\
+-3 & -2 & -1
+\end{pmatrix} = PA$$
+
+

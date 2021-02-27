@@ -1,0 +1,301 @@
+---
+title: "Tareas de Sistemas de Ecuaciones Lineales en R y Python"
+author: "Ramon Ceballos"
+date: "24/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(reticulate)
+```
+
+# Ejercicio 1
+
+Resolver el siguiente sistema del pdf.
+
+Primero, comprobar el tipo de sistema (compatible determinado, compatible indeterminado o incompatible) con R, Python y Octave.
+
+Después, en caso de haber solución, calcularla con R, Python y Octave. Finalmente, indicar la solución final junto con el procedimiento llevado a cabo.
+
+- **R**
+
+```{r}
+library(matlib)
+```
+
+
+Definimos las matrices de coeficientes, de términos independientes y ampliada.
+
+```{r}
+A = rbind(c(10,2,-1,1,0,10), c(-1,-3,0,0,-1,5), c(0,-1,3,-1,0,0), c(17,1,0,3,5,-15), c(0,-10,0,-5,3,0), c(-3,1,1,1,-2,2))
+
+b = c(0,5,5,4,-21,11)
+
+AB = cbind(A,b)
+```
+
+Vemos si el rango de la ampliada es igual que el de la matriz de coeficientes; y si es igual al nº de incognitas.
+
+```{r}
+R(A) == R(AB)
+R(A) == 6
+```
+
+Vemos que ambas hipótesis se cumple por lo que estamos ante un sistema compatible determinado.
+
+Ahora procedemos a encontrar cual es la solución al sistema.
+
+```{r}
+Solve(A,b, fractions=TRUE)
+```
+
+Por tanto, la solución del sistema es `S = c(0,-1, 3, 5, -2, 0)`.
+
+
+- **Python**
+
+```{python}
+import numpy as np
+```
+
+
+Definimos las matrices de coeficientes, de términos independientes y ampliada.
+
+```{python}
+A = np.array([[10,2,-1,1,0,10],[-1,-3,0,0,-1,5],[0,-1,3,-1,0,0],[17,1,0,3,5,-15],[0,-10,0,-5,3,0],[-3,1,1,1,-2,2]])
+
+b = np.array([0,5,5,4,-21,11])
+
+AB = np.array([[10,2,-1,1,0,10,0],[-1,-3,0,0,-1,5,5],[0,-1,3,-1,0,0,5],[17,1,0,3,5,-15,4],[0,-10,0,-5,3,0,-21],[-3,1,1,1,-2,2,11]])
+```
+
+Vemos si el rango de la ampliada es igual que el de la matriz de coeficientes; y si es igual al nº de incognitas.
+
+```{python}
+np.linalg.matrix_rank(A) == np.linalg.matrix_rank(AB)
+np.linalg.matrix_rank(A) == 6
+```
+
+Vemos que ambas hipótesis se cumple por lo que estamos ante un sistema compatible determinado.
+
+Ahora procedemos a encontrar cual es la solución al sistema.
+
+```{python}
+np.round(np.linalg.solve(A,b),3)
+```
+
+Tenemos que el vector solución final obtenido es `S = [0,-1, 3, 5, -2, 0]`.
+
+# Ejercicio 2
+
+Resolver el siguiente sistema del pdf.
+
+Primero, comprobar el tipo de sistema (compatible determinado, compatible indeterminado o incompatible) con R, Python y Octave.
+
+Después, en caso de haber solución, calcularla con R, Python y Octave. Finalmente, indicar la solución final junto con el procedimiento llevado a cabo.
+
+- **R**
+
+Definimos las matrices de coeficientes, de términos independientes y ampliada.
+
+```{r}
+A = rbind(c(-2,2,-1,1,0,4,0), c(-1,-3,0,0,-1,5,-2), c(0,-1,3,-1,0,0,0), c(0,1,0,3,-2,1,4), c(0,-3,0,-5,3,0,-2), c(-3,1,1,1,-2,2,1))
+
+b = c(5,3,5,0,5,0)
+
+AB = cbind(A,b)
+```
+
+Vemos si el rango de la ampliada es igual que el de la matriz de coeficientes; y si es igual al nº de incognitas.
+
+```{r}
+R(A) == R(AB)
+R(A) == 7
+```
+
+Vemos que los rangos de las matrices comparadas son iguales, sin embargo el número de incógnitas es diferente al rango por lo que estamos ante un sistema compatible indeterminado.
+
+Ahora procedemos a encontrar cual es la solución al sistema.
+
+```{r}
+Solve(A,b, fractions=TRUE)
+```
+
+Por tanto, la solución del sistema es S = ($\frac{467}{7} - \frac{621x_7}{7}$,$\frac{383}{7} - \frac{509x_7}{7}$, $\frac{-149}{14} + \frac{233x_7}{14}$, $\frac{-1283}{14} + \frac{1717x_7}{14}$, $\frac{-1349}{14} + \frac{1853x_7}{14}$, $\frac{55}{2} - \frac{69x_7}{2}$, $x_7$), siendo $x_7$ la variable indeterminada.
+
+- **Python**
+
+```{python}
+import numpy as np
+```
+
+
+Definimos las matrices de coeficientes, de términos independientes y ampliada.
+
+```{python}
+A = np.array([[-2,2,-1,1,0,4,0],[-1,-3,0,0,-1,5,-2],[0,-1,3,-1,0,0,0],[0,1,0,3,-2,1,4],[0,-3,0,-5,3,0,-2],[-3,1,1,1,-2,2,1]])
+
+b = np.array([5,3,5,0,5,0])
+
+AB = np.array([[-2,2,-1,1,0,4,0,5],[-1,-3,0,0,-1,5,-2,3],[0,-1,3,-1,0,0,0,5],[0,1,0,3,-2,1,4,0],[0,-3,0,-5,3,0,-2,5],[-3,1,1,1,-2,2,1,1]])
+```
+
+Vemos si el rango de la ampliada es igual que el de la matriz de coeficientes; y si es igual al nº de incognitas.
+
+```{python}
+np.linalg.matrix_rank(A) == np.linalg.matrix_rank(AB)
+np.linalg.matrix_rank(A) == 7
+```
+
+Vemos que los rangos de las matrices comparadas son iguales, sin embargo el número de incógnitas es diferente al rango por lo que estamos ante un sistema compatible indeterminado.
+
+Ahora procedemos a encontrar cual es la solución al sistema.
+
+```{python}
+from sympy import *
+from sympy.solvers.solveset import linsolve
+
+x1,x2,x3,x4,x5,x6,x7 = symbols('x1,x2,x3,x4,x5,x6,x7')
+
+linsolve(Matrix(([-2,2,-1,1,0,4,0,5],[-1,-3,0,0,-1,5,-2,3],[0,-1,3,-1,0,0,0,5],[0,1,0,3,-2,1,4,0],[0,-3,0,-5,3,0,-2,5],[-3,1,1,1,-2,2,1,1])),(x1,x2,x3,x4,x5,x6,x7))
+```
+
+Por tanto, la solución del sistema es S = ($68 - \frac{621x_7}{7}$,$56 - \frac{509x_7}{7}$, $-11 + \frac{233x_7}{14}$, $-94 + \frac{1717x_7}{14}$, $-99 + \frac{1853x_7}{14}$, $28 - \frac{69x_7}{2}$, $x_7$), siendo $x_7$ la variable indeterminada.
+
+
+# Ejercicio 3
+
+Resolver el siguiente sistema del pdf.
+
+Primero, comprobar el tipo de sistema (compatible determinado, compatible indeterminado o incompatible) con R, Python y Octave.
+
+Después, en caso de haber solución, calcularla con R, Python y Octave. Finalmente, indicar la solución final junto con el procedimiento llevado a cabo.
+
+- **R**
+
+```{r}
+library(matlib)
+```
+
+
+Definimos las matrices de coeficientes, de términos independientes y ampliada.
+
+```{r}
+A = rbind(c(10,2,-1,1,0,10), c(-1,-3,0,0,-1,5), c(9,-1,-1,1,-1,15), c(17,1,0,3,5,-15), c(0,-10,0,-5,3,0), c(-3,1,1,1,-2,2))
+
+b = c(0,5,0,4,-21,11)
+
+AB = cbind(A,b)
+```
+
+Vemos si el rango de la ampliada es igual que el de la matriz de coeficientes; y si es igual al nº de incognitas.
+
+```{r}
+R(A) == R(AB)
+R(A) == 6
+```
+
+Vemos que ambas hipótesis no se cumplen por lo que estamos ante un sistema incompatible.
+
+No existe solución.
+
+
+- **Python**
+
+```{python}
+import numpy as np
+```
+
+
+Definimos las matrices de coeficientes, de términos independientes y ampliada.
+
+```{python}
+A = np.array([[10,2,-1,1,0,10],[-1,-3,0,0,-1,5],[9,-1,-1,1,-1,15],[17,1,0,3,5,-15],[0,-10,0,-5,3,0],[-3,1,1,1,-2,2]])
+
+b = np.array([0,5,0,4,-21,11])
+
+AB = np.array([[10,2,-1,1,0,10,0],[-1,-3,0,0,-1,5,5],[9,-1,-1,1,-1,15,0],[17,1,0,3,5,-15,4],[0,-10,0,-5,3,0,-21],[-3,1,1,1,-2,2,11]])
+```
+
+Vemos si el rango de la ampliada es igual que el de la matriz de coeficientes; y si es igual al nº de incognitas.
+
+```{python}
+np.linalg.matrix_rank(A) == np.linalg.matrix_rank(AB)
+np.linalg.matrix_rank(A) == 6
+```
+
+Vemos que ambas hipótesis no se cumplen por lo que estamos ante un sistema incompatible.
+
+No existe solución.
+
+# Ejercicio 4
+
+Encuentra la matriz X, ya sea a mano o con R,Python u Octave, tal que:
+
+- APARTADO A
+
+$$AX+3B=−5X$$
+
+A y B aparecen en el PDF adjunto. Las definimos:
+
+```{r}
+A = rbind(c(-6,-3),c(0,-3))
+B = rbind(c(-1,0),c(4,-2))
+I = rbind(c(1,0),c(0,1))
+```
+
+Recolocamos la ecuación del siguiente modo:
+
+$$(A+5I)X = -3B$$
+Definimos $M=A+5I$ y $N=-3B$.
+
+```{r}
+M = A+(5*I)
+N = -3*B
+```
+
+Determinamos el valor de X.
+
+```{r}
+X = solve(M,N)
+X
+(A %*% X)  + (3*B) == (-5*X)
+```
+
+- APARTADO B
+
+$$ACX+3B=10I−X$$
+Las matrices A, B, C e I se definen en el PDF adjunto.
+
+```{r}
+A = rbind(c(1,2),c(0,2))
+B = rbind(c(2,-1),c(-1,5))
+C = rbind(c(2,6),c(-1,-0.5))
+I = rbind(c(1,0),c(0,1))
+```
+
+Recolocamos la ecuación del siguiente modo:
+
+$$(AC+I)X=10I-3B$$
+
+Definimos $M=AC+I$ y $N=10I-3B$.
+
+```{r}
+M = (A%*%C)+I
+N=10*I-3*B
+```
+
+Determinamos el valor de X.
+
+```{r}
+X =solve(M,N)
+X
+A%*%C%*%X+3*B == 10*I - X
+```
+
+
+

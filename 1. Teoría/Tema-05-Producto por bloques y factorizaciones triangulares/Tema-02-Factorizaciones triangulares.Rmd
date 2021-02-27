@@ -1,0 +1,106 @@
+---
+title: "Tema 3 - Producto por bloques y factorizaciones triangulares"
+author: "Ramon Ceballos"
+date: "24/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+**FACTORIZACIONES TRIANGULARES**
+
+En este apartado nos proponemos estudiar cuando una matriz pude escribirse como producto de una matriz triangular inferior, a la que llamaremos $L$, y una matriz triangular superior a la que llamaremos $U$. Esto de conoce como **factorización LU**.
+
+Antes de empezar, repasemos las operaciones elementales.
+
+# 1. **Operaciones elementales**
+
+<l class = "definition">**Matriz Elemental (por filas).**</l> Se obtiene a partir de la matriz identidad $I_m$. Se pueden llevar a cabo las siguientes operaciones elementales:
+
+- **$F_{ij}:$** matriz elemental obtenida a partir de la matriz identidad $I_m$ a la que se le han intercambiado las filas $i,j$
+
+- **$F_i(\alpha):$** matriz elemental obtenida a partir de la matriz identidad $I_m$ a la que se le ha multiplicado la fila $i$ por $\alpha\in\mathbb{K}$
+
+- **$F_{ij}(\alpha):$** matriz elemental obtenida a partir de la matriz identidad $I_m$ a la cual se le ha sumado a la fila $i$ la fila $j$ multiplicada por $\alpha$
+
+## 1.1. Proposición para trasformaciones elementales por filas
+
+<l class = "prop">**Proposición.**</l> Sea $A\in\mathcal{M}_{m \times n}(\mathbb{K})$ una matriz. Entonces, cada una de las **transformaciones elementales por filas** que se pueden realizar sobre $A$ corresponden a **multiplicar la matriz $A$ por la izquierda por una matriz elemental** de la siguiente manera:
+
+- Intercambiar las filas $i,j$ de $A$ se corresponde a realizar el producto **$F_{ij}\cdot A$**
+
+- Multiplicar la fila $i$ por $\alpha\in\mathbb{K}$ se corresponde a realizar el producto **$F_{i}(\alpha)\cdot A$**
+
+- Sumar a la fila $i$ de la matriz $A$, la fila $j$ multiplicada por un número $\alpha\in\mathbb{K}$ se corresponde a realizar el producto **$F_{ij}(\alpha)\cdot A$**
+
+### Ejemplo 3
+
+Consideremos la matriz siguiente:
+
+$$A = \begin{pmatrix}1 & 1& 0 & -3\\ 2 & 0 & 1 & -1\\ 0 & 0 & 3 & 4\end{pmatrix}$$
+
+Entonces, intercambiar las filas 1 y 3 corresponde a multiplicar:
+
+$$F_{13}\cdot A = \begin{pmatrix}0 &0 &1 \\0 &1 &0 \\1&0&0\end{pmatrix}\begin{pmatrix}1 & 1& 0 & -3\\ 2 & 0 & 1 & -1\\ 0 & 0 & 3 & 4\end{pmatrix} = \begin{pmatrix}0 & 0 & 3 & 4\\ 2 & 0 & 1 & -1\\ 1 & 1& 0 & -3\end{pmatrix}$$
+
+Multiplicar la segunda fila de $A$ por -2 se corresponde con:
+
+$$F_2(-2)\cdot A = \begin{pmatrix}1 &0 &0 \\0 &-2 &0 \\0&0&1\end{pmatrix}\begin{pmatrix}1 & 1& 0 & -3\\ 2 & 0 & 1 & -1\\ 0 & 0 & 3 & 4\end{pmatrix} = \begin{pmatrix}1 & 1& 0 & -3\\ -4 & 0 & -2 & 2\\ 0 & 0 & 3 & 4\end{pmatrix}$$
+
+Sumar a la tercera fila de $A$, la segunda multiplicada por $5$ corresponde a realizar el producto:
+
+$$F_{32}(5)\cdot A = \begin{pmatrix}1&0&0\\0&1&0\\0&5&1\end{pmatrix}\begin{pmatrix}1 & 1& 0 & -3\\ 2 & 0 & 1 & -1\\ 0 & 0 & 3 & 4\end{pmatrix} = \begin{pmatrix}1 & 1& 0 & -3\\ 2 & 0 & 1 & -1\\ 10 & 0 & 8 & -1\end{pmatrix}$$
+
+## 1.2. Proposición para trasformaciones elementales por columnas
+
+Es fácil comprobar que las **transformaciones elementales por columnas** corresponden igualmente a **multiplicar, en este caso por la derecha**, por matrices elementales similares obtenidas a partir de la matriz identidad operando por columnas: $C_{ij},\ C_i(\alpha),\ C_{ij}(\alpha)$
+
+## 1.3. Inversas de las matrices elementales (por filas)
+
+<l class = "prop">**Proposición.**</l> Todas las matrices elementales son  invertibles y sus inversas vuelven a ser matrices elementales:
+
+- **$F_{ij}^{-1} = F_{ij}$**
+
+- **$F_i(\alpha)^{-1}=F_i\left(\frac{1}{\alpha}\right)$**
+
+- **$F_{ij}(\alpha)^{-1} = F_{ij}(-\alpha)$**
+
+<l class = "observ">**Observación.**</l> Las matrices $F_i(\alpha)$ son diagonales y las matrices $F_{ij}(\alpha)$ son triangulares inferiores si $i>j$ o triangulares superiores si $i<j$.
+
+
+# 2. **Factorizaciones triangulares (LU)**
+
+Ahora ya estamos preparados para ver los teoremas relativos a las factorizaciones triangulares, también conocidas como <l class = "definition">**Factorizaciones LU**</l>.
+
+## 2.1 Teorema
+
+<l class = "prop">**Teorema.**</l> Sea $A\in\mathcal{M}_{m\times n}(\mathbb{K})$ y $U$ una matriz escalonada por filas equivalente con todos los pivotes 1 (la cual será triangular superior), tenemos que:
+
+- **Sin permutación de filas.** Si $U$ se puede obtener a partir de $A$ sin necesidad de hacer ninguna permutación entre sus filas (no se cambian las filas), entonces existe una matriz triangular inferior $L$ de forma que $A = LU$. Además, si $A$ es invertible, entonces esta factorización es única.
+
+- **Con permutación de filas.** Si para llegar a $U$ se requieren permutaciones de filas y $A$ es invertible, entonces existe una matriz $P$ tal que $PA = LU$ donde $P$ es simplemente un producto de matrices elementales de la forma $F_{ij}$. Para cada $P$ (ya que puede haber más de una) la factorización es única.
+
+## 2.2. Algoritmo para la factorización $LU$ de una matriz 
+
+Existe un algoritmo para encontrar una factorización $LU$ de una matriz cualquiera $A$. Y es el siguiente:
+
+1. Encontrar matriz escalonada por filas con pivotes 1 equivalente a $A$, la que será nuestra $U$. 
+
+2. Para llegar a dicha matriz, habremos realizado una serie de transformaciones elementales correspondientes a matrices elementales de la forma $F_i(\alpha)$ y $F_{ij}(\alpha)$ con $i<j$. Así, $U=L_n\cdots L_1\cdot A$
+
+3. Entonces, $A = (L_n\cdots L_1)^{-1}U = L_1^{-1}\cdots L_n^{-1}\cdot U = LU$, donde $L$ es triangular inferior porque todas las $L_i^{-1}$ lo son.
+
+
+
+
+
+
+
+
+
+
+

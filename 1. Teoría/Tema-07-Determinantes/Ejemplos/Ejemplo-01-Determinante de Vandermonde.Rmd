@@ -1,0 +1,78 @@
+---
+title: "Tema 4 - Determinantes"
+author: "Ramon Ceballos"
+date: "27/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# **Ejemplo: Determinante de Vandermonde**
+
+A continuación os presentamos el **determinante de Vandermonde** de orden 4.
+
+$$\begin{vmatrix}1 & 1 & 1 & 1\\
+a & b & c & d\\
+a^2 & b^2 & c^2 & d^2\\
+a^3 & b^3 & c^3 & d^3\end{vmatrix}$$
+
+Con todo lo que hemos visto hasta ahora, podemos resolverlo de forma sencilla:
+
+En primer lugar, realizamos $f_4-af_3$, obteniendo:
+
+$$\begin{vmatrix}1 & 1 & 1 & 1\\
+a & b & c & d\\
+a^2 & b^2 & c^2 & d^2\\
+a^3 & b^3 & c^3 & d^3\end{vmatrix} = \begin{vmatrix}1 & 1 & 1 & 1\\
+a & b & c & d\\
+a^2 & b^2 & c^2 & d^2\\
+0 & b^3-ab^2 & c^3-ac^2 & d^3-ad^2\end{vmatrix}$$
+
+A continuación, $f_3-af_2$, y se obtiene:
+
+$$=\begin{vmatrix}1 & 1 & 1 & 1\\
+a & b & c & d\\
+0 & b^2-ab & c^2-ac & d^2-ad\\
+0 & b^3-ab^2 & c^3-ac^2 & d^3-ad^2\end{vmatrix}$$
+ 
+Ahora realizamos $f_2-af_1$ y obtenemos:
+
+$$=\begin{vmatrix}1 & 1 & 1 & 1\\
+0 & b-a & c-a & d-a\\
+0 & b^2-ab & c^2-ac & d^2-ad\\
+0 & b^3-ab^2 & c^3-ac^2 & d^3-ad^2\end{vmatrix}
+=\begin{vmatrix}1 & 1 & 1 & 1\\
+0 & b-a & c-a & d-a\\
+0 & b(b-a) & c(c-a) & d(d-a)\\
+0 & b^2(b-a) & c^2(c-a) & d^2(d-a)\end{vmatrix}$$
+
+El siguiente paso es desarrollar por la primera columna, obteniendo:
+
+$$ = 1\begin{vmatrix}b-a & c-a & d-a\\
+b(b-a) & c(c-a) & d(d-a)\\
+b^2(b-a) & c^2(c-a) & d^2(d-a)\end{vmatrix} = (b-a)(c-a)(d-a)\begin{vmatrix}1 & 1& 1\\b & c & d\\ b^2&c^2&d^2\end{vmatrix}$$
+
+Hemos obtenido un determinante de Vandermonde de orden 3. Lo que implica seguir el mismo razonamiento anterior.
+
+Empezamos realizando $f_3-bf_2$, obteniendo:
+
+$$(b-a)(c-a)(d-a)\begin{vmatrix}1 & 1& 1\\b & c & d\\ b^2&c^2&d^2\end{vmatrix} = (b-a)(c-a)(d-a)\begin{vmatrix}1 & 1& 1\\b & c & d\\ 0&c^2-bc&d^2-bd\end{vmatrix}$$
+
+A continuación, $f_2-bf_1$ y se obtiene:
+
+$$= (b-a)(c-a)(d-a)\begin{vmatrix}1 & 1& 1\\0 & c-b & d-b\\ 0&c^2-bc&d^2-bd\end{vmatrix}$$
+
+Finalmente, desarrollando de nuevo por la primera columna y sacando factor común $(c-b)$ y $(d-b)$ de las dos últimas columnas obtenemos:
+
+$$\det(A) = (b-a)(c-a)(d-a)(c-b)(d-b)\begin{vmatrix}1 & 1\\ c & d\end{vmatrix} = (b-a)(c-a)(d-a)(c-b)(d-b)(d-c)$$
+
+
+
+
+
+

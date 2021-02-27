@@ -1,0 +1,88 @@
+---
+title: "Tema 4 - Determinantes"
+author: "Ramon Ceballos"
+date: "27/2/2021"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# **Determinante de una matriz cuadrada**
+
+Solo se puede hablar de determinante cuando exista una matriz cuadrada.
+
+# 1. Definiciones generales
+
+<l class = "definition">**Determinante.**</l> Dada una matriz cuadrada $A\in\mathcal{M}_n(\mathbb{K})$, llamaremos determinante de la matriz $A$ y lo denotaremos por $\det(A)$ o $|A|$ a un elemento del cuerpo $\mathbb{K}$ que se define por inducción del siguiente modo:
+
+- si $n=1$, $A = (a_{11})$ y entonces $\det(A) = a_{11}$
+
+- si $n>1$, $\det(A)=a_{11}\alpha_{11}-a_{12}\alpha_{12}+\cdots+(-1)^{n+1}a_{1n}\alpha_{1n}$
+
+En estos casos, $\alpha_{1i}$ es el determinante de la matriz de orden $n-1$ que se obtiene en suprimir la primera fila y la columna $i$-ésima de la matriz $A$.
+
+
+### Ejemplo 1
+
+Dada la matriz cuadrada de orden 2:
+
+$$A = \begin{pmatrix}a_{11} & a_{12}\\a_{21} & a_{22}\end{pmatrix}$$
+
+Tenemos que:
+
+$$\alpha_{11} = \det(a_{22}) = a_{22}$$ $$\alpha_{12} = \det(a_{21}) = a_{21}$$
+
+Así pues, el determinante es:
+
+$$\det(A) = a_{11}\alpha_{11}-a_{12}\alpha_{12} = a_{11}a_{22}-a_{12}a_{21}$$
+
+### Ejemplo 2
+
+Dada la matriz cuadrada de orden 3:
+
+$$A = \begin{pmatrix}a_{11} & a_{12}&a_{13}\\a_{21}& a_{22} & a_{23}\\ a_{31} & a_{32} & a_{33}\end{pmatrix}$$
+
+El determinante de $A$ es:
+
+$$\det(A) = a_{11}\alpha_{11}-a_{12}\alpha_{12}+a_{13}\alpha_{13}$$
+
+En estea expresión del determinante de A, tenemos que:
+
+$$\alpha_{11} = \begin{vmatrix}a_{22} & a_{23}\\a_{32}&a_{33}\end{vmatrix}\qquad \alpha_{12} = \begin{vmatrix}a_{21} & a_{23}\\a_{31} & a_{33}\end{vmatrix}\qquad \alpha_{13} = \begin{vmatrix}a_{21} & a_{22}\\a_{31} & a_{32}\end{vmatrix}$$
+
+Con lo cual, se deduce:
+
+$$\alpha_{11} = a_{22}a_{33}-a_{23}a_{32};\quad \alpha_{12} = a_{21}a_{33}-a_{23}a_{31};\quad \alpha_{13} = a_{21}a_{32}-a_{22}a_{31}$$
+
+Así pues: 
+
+$$\det(A) = a_{11}(a_{22}a_{33}-a_{23}a_{32})-a_{12}(a_{21}a_{33}-a_{23}a_{31})+a_{13}(a_{21}a_{32}-a_{22}a_{31})$$
+
+Lo obtenido anteriormente es exactamente lo que se obtiene con la Regla de Sarrus.
+
+# 2. Regla de Sarrus
+
+<l class = "definition">**Regla de Sarrus.**</l> Es una regla nemotécnica utilizada para calcular determiantes de matrices cuadradas de orden 3:
+
+<div class = "center">
+![<l class = "phototext">Regla de Sarrus</l>](Images/sarrus.png)
+
+</div>
+
+Básicamente lo que dice la imágen es:
+
+$$\det(A) = a_{11}a_{22}a_{33}+a_{21}a_{32}a_{13}+a_{31}a_{12}a_{23}$$
+$$-a_{13}a_{22}a_{31}-a_{23}a_{32}a_{11}-a_{33}a_{12}a_{21}$$
+
+## 3. Introducción a las propiedades del determinante
+
+<l class = "prop">**Propiedad.**</l> $\forall n\ge1$, el determinante de la transpuesta de una matriz $A\in\mathcal{M}_n(\mathbb{K})$ coincide con el determinante de dicha matriz, $$\det(A^t) = \det(A)$$
+
+**Ejercicio 1** 
+
+- En primer lugar, probad que es cierto para los casos particulares $n = 2$ y $n = 3$
+- Demostrad formalmente este resultado para el caso general

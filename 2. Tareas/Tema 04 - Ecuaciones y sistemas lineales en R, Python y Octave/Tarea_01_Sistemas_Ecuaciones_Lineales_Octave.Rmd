@@ -1,0 +1,71 @@
+---
+title: "Tarea -01- Sistemas de Ecuaciones Lineales en Octave"
+author: "Ramon Ceballos"
+date: "24/2/2021"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+knitr::opts_chunk$set(engine.path = list(octave ="C:/Program Files/GNU Octave/Octave-6.1.0/mingw64/bin/octave-cli-6.1.0.exe"), echo = TRUE)
+```
+
+
+# Ejercicio 1
+
+Resolver el siguiente sistema del pdf.
+
+Primero, comprobar el tipo de sistema (compatible determinado, compatible indeterminado o incompatible) con R, Python y Octave.
+
+Después, en caso de haber solución, calcularla con R, Python y Octave. Finalmente, indicar la solución final junto con el procedimiento llevado a cabo.
+
+- **Octave**
+
+Definimos las matrices de coeficientes, de términos independientes y ampliada.
+
+```{octave}
+A = [10 2 -1 1 0 10; -1 -3 0 0 -1 5; 0 -1 3 -1 0 0; 17 1 0 3 5 -15; 0 -10 0 -5 3 0; -3 1 1 1 -2 2];
+
+b = [0; 5; 5; 4; -21; 11];
+
+AB = [A,b]
+```
+
+Vemos si el rango de la ampliada es igual que el de la matriz de coeficientes; y si es igual al nº de incognitas.
+
+```{octave}
+A = [10 2 -1 1 0 10; -1 -3 0 0 -1 5; 0 -1 3 -1 0 0; 17 1 0 3 5 -15; 0 -10 0 -5 3 0; -3 1 1 1 -2 2];
+b = [0; 5; 5; 4; -21; 11];
+AB = [A,b];
+
+rank(A) == rank(AB)
+rank(A) == 6
+```
+
+Vemos que ambas hipótesis se cumple por lo que estamos ante un sistema compatible determinado.
+
+Ahora procedemos a encontrar cual es la solución al sistema.
+
+```{octave}
+A = [10 2 -1 1 0 10; -1 -3 0 0 -1 5; 0 -1 3 -1 0 0; 17 1 0 3 5 -15; 0 -10 0 -5 3 0; -3 1 1 1 -2 2];
+b = [0; 5; 5; 4; -21; 11];
+AB = [A,b];
+
+S = linsolve(A,b)
+```
+
+
+# Ejercicio 2
+
+Resolver el siguiente sistema del pdf.
+
+Primero, comprobar el tipo de sistema (compatible determinado, compatible indeterminado o incompatible) con R, Python y Octave.
+
+Después, en caso de haber solución, calcularla con R, Python y Octave. Finalmente, indicar la solución final junto con el procedimiento llevado a cabo.
+
+
+
+

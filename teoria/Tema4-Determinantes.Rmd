@@ -365,7 +365,7 @@ $$A^{-1} = \frac{1}{\det(A)}(\text{Adj}(A))^t = \frac{1}{4}\begin{pmatrix}10 & 2
 
 ## Aplicaciones en el cálculo de matrices y sistemas
 
-Otra aplicación de los determinantes se encuntra en el cálculo del rango de una matriz:
+Otra aplicación de los determinantes se encuentra en el cálculo del rango de una matriz:
 
 Dada $A\in\mathcal{M}_{m\times n}(\mathbb{K})$ y sea $k<m,n$
 

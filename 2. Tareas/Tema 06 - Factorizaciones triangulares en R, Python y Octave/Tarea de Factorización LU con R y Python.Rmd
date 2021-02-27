@@ -1,0 +1,377 @@
+---
+title: "Tarea de Factorización LU con R y Python"
+author: "Ramon Ceballos"
+date: "27/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# PREGUNTA 1
+
+## **Parte A1**
+
+**R**
+
+Defino la matriz A1.
+
+```{r}
+A1 = rbind(c(0,2,-3,4),c(0,0,-5,-1),c(5,-1,-2,0),c(-2,0,4,6))
+```
+
+Hago la factorización LU.
+
+```{r}
+library(matlib)
+library(MASS)
+LU_A1 = LU(A1)
+```
+
+Tenemos que las matrices P, L y U son:
+
+```{r}
+#Matriz P
+P = as.fractions(LU_A1$P)
+P
+
+#Matriz L
+L = as.fractions(LU_A1$L)
+L
+
+#Matriz U
+U = as.fractions(LU_A1$U)
+U
+```
+
+Se observa que hubo permutaciones de filas para obtener la factorización por lo que se debe de cumplir que PA1 = LU.
+
+```{r}
+L %*% U
+P %*% A1
+```
+
+Se observa que ambas matrices son exactamente la misma.
+
+**Python**
+
+Defino la matriz A1.
+
+```{python}
+import numpy as np
+A1 = np.array([[0,2,-3,4],[0,0,-5,-1],[5,-1,-2,0],[-2,0,4,6]])
+```
+
+Hago la factorización LU.
+
+```{python}
+import scipy.linalg
+
+P, L, U = scipy.linalg.lu(A1)
+```
+
+Tenemos que las matrices P, L y U son:
+
+```{python}
+#Matriz P
+P = P
+P
+
+#Matriz L
+L = L
+L
+
+#Matriz U
+U = U
+U
+```
+
+
+Se observa que hubo permutaciones de filas para obtener la factorización por lo que se debe de cumplir que PA1 = LU.
+
+```{python}
+L.dot(U)
+np.transpose(P).dot(A1)
+```
+
+Se observa que ambas matrices son exactamente la misma.
+
+
+
+## **Parte A2**
+
+**R**
+
+Defino la matriz A2.
+
+```{r}
+A2 = rbind(c(1,2,-1,4),c(0,-1,5,8),c(2,3,1,4),c(1,-1,6,4))
+```
+
+Hago la factorización LU.
+
+```{r}
+library(matlib)
+library(MASS)
+LU_A2 = LU(A2)
+```
+
+Tenemos que las matrices P, L y U son:
+
+```{r}
+#Matriz P
+P = as.fractions(LU_A2$P)
+P
+
+#Matriz L
+L = as.fractions(LU_A2$L)
+L
+
+#Matriz U
+U = as.fractions(LU_A2$U)
+U
+```
+
+Se observa que no hubo permutaciones de filas para obtener la factorización por lo que se debe de cumplir que A2 = LU.
+
+```{r}
+L %*% U
+A2
+```
+
+Se observa que ambas matrices son exactamente la misma.
+
+**Python**
+
+Defino la matriz A2.
+
+```{python}
+import numpy as np
+A2 = np.array([[1,2,-1,4],[0,-1,5,8],[2,3,1,4],[1,-1,6,4]])
+```
+
+Hago la factorización LU.
+
+```{python}
+import scipy.linalg
+
+P, L, U = scipy.linalg.lu(A2)
+```
+
+Tenemos que las matrices P, L y U son:
+
+```{python}
+#Matriz P
+P = P
+P
+
+#Matriz L
+L = L
+L
+
+#Matriz U
+U = U
+U
+```
+
+
+Se observa que hubo permutaciones de filas para obtener la factorización por lo que se debe de cumplir que A2 = LU.
+
+```{python}
+L.dot(U)
+np.transpose(P).dot(A2)
+```
+
+Se observa que ambas matrices son exactamente la misma.
+
+
+## **Parte A3**
+
+**R**
+
+Defino la matriz A3.
+
+```{r}
+A3 = rbind(c(2,4,-2,0),c(3,7,5,-4),c(-1,2,-2,5),c(6,1,0,2))
+```
+
+Hago la factorización LU.
+
+```{r}
+library(matlib)
+library(MASS)
+LU_A3 = LU(A3)
+```
+
+Tenemos que las matrices P, L y U son:
+
+```{r}
+#Matriz P
+P = as.fractions(LU_A3$P)
+P
+
+#Matriz L
+L = as.fractions(LU_A3$L)
+L
+
+#Matriz U
+U = as.fractions(LU_A3$U)
+U
+```
+
+Se observa que hubo permutaciones de filas para obtener la factorización por lo que se debe de cumplir que PA3 = LU.
+
+```{r}
+round(L %*% U,3)
+P %*% A3
+```
+
+Se observa que ambas matrices son exactamente la misma.
+
+**Python**
+
+Defino la matriz A3.
+
+```{python}
+import numpy as np
+A3 = np.array([[2,4,-2,0],[3,7,5,-4],[-1,2,-2,5],[6,1,0,2]])
+```
+
+Hago la factorización LU.
+
+```{python}
+import scipy.linalg
+
+P, L, U = scipy.linalg.lu(A3)
+```
+
+Tenemos que las matrices P, L y U son:
+
+```{python}
+#Matriz P
+P = P
+P
+
+#Matriz L
+L = L
+L
+
+#Matriz U
+U = U
+U
+```
+
+
+Se observa que hubo permutaciones de filas para obtener la factorización por lo que se debe de cumplir que PA3 = LU.
+
+```{python}
+L.dot(U)
+np.transpose(P).dot(A3)
+```
+
+Se observa que ambas matrices son exactamente la misma.
+
+
+
+## **Parte A4**
+
+**R**
+
+Defino la matriz A3.
+
+```{r}
+A4 = rbind(c(0,2,3,1),c(0,4,-1,5),c(2,0,3,1),c(1,-4,5,6))
+```
+
+Hago la factorización LU.
+
+```{r}
+library(matlib)
+library(MASS)
+LU_A4 = LU(A4)
+```
+
+Tenemos que las matrices P, L y U son:
+
+```{r}
+#Matriz P
+P = as.fractions(LU_A4$P)
+P
+
+#Matriz L
+L = as.fractions(LU_A4$L)
+L
+
+#Matriz U
+U = as.fractions(LU_A4$U)
+U
+```
+
+Se observa que hubo permutaciones de filas para obtener la factorización por lo que se debe de cumplir que PA4 = LU.
+
+```{r}
+L %*% U
+P %*% A4
+```
+
+Se observa que ambas matrices son exactamente la misma.
+
+**Python**
+
+Defino la matriz A4.
+
+```{python}
+import numpy as np
+A4 = np.array([[0,2,3,1],[0,4,-1,5],[2,0,3,1],[1,-4,5,6]])
+```
+
+Hago la factorización LU.
+
+```{python}
+import scipy.linalg
+
+P, L, U = scipy.linalg.lu(A4)
+```
+
+Tenemos que las matrices P, L y U son:
+
+```{python}
+#Matriz P
+P = P
+P
+
+#Matriz L
+L = L
+L
+
+#Matriz U
+U = U
+U
+```
+
+
+Se observa que hubo permutaciones de filas para obtener la factorización por lo que se debe de cumplir que PA4 = LU.
+
+```{python}
+L.dot(U)
+np.transpose(P).dot(A4)
+```
+
+Se observa que ambas matrices son exactamente la misma.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

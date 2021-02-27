@@ -1,0 +1,100 @@
+---
+title: "Tema 4 - Determinantes"
+author: "Ramon Ceballos"
+date: "27/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# **Cálculo de los determinantes**
+
+# 1. Adjuntos y menores complementarios
+
+Para facilitar el cálculo de los determinantes se emplena los adjuntos y menores complementarios.
+
+Dada $A = (a_{ij})_{n\times n},\ n\ge2$. Sea $a_{ij}$ el elemento que ocupa la fila $i$ y la columna $j$ de la matriz $A$. Si suprimimos la fila $i$ y la columna $j$ de $A$ obtendremos una matriz cuadrada de orden $n-1$.
+
+## 1.1 Definiciones generales
+
+<l class = "definition">**Menor complementario**.</l> El menor complementario de $a_{ij}$ es el determinante de la matriz de orden $n-1$ que designábamos como $\alpha_{ij}$.
+
+<l class = "definition">**Adjunto**. </l>El elemento $A_{ij} = (-1)^{i+j}\alpha_{ij}$ es el adjunto de $a_{ij}$
+
+<l class = "definition">**Matriz adjunta de $A$**.</l> Matriz (con mismo nº de filas y columnas que la matriz original) que tiene como coeficientes los adjuntos $A_{ij}$ de los elementos $a_{ij}$ de $A$. Se denota por $\text{Adj}(A)$.
+
+
+### Ejemplo 8
+
+Si partimos de la siguiente matriz:
+
+$$A = \begin{pmatrix}1 & 0 & 5\\-1&3&2\\ 0 & -1 & 1\end{pmatrix}$$ 
+
+La matriz adjunta de A será:
+
+$$\text{Adj}(A) = 
+\begin{pmatrix}
+\begin{vmatrix} 3 & 2\\ -1 & 1\end{vmatrix} & 
+-\begin{vmatrix}-1 & 2\\ 0 & 1\end{vmatrix} & 
+\begin{vmatrix}-1 & 3\\0 & -1\end{vmatrix}\\
+-\begin{vmatrix}0 & 5\\ -1 & 1\end{vmatrix} & 
+\begin{vmatrix}1 & 5\\ 0 & 1\end{vmatrix} & 
+-\begin{vmatrix}1 & 0\\ 0 & -1\end{vmatrix}\\
+\begin{vmatrix}0 & 5\\ 3 & 2\end{vmatrix} & 
+-\begin{vmatrix}1 & 5\\-1 & 2\end{vmatrix} & 
+\begin{vmatrix}1 & 0 \\ -1 & 3\end{vmatrix}\\
+\end{pmatrix} = \begin{pmatrix}5 & 1 & 1\\ -5 & 1 & 1\\-15 & -7 & 3\end{pmatrix}$$
+
+
+
+# 2. Cálculo de determinantes a partir de los adjuntos
+
+El determinante de una matriz cuadrada $A\in\mathcal{M}_n(\mathbb{K})$, $n\ge2$ se puede calcular desarrollando por los adjuntos de los elementos de cualquiera de sus filas o columnas.
+
+<l class = "prop"> **Proposición.**</l> Sea $A = (a_{ij})$ una matriz cuadrada de orden $n$. Entonces se verifica:
+
+$$\det(A) = a_{i1}A_{i1}+a_{i2}A_{i2}+\cdots+a_{in}A_{in}$$
+
+Esto es el desarrollo de un determinante por los adjuntos de los elementos de una fila; y también se puede hacer para una columna cualquiera:
+
+$$\det(A) = a_{1j}A_{1j}+a_{2j}A_{2j}+\cdots+a_{nj}A_{nj}$$
+
+Esto es el desarrollo de un determinante por los adjuntos de los elementos de una columna.
+
+
+### Ejemplo 9
+
+El determinante siguiente:
+
+$$\det(A) = \begin{vmatrix}1 & -1 & 3\\4 & 0 & 2\\ 5&-1&0\end{vmatrix}$$
+
+Si se desarrolla por los elementos de la primera fila es:
+
+$$|A| = 1\begin{vmatrix}0 & 2\\-1&0\end{vmatrix}-(-1)\begin{vmatrix}4&2\\5&0\end{vmatrix}+3\begin{vmatrix}4 & 0\\5 & -1\end{vmatrix} = 1\cdot 2+1\cdot(-10)+3\cdot(-4) = -20$$
+
+Y desarrollado por los elementos de la segunda columna es:
+
+$$|A| = -(-1)\begin{vmatrix}4&2\\5&0\end{vmatrix}+0\begin{vmatrix}1&3\\5&0\end{vmatrix}-(-1)\begin{vmatrix}1&3\\4&2\end{vmatrix} = 1\cdot (-10)+0+1\cdot(-10) = -20$$
+
+## 2.1. Truco para matrices de mayores dimensiones
+
+Aplicando este último desarrollo a las matrices triangulares, tenemos que el determinante de una de estas matrices es igual al producto de los elementos de la diagonal principal.
+
+
+### Ejemplo 10
+
+$$\det(A) = \begin{vmatrix}1 & 2 & 3 & 4\\
+0 & 5 & 6 & 7\\
+0 & 0 & 8 & 9\\
+0 & 0 & 0 & 10\end{vmatrix} = 1\begin{vmatrix}5 & 6 & 7\\
+0 & 8 & 9\\
+0 & 0 & 10\end{vmatrix} = 5\begin{vmatrix}
+8 & 9\\
+0 & 10\end{vmatrix} = 40|10| = 400 $$
+
+Lo que hemos hecho ha sido hacer un desarrollo por los adjuntos de la primera columna en cada paso.
+

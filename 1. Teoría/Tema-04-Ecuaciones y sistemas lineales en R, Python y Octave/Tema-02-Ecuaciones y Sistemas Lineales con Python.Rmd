@@ -1,0 +1,637 @@
+---
+title: "Ecuaciones y Sistemas Lineales con Python"
+author: "Ramon Ceballos"
+date: "23/2/2021"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(reticulate)
+```
+
+**Ecuaciones y Sistemas Lineales con Python**
+
+En esta sección veremos como:
+
+- Trabajar con sistemas compatibles determinados
+- Representar ecuaciones de un sistema lineal
+- Trabajar con sistemas compatibles indeterminados
+- Trabajar con sistemas incompatibles
+
+
+# 1. **Sistemas compatibles determinados con `Python`**
+
+## 1.1. Empleo de NumPy
+
+Dado el sistema de ecuaciones lineales:
+
+$$\left\{\begin{matrix}a_{11}x_1+a_{12}x_2+\cdots+a_{1n}x_n & = & b_1\\
+a_{21}x_1+a_{22}x_2+\cdots+a_{2n}x_n & = & b_2\\
+\vdots & \  & \vdots\\
+a_{m1}x_1+a_{m2}x_2+\cdots+a_{mn}x_n & = & b_m\\\end{matrix}\right.$$
+
+Si lo pasamos a su forma matricial, $AX = b$, podremos resolverlo de forma sencilla con la función **`numpy.linalg.solve(A,b)`**, siempre que se trate de un sistema compatible determinado.
+
+### Ejemplo 1
+
+<div class = "example"> 
+
+Dado el siguiente sistema de ecuaciones lineales, calculemos su solución:
+
+$$\left\{\begin{matrix}
+x_1 &+& x_2 &+& 2x_3 &=& 9\\
+2x_1 &+& 4x_2 &-& 3x_3 &=& 1\\
+3x_1 &+& 6x_2 &-& 5x_3 &=& 0\end{matrix}\right.$$
+</div>
+
+Se trata de un sistema de 3 ecuaciones con 3 incógnitas. Para obtener su forma matriciar hacemos lo siguiente:
+
+```{python}
+import numpy as np
+A = np.array([[1,1,2],[2,4,-3],[3,6,-5]])
+b = np.array([9,1,0])
+AB = np.array([[1,1,2,9],[2,4,-3,1],[3,6,-5,0]])
+```
+
+Comprobamos que el rango de $A$ es igual al de la ampliada, para ver si el sistema es compatible.
+
+```{python}
+np.linalg.matrix_rank(A) == np.linalg.matrix_rank(AB)
+```
+
+Ahora, comprobamos si es igual al número de incógnitas, para ver si es compatible determinado.
+
+```{python}
+np.linalg.matrix_rank(A) == 3
+```
+
+Finalmente, resolvemos el sistema de ecuaciones lineales planteado.
+
+```{python}
+x = np.linalg.solve(A, b)
+x
+```
+
+Es decir, nuestra única solución es $x = (1,2,3)$.
+
+Recordad que la comprobación la podemos hacer de 2 formas:
+
+- 1. Sustituyendo la solución en cada una de las ecuaciones y ver que se cumplen todas las igualdades.
+
+- 2. Viendo que la multiplicación de la matriz de coeficientes por la solución da el vector de términos independientes.
+
+El segundo caso en **`Python`** vendría dado por el siguiente bloque de código:
+
+```{python}
+A.dot(x)
+```
+
+Así, podemos ver que al multiplicar $A$ por nuestra solución, obtenemos el vector de términos independientes $b = (9,1,0)$.
+
+## 1.2. Empleo de SymPy
+
+También podemos resolver sistemas compatibles determinados con la librería **`sympy`**.
+
+Además, lo podremos resolver de tres formas:
+
+- Introduciendo la lista de ecuaciones.
+- Introduciendo la matriz ampliada.
+- Introduciendo el sistema.
+
+### Ejemplo 2
+
+<div class = "example">
+
+Resolvamos esta vez un sistema de dos ecuaciones con dos incógnitas:
+
+$$\left\{\begin{matrix}
+2x_1 &+& 2x_2 &=& 1\\
+-x_1 &+& x_2 &=& 2\end{matrix}\right.$$
+
+</div>
+
+Importamos la función **linsolve()** ndel paquete SymPy.
+
+```{python}
+from sympy import *
+from sympy.solvers.solveset import linsolve
+```
+
+A continuación creamos las variables del sistema de ecuaciones.
+
+```{python}
+x,y,z = symbols('x,y,z')
+x1,x2,x3 = symbols('x1,x2,x3')
+```
+
+**A. Lista de ecuaciones**
+
+Si lo queremos resolver introduciendo la lista de ecuaciones, primero tenemos que transformarlas de modo que todas estén igualadas a 0. En nuestro caso, tendremos el siguiente sistema equivalente:
+
+$$\left\{\begin{matrix}
+2x_1 &+& 2x_2 &-&1&=& 0\\
+-x_1 &+& x_2 &-&2&=&0\end{matrix}\right.$$
+
+Por tanto, empleamos la función importada (desde SymPy) **linsolve()** para resolver el sistema empleando la lista de ecuaciones del sistema.
+
+```{python}
+linsolve([2*x1 + 2*x2 - 1, -x1 + x2 - 2], (x1, x2))
+```
+
+**B. Matriz ampliada**
+
+Si lo queremos resolver introduciendo la matriz ampliada, hacemos lo siguiente:
+
+```{python}
+linsolve(Matrix(([2, 2, 1], [-1, 1, 2])), (x1, x2))
+```
+
+**C. Sistema**
+
+Si lo queremos hacer introduciendo el sistema se realizan los siguientes pasos:
+
+- 1. Definimos la matriz ampliada.
+- 2. Definimos una variable (A) que englobe los valores de todas las filas y de todas las columnas menos la última columna (matriz de coeficientes).
+- 3. Definimos una variable (b) que englobe todas las filas de la última columna (matriz de términos independientes).
+- 4. Se declara el sistema (system = A,b).
+- 5. Resolvemos el sistema con linsolve().
+
+```{python}
+AB = Matrix(((2, 2, 1), (-1, 1, 2))) 
+
+A = AB[:, :-1] 
+
+b = AB[:, -1]
+
+system = A,b
+
+linsolve(system, x1, x2)
+```
+
+# 2. **Representación de sistemas con `Python`**
+
+
+Con la librería **`matplotlib`** podemos representar gráficamente nuestros sistemas de ecuaciones lineales tal cual hacíamos con `R`.
+
+```{python}
+import matplotlib.pyplot as plt
+```
+
+<l class = "important"> **¡Atención!**</l> Todo el código mostrado en este apartado se encuentra en un archivo de `Jupyter` llamado Tema 2, ya que `R` daba demasiados problemas para ejecutar los gráficos (busca en carpeta codigo).
+
+### Ejemplo 2
+
+Dado el sistema de 2 ecuaciones lineales con 2 incógnitas visto en el `Ejemplo 2`:
+
+$$\left\{\begin{matrix}2x_1 &+&2x_2&=&1\\
+-x_1 &+&4x_2&=&2\end{matrix}\right.$$
+
+Reescribiéndolo del siguiente modo, es decir, aislando la variable $x_2$.
+
+$$\left\{\begin{matrix}x_2&=&\frac{1}{2}-x_1\\
+x_2&=&\frac{2+x_1}{4}\end{matrix}\right.$$
+
+Su representación gráfica viene dada a continuación. Para ello generamos 100 números entre 0 y 10 para representar ambas rectas del sistema de ecuaciones.
+
+
+```{python, eval = F}
+x1 = np.linspace(0, 10, 100)
+plt.plot(x1, 1/2-x1, x1, (2+x1)/4)
+plt.show()
+```
+
+<div class = "center">
+![<l class = "phototext">Representación gráfica del sistema del `Ejemplo 2` con `Python`</l>](Images/p.png)
+
+</div>
+
+Donde: 
+
+- Damos 100 valores entre 0 y 10 a la variable $x_1$.
+- El eje horizontal representa la variable $x_1$.
+- El eje vertical representa la variable $x_2$.
+- Claramente se observa que el sistema es compatible determinado, ya que hay un único punto donde las dos rectas intersecan.
+- El punto de intersección es la solución que hemos encontrado previamente: $\left(-\frac{3}{4},\frac{5}{4}\right)$.
+
+### Ejemplo 3
+
+<div class = "example">
+
+$$\left\{\begin{matrix}4x &+&2y&=&3\\
+x &-&2y&=&2\\
+3x &+&4y&=&1\end{matrix}\right.$$
+</div>
+
+Si lo reescribimos de la forma:
+
+$$\left\{\begin{matrix}y&=&\frac{3}{2}-2x\\
+y&=&\frac{x}{2}-1\\
+y &=& \frac{1-3x}{4}\end{matrix}\right.$$
+
+El siguiente código genera el siguiente gráfico:
+
+
+```{python, eval = F}
+x = np.linspace(0, 10, 100)
+plt.plot(x, 3/2-2*x, x, x/2-1, x, (1-3*x)/4)
+plt.show()
+```
+
+<div class = "center">
+![<l class = "phototext">Representación gráfica del sistema del `Ejemplo 3` con `Python`</l>](Images/p2.png)
+
+</div>
+
+Donde: 
+
+- El eje horizontal representa la variable $x$.
+- El eje vertical representa la variable $y$.
+- Claramente se observa que el sistema es compatible determinado, ya que las 3 rectas intersecan en un mismo punto.
+
+### Ejemplo 1
+
+Si quisiésemos representar un sistema con 3 incógnitas, como por ejemplo el sistema del `Ejemplo 1`, ya se complica un poco más la cosa.
+
+$$\left\{\begin{matrix}x &+& y &+& 2z  &=&  9\\ 
+2x &+& 4y &-& 3z  &=&  1\\ 
+3x &+& 6y &-& 5z  &=&  0 \end{matrix}\right.$$
+
+Además, al no ser interactivo, es muy difícil que nos sea útil.
+
+
+El código necesario se muestra a lo largo de las siguientes diapositivas.
+
+Se declaran los coeficientes de cada ecuación del sistema (n1, n2, n3).
+
+```{python}
+
+
+point1  = np.array([0,0,9/2])
+n1 = np.array([1,1,2])
+
+point2  = np.array([0,0,-1/3])
+n2 = np.array([2,4,-3])
+
+point3  = np.array([0,0,0])
+n3 = np.array([3,6,-5])
+```
+
+
+En el chunk anterior, lo único que se ha hecho ha sido declarar **un punto que cumple cada ecuación** y **el vector normal del plano** que forma dicha ecuación.
+
+Es decir:
+
+- `point1`=$\left(0,0,\frac{9}{2}\right)$ cumple la primera ecuación ya que:
+
+$$0 + 0 +2\cdot\frac{9}{2} = 9$$
+
+- `point2`=$\left(0,0,-\frac{1}{3}\right)$ cumple la segunda ecuación ya que :
+
+$$2\cdot 0+4\cdot 0-3\cdot\left(-\frac{1}{3}\right) = 1$$
+
+- `point3`=$\left(0,0,0\right)$ cumple la tercera ecuación ya que:
+
+$$3\cdot 0+6\cdot 0-5\cdot 0 = 0$$
+
+
+No necesariamente tienen por qué ser estos, también nos hubiese servido tomar:
+
+- `point1` = $(9,0,0)$
+- `point2` = $\left(1/2,0,0\right)$
+- `point3` = $(-2,1,0)$
+
+Pasemos ahora a los vectores normales a un plano. No entraremos mucho en detalle de momento. Por tanto, una definición básica de lo que es un vector normal a un plano es la siguiente:
+
+<l class = "definition">**Vector normal.**</l> El vector $\vec{n} = (a,b,c)$ es normal a un plano si es perpendicular a éste.
+
+Sin embargo, más que la definición, lo que nos interesa es que dada la ecuación general de un plano: $Ax+By+Cz+D =0$, el vector normal a este plano es $\vec{n} = (A, B, C)$.
+
+
+<div class = "center">
+![<l class = "phototext">Vector normal al plano $Ax+By+Cz+D =0$</l>](Images/nv.png)
+
+</div>
+
+De ahí que los vectores normales a cada una de nuestras ecuaciones siguientes:
+
+$$\left\{\begin{matrix}x &+& y &+& 2z &-& &9& &=&  0\\ 
+2x &+& 4y &-& 3*z  &-& &1& &=&  0\\ 
+3x &+& 6y &-& 5z  &=&  0 \end{matrix}\right.$$
+
+Sean:
+
+$$n_1 = (1,1,2),\quad n_2 = (2,4,-3)\quad n_3 = (3,6,-5)$$
+
+Declaramos **el término independiente de cada ecuación** del sistema.
+
+```{python, eval = F}
+D1 = -9
+D2 = -1
+D3 = 0
+```
+
+Aquí lo que hacemos es declarar los valores de $D$, los términos independientes, para cada una de las ecuaciones, los cuales, recordemos, vienen dados por la ecuación general del plano: $Ax+By+Cz+D = 0$
+
+Ahora empleamos la función de numpy denominada **np.meshgrid()** para generar una serie de mallas para la representación tridimensional.
+
+```{python, eval = F}
+X, Y = np.meshgrid(range(30), range(30))
+```
+
+En este chunk, con la función **`meshgrid`** creamos una matriz de coordenadas para la futura representación gráfica.
+
+
+Ahora, nos interesa saber cómo se define $z$ en función de $x$ e $y$. Para ello, lo que hacemos es aislar la variable $z$ de cada una de nuestras ecuaciones. Hecho esto, el sistema nos queda reescrito de la siguiente forma:
+
+$$\left\{\begin{matrix}z &=&  \frac{9-x-y}{2}\\ 
+z &=&  \frac{2x+4y-1}{3}\\ 
+z  &=&  \frac{3x+6y}{5} \end{matrix}\right.$$
+
+Si os fijáis, $z$ al fin y al cabo es: $$\frac{-Ax-By-D}{C}$$
+
+Por tanto, declaramos las siguientes 3 variables en función de lo que acabamos de obtener:
+
+```{python, eval = F}
+z1 = (-n1[0]*X - n1[1]*Y - D1)*1./n1[2]
+
+z2 = (-n2[0]*X - n2[1]*Y - D2)*1./n2[2]
+
+z3 = (-n3[0]*X - n3[1]*Y - D3)*1./n3[2]
+```
+
+
+Finalmente, creamos y dibujamos el correspondiente **gráfico 3d**.
+
+```{python, eval = F}
+from mpl_toolkits.mplot3d import Axes3D
+
+plot3d = plt.figure().gca(projection='3d')
+
+plot3d.plot_surface(X,Y,z1, color='red')
+
+plot3d.plot_surface(X,Y,z2, color='cyan')
+
+plot3d.plot_surface(X,Y,z3, color='yellow')
+
+plt.show()
+```
+
+Se produce el siguiente resultado:
+
+<div class = "center">
+![<l class = "phototext">Representación gráfica del sistema del `Ejemplo 1` con `Python`</l>](Images/py3d.png)
+
+</div>
+
+
+
+# 3. **Sistemas compatibles indeterminados con `Python`**
+
+Para averiguar que estamos trabajando con sistemas compatibles indeterminados podemos hacer uso de la función **`np.linalg.matrix_rank()`** para trabajar con los rangos o representar gráficamente el sistema.
+
+
+### Ejemplo 4
+
+Dado el siguiente sistema de ecuaciones lineales:
+
+$$\left\{\begin{matrix}x&+&y&-&z&=& 2\\x&-&y&+&z&=&1\\3x&+&y&-&z&=&5\end{matrix}\right.$$
+
+
+Definimos las matrices del sistema del siguiente modo:
+
+```{python}
+A = np.array([[1,1,-1],[1,-1,1],[3,1,-1]])
+
+B = np.array([2,1,5])
+
+AB = np.array([[1,1,-1,2],[1,-1,1,1],[3,1,-1,5]])
+```
+
+Calculemos los rangos de la matriz de coeficientes y la matriz ampliada para ver de qué tipo de sistema se trata:
+
+
+```{python}
+np.linalg.matrix_rank(A)
+
+np.linalg.matrix_rank(A) == np.linalg.matrix_rank(AB)
+```
+
+Hemos visto que los rangos de $A$ y el de la matriz ampliada coinciden y son iguales a 2, pero hay 3 incógnitas. Por lo tanto, por el Teorema de Rouché-Frobenius se trata de un sistema compatible indeterminado.
+
+
+Ahora, si queremos representar gráficamente el sistema, introducimos el siguiente código: 
+
+```{python, eval = F}
+point1  = np.array([0,0,-2])
+n1 = np.array([1,1,-1])
+
+point2  = np.array([0,0,1])
+n2 = np.array([1,-1,1])
+
+point3  = np.array([0,0,-5])
+n3 = np.array([3,1,-1])
+```
+
+Definimos los términos independientes a continuación:
+
+```{python, eval = F}
+D1 = -2
+D2 = -1
+D3 = -5
+
+```
+
+Creamos la matriz de coordenadas, a continuación.
+
+```{python, eval = F}
+X, Y = np.meshgrid(range(-20,20), range(30))
+```
+
+Calculamos z en función de x e y.
+
+```{python, eval = F}
+z1 = (-n1[0]*X - n1[1]*Y - D1)*1./n1[2]
+
+z2 = (-n2[0]*X - n2[1]*Y - D2)*1./n2[2]
+
+z3 = (-n3[0]*X - n3[1]*Y - D3)*1./n3[2]
+
+```
+
+Creamos y dibujamos el plot.
+
+```{python, eval = F}
+from mpl_toolkits.mplot3d import Axes3D
+
+plot3d = plt.figure().gca(projection='3d')
+
+plot3d.plot_surface(X,Y,z1, color='red')
+
+plot3d.plot_surface(X,Y,z2, color='cyan')
+
+plot3d.plot_surface(X,Y,z3, color='yellow')
+
+plt.show()
+```
+
+Y obtenemos el siguiente gráfico:
+
+<div class = "center">
+![<l class = "phototext">Representación gráfica del sistema del `Ejemplo 4` con `Python`</l>](Images/indet.png)
+
+</div>
+
+El gráfico anterior no es tan útil como el que obteníamos con `R`, ya que éste al no ser interactivo puede que no nos dé la información de forma clara a la primera. 
+
+Sin embargo, se puede deducir que la intersección de los 3 planos es una recta, lo que nos hace llegar a la conclusión de que el sistema es compatible indeterminado.
+
+
+## 3.1 Resolución con SymPy
+
+Si queremos resolver un sistema compatible indeterminado, lo podemos hacer con la ayuda de la librería **`sympy`**.
+
+Además, lo podremos resolver de tres formas:
+
+- Introduciendo la lista de ecuaciones
+- Introduciendo la matriz ampliada
+- Introduciendo el sistema
+
+### Ejemplo 4
+
+<div class = "example">
+
+Recuperando el sistema del `Ejemplo 4`:
+
+
+$$\left\{\begin{matrix}x&+&y&-&z&=& 2\\x&-&y&+&z&=&1\\3x&+&y&-&z&=&5\end{matrix}\right.$$
+</div>
+
+Recordemos que se trata de un sistema de 3 ecuaciones con 3 incógnitas.
+
+**A. Lista de ecuaciones**
+
+Si lo queremos resolver introduciendo la lista de ecuaciones, habrá que modificar éstas para que todas estén igualadas a 0. Es decir, necesitamos considerar el sistema equivalente.
+
+$$\left\{\begin{matrix}x&+&y&-&z&-&2&=& 0\\x&-&y&+&z&-&1&=& 0\\3x&+&y&-&z&-&5&=& 0\end{matrix}\right.$$
+
+```{python}
+linsolve([x + y - z - 2, x - y + z - 1, 3*x + y - z - 5], (x, y, z))
+```
+
+**B. Matriz ampliada**
+
+Si lo queremos resolver introduciendo la matriz ampliada, hacemos:
+
+```{python}
+linsolve(Matrix(([1, 1, -1, 2], [1, -1, 1, 1], [3, 1, -1, 5])), (x, y, z))
+```
+
+**C.Introducir el sistema**
+
+Si lo queremos hacer introduciendo el sistema, se hace lo siguiente:
+
+- Definir la matriz ampliada.
+- Definir en `A` los valores de todas las filas y de todas las columnas menos la última.
+- Definir en `B` los valores de todas las filas de la última columna.
+- Definimos el sistema.
+- Resolvemos el sistema.
+
+```{python}
+AB = Matrix(((1, 1, -1, 2), (1, -1, 1, 1), (3, 1, -1, 5))) 
+
+A = AB[:, :-1] 
+
+B = AB[:, -1]
+
+system = A,B
+
+linsolve(system, x, y, z)
+```
+
+
+Como podréis observar, en los 3 casos se nos muestra una solución en función de la última variable, entendiendo que esa variable libre puede tomar cualquier valor en $\mathbb{R}$. Eso hace que nuestra solución sea infinita.
+
+
+
+
+# 4. **Sistemas incompatibles con `Python`**
+
+### Ejemplo 5
+
+¿Qué pasa si intentamos resolver un sistema incompatible con `Python`?
+
+
+Supongamos que nos dan el siguiente sistema de ecuaciones lineales:
+
+$$\left\{\begin{matrix}x&+&y &=& 2\\x&-&y&=&1\\2x&+&y&=&3\end{matrix}\right.$$
+
+**Ejercicio 3.** 
+
+- Comprobad utilizando rangos y el Teorema de Rouché-Frobenius que se trata de un sistema incompatible.
+
+- Dibujad un plot donde se vean las 3 rectas. ¿Por qué se trata de un sistema incompatible?
+
+Definimos la matriz de coeficientes, de términos independientes y la matriz ampliada.
+
+```{python}
+import numpy as np
+
+A = np.array(([1,1],[1,-1],[2,1]))
+
+b = np.array([2,1,3])
+
+AB = np.array(([1,1,2],[1,-1,1],[2,1,3]))
+
+```
+
+Comprobamos los rangos y si el rango de la matriz de coeficientes es igual al de la matriz ampliada.
+
+```{python}
+np.linalg.matrix_rank(A)
+np.linalg.matrix_rank(A)==np.linalg.matrix_rank(AB)
+```
+
+Se observa que el rango de la matriz ampliada es diferente al de la matriz de coeficientes, de ahí qeu se concluye que este sistema es incompatible.
+
+Ahora vamos a realizar la representación gráfica de las rectas que definen el sistema de ecuaciones estudiado.
+
+```{python}
+import matplotlib.pyplot as plt
+x1 =np.linspace(0,10,1000)
+
+plt.plot(x1,2-x1, x1,1+x1, x1,(3-x1)/2)
+plt.xlim(0,1.4)
+plt.ylim(0.6,2)
+plt.show()
+```
+
+Se observa que las rectas intersecan 2 a 2, de modo que nunca va a haber una intersección de todas ellas. Por tanto, se deduce que el sistema es incompatible.
+
+### Ejemplo 5
+
+Utilizando la misma función que para sistemas compatibles determinados o indeterminados (**linsolve()**)con cualquiera de las 3 formas posibles obtendremos lo siguiente:
+
+```{python}
+linsolve(Matrix(([1, 1, 2], [1, -1, 1], [2, 1, 3])), (x, y))
+```
+
+Es decir, que el conjunto de soluciones es el conjunto vacío, $\emptyset$. Esto se debe a que el sistema es incompatible y no tiene solución.
+
+**Ejercicio 4.** Probad de hallar la misma solución utilizando las otras 2 formas con esta misma función.
+
+
+
+
+
+
+
+
+
+
+
+
+

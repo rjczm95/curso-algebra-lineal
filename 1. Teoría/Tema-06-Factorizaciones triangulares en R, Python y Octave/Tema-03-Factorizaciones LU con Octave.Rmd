@@ -1,0 +1,88 @@
+---
+title: "Factorizaciones LU con Octave"
+author: "Ramon Ceballos"
+date: "27/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+knitr::opts_chunk$set(engine.path = list(octave ="C:/Program Files/GNU Octave/Octave-6.1.0/mingw64/bin/octave-cli-6.1.0.exe"), echo = TRUE)
+```
+
+**Factorizaciones LU con Octave**
+
+## 1. Obtener las matrices LU en Octave
+
+A la hora de realizar factorizaciones LU con `Octave`, utilizamos la función **`lu()`** introduciéndole por parámetro una matriz cuadrada.
+
+### Ejemplo 1
+
+Encontremos la factorización LU de la siguiente matriz: 
+
+$$A = \begin{pmatrix}1 & 3 & 0 & -1\\
+2 & 1 & -1& 5\\
+0 & -2& 3 & -1\\
+1 & 1 & 3 & 1\end{pmatrix}$$
+
+
+```{octave}
+A = [1,3,0,-1; 2,1,-1,5; 0,-2,3,-1; 1,1,3,1];
+[L,U,P] = lu(A);
+```
+
+```{octave}
+A = [1,3,0,-1; 2,1,-1,5; 0,-2,3,-1; 1,1,3,1]; [L,U,P] = lu(A);
+P
+```
+
+De nuevo, aunque no era necesario, la función ha llevado a cabo una permutación de filas.
+
+
+Pasamos a ver las matrices L y U.
+
+```{octave}
+A = [1,3,0,-1; 2,1,-1,5; 0,-2,3,-1; 1,1,3,1]; [L,U,P] = lu(A);
+L
+U
+```
+
+### Ejemplo 2
+
+Encontremos ahora la factorización LU de la matriz:
+
+$$A = \begin{pmatrix}0 & 1 & 3\\
+1 & 3& -2\\
+-3 & -2 & -1
+\end{pmatrix}$$
+
+
+```{octave}
+A = [0,1,3; 1,3,-2; -3,-2,-1];
+[L,U,P] = lu(A)
+```
+
+```{octave}
+A = [0,1,3; 1,3,-2; -3,-2,-1]; [L,U,P] = lu(A);
+P
+```
+
+En este caso sí que era necesaria una permutación de filas.
+
+Pasamos a ver las matrices L y U.
+
+```{octave}
+A = [0,1,3; 1,3,-2; -3,-2,-1]; [L,U,P] = lu(A);
+L
+U
+```
+
+
+
+
+
+
+

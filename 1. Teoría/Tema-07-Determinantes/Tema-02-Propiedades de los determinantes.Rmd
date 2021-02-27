@@ -1,0 +1,94 @@
+---
+title: "Tema 4 - Determinantes"
+author: "Ramon Ceballos"
+date: "27/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# **Propiedades que se generar a partir de los determinantes**
+
+# 1. Igualdad del determinante de la matriz A y su transpuesta
+
+<l class = "prop">**Propiedad.**</l> $\forall n\ge1$, el determinante de la transpuesta de una matriz $A\in\mathcal{M}_n(\mathbb{K})$ coincide con el determinante de dicha matriz, $$\det(A^t) = \det(A)$$
+
+# 2. Sacar factor común de una fila o columna y multiplicarlo por el valor del determinante nuevo
+
+Denotemos por $\det(u_1,\dots,u_i,\dots,u_n)$ el determinante de $A\in\mathcal{M}_n(\mathbb{K})$, la cual tiene por filas (o columnas) las matrices fila (o columna) $u_i,\ i = 1,2,\dots,n$
+
+<l class = "prop">**Propiedad.**</l> $\det(u_1,\dots,\lambda u_i,\dots,u_n) = \lambda\det(u_1,\dots,u_i,\dots,u_n)$
+
+
+### Ejemplo 3
+
+$$\begin{vmatrix}1&2&1\\4&4&2\\10&4&1\end{vmatrix} = 2\begin{vmatrix}1&\mathbf{1}&1\\4&\mathbf{2}&2\\10&\mathbf{2}&1\end{vmatrix} = 4\begin{vmatrix}1&1&1\\\mathbf{2}&\mathbf{1}&\mathbf{1}\\10&2&1\end{vmatrix}$$
+
+# 3. Suma de determinates al separar fila o columna como una suma de vectores
+
+Si en el determinante de una matriz, una fila o columna se puede expresar como la suma de dos vectores,  se puede traducir como la suma del determinante de dos matrices distintas que lleve cada de estas matrices cada uno de los vectores citados.
+
+<l class = "prop">**Propiedad**.</l> $\det(u_1,\dots,u_i+u_i',\dots,u_n) = \det(u_1,\dots,u_i,\dots,u_n)+\det(u_1,\dots,u_i',\dots,u_n)$
+
+### Ejemplo 4
+
+$$\begin{vmatrix}1&0+3&-1\\2&2+2&3\\0&3+1&5\end{vmatrix} = 
+\begin{vmatrix}1&0&-1\\2&2&3\\0&3&5\end{vmatrix}+\begin{vmatrix}1&3&-1\\2&2&3\\0&1&5\end{vmatrix}$$
+
+# 4. Cambio de filas/columna en el determinante de una matriz
+
+Si cambiamos dos filas o columnas de orden en un determinante, el determinante de la matriz generada será igual que la anterior pero cambiada de signo.
+
+<l class = "prop">**Propiedad.**</l> Si se intercambian dos filas o columnas, el determinante cambia de signo:  $\det(u_1,\dots,u_i,\dots,u_j,\dots,u_n) = -\det(u_1,\dots,u_j,\dots,u_i,\dots,u_n)$
+
+
+### Ejemplo 5
+
+$$\begin{vmatrix}1 & 0 & -2\\2&3&0\\-1&1&0\end{vmatrix} = 
+- \begin{vmatrix}-1 & 1 & 0\\2&3&0\\1&0&-2\end{vmatrix} = 
+\begin{vmatrix}1 & -1 & 0\\3&2&0\\0&1&-2\end{vmatrix}$$
+
+# 5. Dos filas/columnas iguales
+
+Si hay dos filas/columnas iguales el determinante valdrá cero.
+
+<l class = "prop">**Propiedad.**</l> Si una matriz tiene dos filas o columnas iguales, su determinante es 0: $\det(u_1,\dots,u_i,\dots,u_i\dots,u_n)=0$
+
+# 6. Dos filas/columnas proporcionales
+
+Si una matriz tiene dos filas/columnas proporcionales el determinante valdrá 0.
+
+<l class = "prop">**Propiedad.**</l> Si una matriz tiene dos filas o columnas proporcionales, su determinante es 0:
+$\det(u_1,\dots,u_i,\dots,\lambda u_i\dots,u_n)=0$
+
+# 7. Fila/columna que es combinación lineal de las otras
+
+<l class = "prop">**Propiedad.**</l> Si una fila o columna es combinación lineal de las otras, el determinante es nulo.
+
+Si $u_i =\sum_{k\ne i}a_ku_k$, entonces $\det(u_1,\dots,u_i,\dots,u_n)=0$
+
+Vale tanto la suma como la multiplicación y así.
+
+<div class = "example">
+### Ejemplo 6
+
+$$\begin{vmatrix}1 & 2 & 3\\4 & 0 & 2\\ 5&2&5\end{vmatrix}=0$$
+
+La última fila es el resultado de sumar las dos primeras.
+
+# 8. Sumar la combinación lineal de las otras a una fila/columna
+
+<l class = "prop">**Propiedad.**</l> El determinante no cambia si a una fila o columna se le suma una combinación lineal de las otras. $\det(u_1,\dots,u_i,\dots,u_n) = \det(u_1,\dots,u_i+\sum_{k\ne i}a_ku_k,\dots,u_n)$
+
+<div class = "example">
+### Ejemplo 7
+
+$$\begin{vmatrix}1 & 2 & 3\\4 & 0 & 2\\ 5&-1&0\end{vmatrix} = \begin{vmatrix}1 & 2 & 6\\4 & 0 & 6\\ 5&-1&4\end{vmatrix}$$
+
+A la tercera columna le hemos sumado la primera y la segunda columnas.
+
+

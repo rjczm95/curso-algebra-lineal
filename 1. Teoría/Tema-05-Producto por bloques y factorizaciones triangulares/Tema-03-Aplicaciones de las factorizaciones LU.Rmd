@@ -1,0 +1,100 @@
+---
+title: "Tema 3 - Producto por bloques y factorizaciones triangulares"
+author: "Ramon Ceballos"
+date: "25/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# **Aplicaciones de las factorizaciones LU**
+
+## 1. Resolución de sistema de ecuaciones lineales
+
+Una de las aplicaciones que tienen las factorizaciones triangulares (o factorizaciones LU) se ve en la resolución de sistemas de ecuaciones lineales.
+
+Con las factorizaciones $A = LU$ o $PA = LU$ tendremos que hacer los cálculos solamente una vez y finalmente, resolver los sistemas triviales para cada término independiente.
+
+En primer lugar, tendremos el sistema $AX = b$, el cual es equivalente a $LUX = b$.
+
+Ahora, consideremos el sistema $Y = UX$, de forma que $LY = b$. Este sistema tiene solución inmediata, pues $L$ es triangular inferior.
+
+Por último, resolvemos $UX = Y$, que también tendrá solución inmediata ya que $U$ es triangular superior.
+
+En caso de que el sistema admita factorización $PA = LU$ es exactamente igual ya que $AX = b$ es equivalente a $PAX = Pb$, puesto que solamente hemos permutado filas.
+
+### Ejemplo 4
+
+Consideremos el sistema:
+
+$$\left\{\begin{matrix}
+&&x_2&+&3x_3&=&1\\
+x_1&+&3x_2&-&2x_3 &=& 3\\
+-3x_1&-&2x_2&-&x_3&=&-2
+\end{matrix}\right.$$
+
+Podemos escribir el sistema en su forma matricial, $AX=b$ del siguiente modo:
+
+$$A = \begin{pmatrix}0 & 1 & 3\\
+1 & 3& -2\\
+-3 & -2 & -1
+\end{pmatrix}\qquad b = \begin{pmatrix}1\\3\\-2\end{pmatrix}$$
+
+Observad que la matriz $A$ es la del `Ejemplo de factorización con permutación`, la cual sabemos que admite factorización $PA = LU$.
+
+Evidentemente, los sistemas $AX = b$ y $PAX = Pb$ tendrán las mismas soluciones ya que de un sistema a otro solamente hemos permutado filas.
+
+Dicho esto, sabemos que $PAX = Pb$ es equivalente a $LUX = Pb$.
+
+Consideremos $Y = UX$. Con lo cual, buscamos $Y$ tal que:
+
+$$LY = Pb \Leftrightarrow \begin{pmatrix}1 &0 & 0\\
+0 & 1& 0\\
+-3 & 7 & -28
+\end{pmatrix}\begin{pmatrix}y_1\\y_2\\y_3\end{pmatrix} = \begin{pmatrix}0 &1 & 0\\
+1 & 0& 0\\
+0 & 0 & 1
+\end{pmatrix}\begin{pmatrix}1\\3\\-2\end{pmatrix}\Leftrightarrow
+\begin{pmatrix}1 &0 & 0\\
+0 & 1& 0\\
+-3 & 7 & -28
+\end{pmatrix}\begin{pmatrix}y_1\\y_2\\y_3\end{pmatrix} = \begin{pmatrix}3\\1\\-2\end{pmatrix}$$
+
+Este sistema tiene solución inmediata: $y_1 = 3,\ y_2 = 1,\ y_3=\frac{-3y_1+7y_2+2}{28} = 0$
+
+Ahora ya solo nos queda resolver el sistema $UX = Y$. Es decir:
+
+$$\begin{pmatrix}1 &3 & -2\\
+0 & 1& 3\\
+0 & 0 & 1
+\end{pmatrix}\begin{pmatrix}x_1\\x_2\\x_3\end{pmatrix} = \begin{pmatrix}3\\1\\0\end{pmatrix}$$
+
+Este sistema vuelve a tener solución inmediata: $x_3 = 0, x_2 = 1-x_3 = 1,\ x_1 = 3-3x_2+2x_3 = 0$
+
+
+Con lo cual, en nuestro sistema inicial:
+
+$$\left\{\begin{matrix}
+&&x_2&+&3x_3&=&1\\
+x_1&+&3x_2&-&2x_3 &=& 3\\
+-3x_1&-&2x_2&-&x_3&=&-2
+\end{matrix}\right.$$
+
+La solución es $X = \begin{pmatrix}0\\1\\0\end{pmatrix}$
+
+<l class = "observ">**Observación.**</l> Observad que por mucho que cambiemos los términos independientes, ello no afecta a la factorización LU, ya que ésta seguirá siendo la misma puesto que la matriz de coeficientes $A$ no está siendo modificada.
+
+
+
+
+
+
+
+
+
+
+

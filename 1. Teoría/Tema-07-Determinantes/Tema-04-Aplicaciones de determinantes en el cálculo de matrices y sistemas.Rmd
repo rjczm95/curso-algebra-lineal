@@ -1,0 +1,362 @@
+---
+title: "Tema 4 - Determinantes"
+author: "Ramon Ceballos"
+date: "27/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# **Aplicaciones de determinantes en el cálculo de matrices y sistemas**
+
+Los determinantes sirven para facilitar el cálculo con matrices y en la resolución de sistemas de ecuaciones.
+
+# 1. Cálculo de la matriz inversa con determinantes
+
+<l class = "prop">**Teorema.**</l> Sean $A$ y $B$ matrices cuadradas de orden $n$, $A,B\in\mathcal{M}_n(\mathbb{K})$. Entonces:
+
+- $A$ es invertible si, y solo si, $\det(A)\ne 0$
+
+- $\det(AB) = \det(A)\det(B)$
+
+- si $\det(A)\ne 0$, entonces $\det(A^{-1}) = \frac{1}{\det(A)}$
+
+- si $\det(A)\ne 0$, entonces $A^{-1} = \frac{(\text{Adj}(A))^t}{\det(A)}$
+
+<l class = "observ">**Observación.**</l> La última propiedad nos da una nueva forma de calcular la matriz inversa de $A$.
+
+## Ejemplo 12
+
+Calculemos la inversa de la matriz siguiente:
+
+$$A = \begin{pmatrix}1 & 0 & -1\\ 0 & -3 & 5\\ 2 & -2 & 0\end{pmatrix}$$
+
+En primer lugar, calculemos el determinante de $A$ y veamos si es nulo o no. Por la Regla de Sarrus, tenemos:
+
+$$\det(A) = 0 + 0 + 0 -(6-10+0) = 4\ne 0$$
+
+Con lo cual, sabemos que $A$ es invertible. Procedamos a calcular su inversa. En primer lugar, calculemos la matriz adjunta:
+
+$$A_{11} = \begin{vmatrix}-3 & 5\\-2 & 0\end{vmatrix} = 10\qquad A_{12} = -\begin{vmatrix}0 & 5\\2 & 0\end{vmatrix} = 10\qquad A_{13} = \begin{vmatrix}0 & -3\\2 & -2\end{vmatrix}=6$$
+$$A_{21} = -\begin{vmatrix}0 & -1\\-2 & 0\end{vmatrix} = 2\qquad A_{22} = \begin{vmatrix}1 & -1\\ 2 & 0\end{vmatrix} = 2\qquad A_{23} = -\begin{vmatrix}1 & 0\\ 2 & -2\end{vmatrix} = 2$$
+$$A_{31} = \begin{vmatrix}0 & -1\\-3 & 5\end{vmatrix} = -3\qquad A_{32} = -\begin{vmatrix}1 & -1\\0 & 5\end{vmatrix} = -5\qquad A_{33} = \begin{vmatrix}1 & 0\\0 & -3\end{vmatrix} = -3$$
+
+
+Por tanto, la matriz adjunta será:
+
+$$\text{Adj}(A) = \begin{pmatrix}10 & 10 & 6\\
+2 & 2 & 2\\
+-3 & -5 & -3\end{pmatrix}$$
+
+Ahora, su transpuesta es:
+
+$$(\text{Adj}(A))^t = \begin{pmatrix}10 & 2 & -3\\
+10 & 2 & -5\\
+6 & 2 & -3\end{pmatrix}$$
+
+Finalmente calculamos la matriz inversa de A:
+
+$$A^{-1} = \frac{1}{\det(A)}(\text{Adj}(A))^t = \frac{1}{4}\begin{pmatrix}10 & 2 & -3\\
+10 & 2 & -5\\
+6 & 2 & -3\end{pmatrix} = \begin{pmatrix}\frac{5}{2} & \frac{1}{2} & -\frac{3}{4}\\
+\frac{5}{2} & \frac{1}{2} & -\frac{5}{4}\\
+\frac{3}{2} & \frac{1}{2} & -\frac{3}{4}\end{pmatrix}$$
+
+# 2. Cálculo del rango de una matriz con determinantes
+
+Otra aplicación de los determinantes se encuentra en el cálculo del rango de una matriz.
+
+## 2.1. Definiciones generales
+
+Dada $A\in\mathcal{M}_{m\times n}(\mathbb{K})$ y sea $k<m,n$ se define lo siguiente.
+
+<l class = "definition">**Menor de orden $k$ de $A$.**</l> Determinante de cualquier matriz cuadrada de orden $k$ obtenida suprimiendo $m-k$ filas y $n-k$ columnas de $A$.
+
+<l class = "definition">**Orlar un menor de orden $k$.**</l> Consiste en completarlo hasta un menor de orden $k+1$ de $A$ con otra fila y otra columna de la matriz $A$ dada.
+
+
+Se pueden utilizar dichos menores para calcular el rango de una matriz $A$ cualquiera.
+
+## 2.2. Teorema
+
+<l class = "prop">**Teorema.**</l> Sea $A\in\mathcal{M}_{m\times n}(\mathbb{K})$ y $k<m,n$. Entonces, si se puede encontrar un menor de orden $k$ no nulo y todos los de orden $k+1$ son 0, entonces $rg(A)= k$.
+
+En otras palabras, el rango de la matriz $A$ coincide con el orden del mayor "menor no nulo" obtenido a partir de $A$.
+
+Otra forma de enunciar el **`Teorema`** anterior es la siguiente: 
+
+<l class = "prop">**Teorema.**</l> Sea $A\in\mathcal{M}_{m\times n}(\mathbb{K})$ y $k<m,n$. Entonces, si se puede encontrar un menor de orden $k$ no nulo y todas las posibles maneras de orlar dicho menor dan menores de orden $k+1$ nulos, entonces $rg(A)= k$.
+
+
+### Ejemplo 13
+
+Calculemos el rango de la matriz siguiente:
+
+$$A = \begin{pmatrix}4 & 3 & 2 & -1 & -2\\ 7 & 5  & 4 & -2 & 1\\ 2 & 1 & 1 & -1 & 8\end{pmatrix}$$
+
+El mayor menor de la matriz $A$ es de orden 3. De hecho, esta matriz tiene ${5\choose 3} = 10$ menores de orden $3$ diferentes. Veamos si alguno de ellos es no nulo.
+
+$$(c_1,c_2,c_3) = \begin{vmatrix}4 & 3 & 2\\ 7 & 5 & 4\\ 2 & 1 & 1\end{vmatrix} = 20 +14+24-(20+16+21) = 1\ne 0$$
+
+Como este menor de orden 3 ya no es nulo, por el Teorema anterior concluimos que la matriz tiene rango 3.
+
+
+**Ejercicio 4.** Calcular el rango de la matriz: 
+
+$$A = \begin{pmatrix} 0 & 1 & -1\\ 4 & -2 & -6\\
+-1 & 1 & 1\\
+2 & -2 & -2\end{pmatrix}$$
+
+
+# 3. Regla de Cramer - Resolver sistemas de ecuaciones lineales con determinantes
+
+Otra aplicación muy útil de los determinantes es la de resolver sistemas de ecuaciones lineales.
+
+Dado el sistema $AX = b$ en su expresión matricial, siendo éste un sistema de $n$ ecuaciones con $n$ incógnitas $x_1,\dots,x_n$. Sabemos que si $\det(A)\ne 0$ este sistema tiene solución única dada por $X = A^{-1}b$.
+
+En estos casos, otra forma de encontrar esta solución única es a través de la <l class = "definition">**Regla de Cramer**</l>.
+
+## 3.1 Teorema
+
+<l class = "prop">**Teorema. Método de Cramer.**</l> Sea $AX = b$ la expresión matricial de un sistema de $n$ ecuaciones con $n$ incógnitas $x_1,\dots,x_n$ con $\det(A)\ne 0$. Sea $A_i,\ i=1,2,\dots,n$ la matriz que resulta de sustituir la columna $i$ de la matriz de coeficientes $A$ por el término independiente $b$. Entonces, la solución del sistema viene dada por:
+
+$$x_i = \frac{|A_i|}{|A|},\ \forall i = 1,2,\dots,n$$
+
+### Ejemplo de Sistema compatible determinado
+
+Consideremos el sistema $AX = b$ descrito a continuación:
+
+$$A = \begin{pmatrix}
+1 & 1 & 1\\ -1 & 0 & 1\\ -1 & -1 & 0\end{pmatrix}\qquad X = \begin{pmatrix}x_1\\x_2\\x_3\end{pmatrix}\qquad b = \begin{pmatrix}1\\  0\\  -1\end{pmatrix}$$
+
+Podemos comprobar fácilmente que el determinante es distinto de cero. 
+
+$$\det(A) = \begin{vmatrix}
+1 & 1 & 1\\ -1 & 0 & 1\\ -1 & -1 & 0\end{vmatrix} = 1\ne 0$$
+
+Por tanto, tenemos un **sistema de Cramer con solución única** (sistema compatible determinado), cuya solución es: 
+
+$$x_1 = \frac{\begin{vmatrix}
+1 & 1 & 1\\ 0 & 0 & 1\\ -1 & -1 & 0\end{vmatrix}}{|A|} = \frac{0}{1} = 0$$
+
+
+$$x_2 = \frac{\begin{vmatrix}
+1 & 1 & 1\\ -1 & 0 & 1\\ -1 & -1 & 0\end{vmatrix}}{|A|} = \frac{1}{1} = 1$$
+
+$$x_3 = \frac{\begin{vmatrix}
+1 & 1 & 1\\ -1 & 0 & 0\\ -1 & -1 & -1\end{vmatrix}}{|A|} = 0$$
+
+Con lo cual, nuestra solución es:
+
+$$X = \begin{pmatrix}0\\1\\0\end{pmatrix}$$
+
+
+**Ejercicio 5**
+
+Demostrar que el sistema $AX = b$ dado por:
+
+$$A = \begin{pmatrix}
+1 & 1 & 1\\ -1 & 0 & 1\\ -1 & -1 & 0\end{pmatrix}\qquad X = \begin{pmatrix}x_1\\x_2\\x_3\end{pmatrix}\qquad b = \begin{pmatrix}\alpha\\  \beta\\  \gamma\end{pmatrix}$$
+
+Con $\alpha,\beta,\gamma\in\mathbb{R}$ tiene solución única y calcular dicha solución haciendo uso del Método de Cramer.
+
+## 3.2 Regla de Cramer para Sistemas compatibles indeterminados
+
+La regla de Cramer también sirve en el caso de **sistemas compatibles indeterminados**.
+
+Lo que se debe hacer en estos casos es encontrar un menor no nulo que nos dé el rango del sistema y la submatriz el sistema correspondiente a este menor es una matriz cuadrada invertible a la que se le puede aplicar el Método de Cramer.
+
+Entonces, las ecuaciones no correspondientes a este menor las podemos eliminar, pues son prescindibles.
+
+<l class = "definition">**Incógnitas principales.**</l>Las incógnitas involucradas en la submatriz.
+
+<l class = "definition">**Incógnitas secundarias.**</l>Las incógnitas que no son principales.
+
+De este modo, el sistema con las incógnitas principales y solo las ecuaciones correspondientes al menor no nulo, tiene solución única dada por el Método de Cramer en función de las incógnitas secundarias.
+
+
+### Ejemplo Sistema compatible indeterminado
+
+Consideremos el sistema $AX = b$ donde:
+
+$$A = \begin{pmatrix}
+12 & 6 & 8\\ 
+4 & 2 & 4\\ 
+-8 & -4 & -4
+\end{pmatrix}\qquad
+X = \begin{pmatrix}
+x\\
+y\\
+z\end{pmatrix}\qquad
+b = \begin{pmatrix}
+1\\
+2\\
+1\end{pmatrix}$$
+
+Es fácil comprobar el determinante de A da cero:
+
+$$\det(A) = \begin{vmatrix}
+12 & 6 & 8\\ 
+4 & 2 & 4\\ 
+-8 & -4 & -4
+\end{vmatrix} = 0$$
+
+Esto se debe a que la primera columna es el doble de la segunda.
+
+Por este motivo, consideremos el menor de orden 2 formado por las dos primeras filas y las dos últimas columnas:
+
+$$\begin{vmatrix}
+6 & 8\\2 & 4
+\end{vmatrix} = 8\ne 0$$
+
+Orlando este menor con la columna de los términos independientes, lo que obtenemos es:
+
+$$\begin{vmatrix}
+6 & 8 & 1\\2 & 4 & 2\\ -4 & -4 & 1
+\end{vmatrix} = 0$$
+
+Por lo tanto, concluimos que $rg(A) = 2$. Además, tenemos que el sistema es compatible indeterminado.
+
+Así pues, las incógnitas principales serán $y,z$ porque recordemos que el menor de orden 2 no nulo está formado por las dos últimas columnas de $A$.
+
+Por otro lado, la tercera ecuación, al no haberla considerado en el menor de orden 2, ya no nos es necesaria. Así, nuestro sistema lo podemos reescribir como:
+
+$$\left\{\begin{matrix}
+12x&+&6y&+&8z&=&1\\
+4x&+&2y&+&4z&=&2
+\end{matrix}
+\right.$$
+
+O, equivalentemente:
+
+$$\left\{\begin{matrix}
+6y&+&8z&=&1-12x\\
+2y&+&4z&=&2-4x
+\end{matrix}
+\right.$$
+
+Esto es un sistema de Cramer de $A'X' = b'$ con:
+
+$$A' = \begin{pmatrix}
+6 & 8\\
+2 & 4
+\end{pmatrix}\qquad X' = \begin{pmatrix}
+y\\
+z\end{pmatrix}\qquad b' = \begin{pmatrix}
+1-12x\\
+2-4x\end{pmatrix}$$
+
+Y este sistema tiene solución única en función de $x$ dada por:
+
+$$y = \frac{\begin{vmatrix}1-12x & 8\\
+2-4x & 4\end{vmatrix}}{8} = \frac{-16x-12}{8} = -2x-\frac{3}{2}\qquad z = \frac{\begin{vmatrix}6 & 1-12x\\
+2 & 2-4x\end{vmatrix}}{8} = \frac{10}{8}=\frac{5}{4}$$
+
+De este modo, nuestra solución es $X = \begin{pmatrix}x\\ -2x-\frac{3}{2}\\ \frac{5}{4}\end{pmatrix}$ con $x\in\mathbb{R}$.
+
+
+
+# 4. Transformaciones lineales vs Determinantes
+
+A la hora de calcular el rango de una matriz, calcular la inversa de una matriz regular o de resolver un sistema de ecuaciones lineales podemos hacerlo de dos formas:
+
+- A través de transformaciones lineales (método de Gauss).
+
+- Utilizando determinantes.
+
+La primera tiene la ventaja de la implementación en ordenadores ya que requiere de muchas menos operaciones.
+
+En cambio, los determinantes permiten más flexibilidad en las operaciones, la cual es de agradecer cuando el estudio a hacer **depende de uno o más parámetros**.
+
+**Ejercicio 6**
+
+Estudiar el siguiente sistema según los valores del parámetro $a\in\mathbb{R}$.
+
+$$\left\{\begin{matrix}ax &+&y&+&z&=&1\\
+x &+&ay&+&z&=&1\\
+x &+&y&+&az&=&1\\
+\end{matrix}\right.$$
+
+### Solución
+
+Vayamos a ver de qué tipo puede ser este sistema.
+
+En primer lugar, calcularemos el rango de la matriz de coeficientes del sistema,
+
+$$A = \begin{pmatrix}
+a & 1 & 1\\
+1 & a & 1\\
+1 & 1 & a
+\end{pmatrix}$$
+
+y lo haremos mediante determinantes:
+
+$$|A| = \begin{vmatrix}
+a & 1 & 1\\
+1 & a & 1\\
+1 & 1 & a
+\end{vmatrix} = a^3+1+1-(a+a+a) = a^3-3a+2$$
+
+Ahora, la pregunta es: ¿Cuándo este determinante vale 0?
+
+Pues cuando $$a^3-3a+2 = 0\Leftrightarrow (a-1)^2(a+2) =0\Leftrightarrow a=1\text{ y }a=-2$$
+
+Entonces, tenemos 3 casos:
+
+- $a\ne 1$ y $a\ne -2$
+- $a = 1$
+- $a = -2$
+
+El primer caso, $a\ne 1$ y $a\ne -2$, es el más sencillo ya que al ser el determinante de $A$ no nulo, lo que tenemos es que tanto $A$ como la matriz ampliada del sistema tienen rango 3. Esto nos lleva a concluir que se trata de un sistema compatible determinado por el Teorema de Rouché-Frobenius.
+
+Ahora, ¿qué ocurre cuando $a=1$? Pues, en primer lugar, que el rango de $A$ es estrictamente menor a 3, con lo cuál, veamos si es 2 o 1:
+
+$$A = \begin{pmatrix}
+1 & 1 & 1\\
+1 & 1 & 1\\
+1 & 1 & 1
+\end{pmatrix}$$
+
+Como todas las filas y todas las columnas son iguales, el rango de $A$ es 1, ya que no hay ningún menor de orden 2 en esta matriz que sea no nulo.
+
+Veamos qué ocurre con la ampliada:
+
+$$A|b = \begin{pmatrix}
+1 & 1 & 1 & 1\\
+1 & 1 & 1 & 1\\
+1 & 1 & 1 & 1
+\end{pmatrix}$$
+
+Pues ocurre exactamente lo mismo: todas las filas y todas las columnas son iguales. Entonces, el rango es 1. En este caso, por el Th. Rouché-Frobenius, tenemos que se trata de un sistema compatible indeterminado.
+
+Finalmente, si $a = -2$, tenemos lo siguiente,
+
+$$A = \begin{pmatrix}
+-2 & 1 & 1\\
+1 & -2 & 1\\
+1 & 1 & -2
+\end{pmatrix}$$
+
+Si tomamos el menor de orden 2 formado por las 2 primeras filas y las dos primeras columnas, tenemos que es no nulo
+
+$$\begin{vmatrix}
+-2 & 1\\
+1 & -2
+\end{vmatrix} = 4-1 =3\ne 0$$
+
+con lo cual, el rango de la matriz de coeficientes del sistema es 2. ¿Qué ocurre ahora con el rango de la matriz ampliada?
+
+Si orlamos el menor anterior, que ya hemos visto que no era nulo, con la última fila y la cuarta columna, lo que obtenemos es
+
+$$\begin{vmatrix}
+-2 & 1 & 1\\
+1 & -2 & 1\\
+1 & 1 & 1
+\end{vmatrix} = 4+1+1-(-2-2+1) = 9\ne 0$$
+
+Por tanto, acabamos de ver que el rango de la ampliada es 3, lo que nos lleva a concluir que, al ser los rangos diferentes, el sistema es incompatible
+

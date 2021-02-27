@@ -1,0 +1,408 @@
+---
+title: "Ecuaciones y Sistemas Lineales con Octave"
+author: "Ramon Ceballos"
+date: "23/2/2021"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+knitr::opts_chunk$set(engine.path = list(octave ="C:/Program Files/GNU Octave/Octave-6.1.0/mingw64/bin/octave-cli-6.1.0.exe"), echo = TRUE)
+```
+
+**Ecuaciones y Sistemas Lineales con Octave**
+
+En esta sección veremos como
+
+- Trabajar con sistemas compatibles determinados.
+- Representar ecuaciones de un sistema lineal.
+- Utilizar el Método de Gauss.
+- Trabajar con sistemas compatibles indeterminados.
+- Trabajar con sistemas incompatibles
+- Resolver ecuaciones matriciales.
+
+# 1. **Sistemas compatibles determinados con `Octave`**
+
+Dado el sistema de ecuaciones lineales siguiente:
+
+$$\left\{\begin{matrix}a_{11}x_1+a_{12}x_2+\cdots+a_{1n}x_n & = & b_1\\
+a_{21}x_1+a_{22}x_2+\cdots+a_{2n}x_n & = & b_2\\
+\vdots & \  & \vdots\\
+a_{n1}x_1+a_{n2}x_2+\cdots+a_{nn}x_n & = & b_n\\\end{matrix}\right.$$
+
+Si lo pasamos a su forma matricial, $AX = b$, podremos resolverlo de forma sencilla con la función **`linsolve(A,b)`** siempre que se trate de un sistema compatible determinado.
+
+
+### Ejemplo 1
+
+Dado el sistema de ecuaciones lineales siguiente, calculemos su solución.
+
+$$\left\{\begin{matrix}
+x_1 &+& x_2 &+& 2x_3 &=& 9\\
+2x_1 &+& 4x_2 &-& 3x_3 &=& 1\\
+3x_1 &+& 6x_2 &-& 5x_3 &=& 0\end{matrix}\right.$$
+
+Se trata de un sistema de 3 ecuaciones con 3 incógnitas.
+
+Definimos la matriz de coeficientes, la matriz de términos independientes y la matriz ampliada (A|B).
+
+```{octave}
+A = [1 1 2; 2 4 -3; 3 6 -5];
+b = [9; 1; 0];
+AB = [A b];
+```
+
+Comprobamos que el rango de $A$ es igual al de la matriz ampliada, para ver si el sistema es compatible.
+
+```{octave}
+A = [1 1 2; 2 4 -3; 3 6 -5]; b = [9; 1; 0]; AB = [A b];
+rank(A)==rank(AB)
+```
+
+Los rangos de ambas matrices son iguales (1 es indicativo de True). Ahora, comprobamos si este rango es igual al número de incógnitas, para ver si el sistema es compatible determinado.
+
+```{octave}
+A = [1 1 2; 2 4 -3; 3 6 -5]; 
+rank(A) == 3
+```
+
+Acabamos de ver que, por el Teorema de Rouché-Frobenius, se trata de un sistema compatible determinado.
+
+Finalmente, pasemos a resolverlo:
+
+```{octave}
+A = [1 1 2; 2 4 -3; 3 6 -5]; b = [9; 1; 0];
+x = linsolve(A,b)
+```
+
+**Ejercicio 5.** Comprobad que la solución es correcta.
+
+
+# 2. **Representación de sistemas con `Octave`**
+
+### Ejemplo 2
+
+Dado el siguiente sistema de ecuaciones lineales de 2 ecuaciones lineales con 2 incógnitas:
+
+$$\left\{\begin{matrix}2x &+&2y&=&1\\
+-x &+&y&=&2\end{matrix}\right.$$
+
+Necesitamos aislar la variable $y$ para poder representarlo gráficamente.
+
+$$\left\{\begin{matrix}y&=&\frac{1-2x}{2}\\
+y&=&2+x\end{matrix}\right.$$
+
+Representamos gráficamente el sistema del siguiente modo:
+
+```{octave, eval = F}
+x = linspace(0,10,100);
+y1 = (1-2*x)/2;
+y2 = 2+x;
+plot(x,y1,x,y2);
+```
+
+Y con esto, ejecutándolo en `GNU Octave`, obtenemos:
+
+<div class = "center">
+![<l class = "phototext">Representación gráfica del sistema del `Ejemplo 2` con `Octave`</l>](Images/octavecompdet1.png)
+</div>
+
+Donde la intersección entre las 2 rectas representa la única solución del sistema. Pasamos a resolver el sistema con **linsolve()**.
+
+```{octave}
+A = [2 2; -1 1]; b = [1; 2];
+linsolve(A,b)
+```
+
+
+**Ejercicio 6.** (está en la carpeta código) Probar que se trata de un sistema compatible determinado mediante el Teorema de Rouché-Frobenius.
+
+```{octave}
+A = [2 2; -1 1]; b = [1; 2]; AB = [A b];
+
+rank(A) == rank (AB)
+
+rank(A) == 2
+
+```
+
+### Ejemplo 3
+
+Dado el siguiente sistema de ecuaciones lineales de 3 ecuaciones lineales con 2 incógnitas:
+
+$$\left\{\begin{matrix}4x_1 &+&2x_2&=&3\\
+x_1 &-&2x_2&=&2\\
+3x_1 &+&4x_2&=&1\end{matrix}\right.$$
+
+Reescribiéndolo del siguiente modo:
+
+$$\left\{\begin{matrix}x_2&=&\frac{3-4x_1}{2}\\
+x_2 &=& \frac{x_1-2}{2}\\ 
+x_2&=&\frac{1-3x_1}{4}\end{matrix}\right.$$
+
+Su representación gráfica viene dada por:
+
+```{octave}
+x1 = linspace(-4,4,100);
+x2a = (3-4*x1)/2;
+x2b = (x1-2)/2;
+x2c = (1-3*x1)/4;
+plot(x1,x2a,x1,x2b,x1,x2c);
+```
+
+Ejecutando este código en `GNU Octave` obtenemos el siguiente gráfico:
+
+![<l class = "phototext">Representación gráfica del sistema del `Ejemplo 3` con `Octave`</l>](Images/octavecompdet2.png)
+
+### Ejemplo 1
+
+Recuperemos el sistema del `Ejemplo 1`. Si nos diesen por ejemplo un sistema de 3 ecuaciones y lo quisiésemos representar, una de las formas de hacerlo es con la función **`plot3`** del siguiente modo:
+
+$$\left\{\begin{matrix}
+x &+& y &+& 2z &=& 9\\
+2x &+& 4y &-& 3z &=& 1\\
+3x &+& 6y &-& 5z &=& 0\end{matrix}\right.$$
+
+Aislemos la variable $z$ de todas las ecuaciones:
+
+$$\left\{\begin{matrix}
+z &=& \frac{9-x-y}{2}\\
+z &=& \frac{2x+4y-1}{3}\\
+z &=& \frac{3x+6y}{5}\end{matrix}\right.$$
+
+Introduciendo el siguiente código en `GNU Octave` obtenemos el plot que se muestra en la siguiente diapositiva.
+
+El comando **meshgrid()** permite dar una serie de valores para x e y en este caso comprendidos entre 0 y 3, en intervalos de 0.1.
+
+El comando **hold on** indica el inicio del dibujo que en este caso representará tres planos y un pto conocido (la solución del sistema).
+
+El comando **hold off** indica que hemos terminado de dibujar, y al emplear **view()** se va a representar dicho dibujo comprendido entre 'hold on' y 'hold off'.
+
+El comando **mesh()** permite generar el plano.
+
+```{octave, eval = F}
+%planos
+[x,y] = meshgrid(0:0.1:3);
+z = (9-x-y)/2;
+hold on
+mesh(x,y,z)
+z = (2*x+4*y-1)/3;
+mesh(x,y,z)
+z = (3*x+6*y)/5;
+mesh(x,y,z)
+
+%Punto de interseccion
+plot3(1,2,3,'ro','markersize',5,'markerfacecolor','r');
+hold off
+view(120,30)
+```
+
+<div class = "center">
+![<l class = "phototext">Representación gráfica del sistema del `Ejemplo 1` con `Octave`</l>](Images/plns3d.png)
+</div>
+
+# 3. **Método de Gauss con `Octave`**
+
+Hay una función que nos proporciona `Octave` que lo que hace es calcular la matriz escalonada reducida de la matriz que introduzcamos por parámetro.
+
+Esta función es **`rref`** y funciona tal como veremos a continuación.
+
+Si recuperamos el sistema del `Ejemplo 1`.
+
+$$\left\{\begin{matrix}
+x &+& y &+& 2z &=& 9\\
+2x &+& 4y &-& 3z &=& 1\\
+3x &+& 6y &-& 5z &=& 0\end{matrix}\right.$$
+
+La forma matricial del sistema viene dada por:
+
+```{octave}
+A = [1 1 2; 2 4 -3; 3 6 -5];
+b = [9; 1; 0];
+AB = [A b];
+```
+
+Entonces, la función **`rref`** aplicada a la matriz ampliada nos devuelve:
+
+```{octave}
+A = [1 1 2; 2 4 -3; 3 6 -5]; b = [9; 1; 0]; AB = [A b];
+rref(AB)
+```
+
+
+# 4. **Sistemas compatibles indeterminados con `Octave`**
+
+### Ejemplo 4
+
+Dado el siguiente sistema de ecuaciones lineales:
+
+$$\left\{\begin{matrix}x&+&y&-&z&=& 2\\x&-&y&+&z&=&1\\3x&+&y&-&z&=&5\end{matrix}\right.$$
+
+Se trata de un sistema de 3 ecuaciones con 3 incógnitas.
+
+Si lo pasamos a su forma matricial, tendremos:
+
+```{octave}
+A = [1 1 -1; 1 -1 1; 3 1 -1];
+b = [2; 1; 5];
+AB = [A b];
+```
+
+Calculando ahora los rangos de la matriz de coeficientes y la matriz ampliada. 
+
+```{octave}
+A = [1 1 -1; 1 -1 1; 3 1 -1]; b = [2; 1; 5]; AB = [A b];
+rango = rank(A)
+rank(A) == rank(AB)
+```
+
+Entonces, como los rangos son iguales pero difieren del número de incógnitas (el rango de ambas matrices es dos mientras que el número total de incógnitas es 3), por el Teorema de Rouché-Frobenius podemos concluir que se trata de un sistema compatible indeterminado.
+
+Otra forma de verlo, sería haciendo uso de la función **`rref`**:
+
+```{octave}
+A = [1 1 -1; 1 -1 1; 3 1 -1]; b = [2; 1; 5]; AB = [A b];
+rref(AB)
+```
+
+El anterior resultado nos indica que tenemos lo siguiente:
+
+$$\begin{matrix}x &=&1.5\\ y-z &=& 0.5\\ z\in\mathbb{R}\end{matrix}$$
+
+Con lo cual, tenemos un conjunto infinito de soluciones:
+
+$$\{(x,y,z)\in\mathbb{R}^3\ :\ x = 1.5,\ y = 0.5+z,\ z\in\mathbb{R}\}$$
+
+Otra opción sería representar gráficamente el sistema e intentar intuir de qué tipo se trata.
+
+Para ello, recordemos que necesitamos el sistema en la forma siguiente:
+
+$$\left\{\begin{matrix}z&=& x+y-2\\z&=&1-x+y\\z&=&3x+y-5\end{matrix}\right.$$
+
+```{octave, eval = F}
+%planos
+[x,y] = meshgrid(0:0.1:3);
+z = x+y-2;
+hold on
+mesh(x,y,z)
+z = 1-x+y;
+mesh(x,y,z)
+z = 3*x+y-5;
+mesh(x,y,z)
+hold off
+view(120,30)
+```
+
+
+<div class = "center">
+![<l class = "phototext">Representación gráfica del sistema del `Ejemplo 4` con `Octave`</l>](Images/ocEj4.png)
+</div>
+
+# 5. **Sistemas incompatibles con `Octave`**
+
+### Ejemplo 5
+
+Dado el sistema de ecuaciones lineales siguiente:
+
+$$\left\{\begin{matrix}x_1&+&x_2&=&2\\ x_1&-&x_2&=&1\\2x_1&+&x_2&=&3\end{matrix}\right.$$
+
+Pasémoslo a su forma matricial para ver de qué tipo de sistema se trata:
+
+```{octave}
+A = [1 1; 1 -1; 2 1]; b = [2; 1; 3]; AB = [A b];
+```
+
+Estudiando los rangos, vemos que el de la matriz de coeficientes y el de la matriz ampliada son diferentes.
+
+```{octave}
+A = [1 1; 1 -1; 2 1]; b = [2; 1; 3]; AB = [A b];
+rank(A) == rank(AB)
+```
+
+Por tanto, el Teorema de Rouché-Frobenius nos dice que el sistema de este ejemplo es incompatible.
+
+Por otro lado, también se puede ver gráficamente. Primero, reescribimos el sistema del siguiente modo, de forma que tengamos la variable $x_2$ aislada.
+
+$$\left\{\begin{matrix}x_2&=&2-x_1\\ x_2&=&x_1-1\\x_2&=&3-2x_1\end{matrix}\right.$$
+
+```{octave, eval= F}
+x1 = linspace(0,3,100);
+x2a = 2-x1;
+x2b = x1-1;
+x2c = 3-2*x1;
+plot(x1,x2a,x1,x2b,x1,x2c);
+```
+
+Lo que produce el siguiente plot:
+
+<div class = "center">
+![<l class = "phototext">Representación gráfica del sistema del `Ejemplo 5` con `Octave`</l>](Images/ocEj5.png)
+</div>
+
+Finalmente, si utilizásemos la función **`rref()`**, obtendríamos:
+
+```{octave}
+A = [1 1; 1 -1; 2 1]; b = [2; 1; 3]; AB = [A b];
+rref(AB)
+```
+
+Donde vemos que la última fila lo que nos está diciendo es que $0=1$, lo cual es falso. Esto es lo que nos lleva a concluir que el sistema no tiene solución. Con lo cual, el sistema es incompatible.
+
+
+# 6. **Ecuaciones matriciales con `Octave`**
+
+### Ejemplo 6
+
+Dada una ecuación matricial, si la tenemos de la siguiente forma $AX = B$, donde $A,B$ son matrices, entonces la podemos resolver en la mayoría de los casos haciendo uso de la función **`linsolve(A,B)`**.
+
+Sea la ecuación matricial, la siguiente:
+
+$$AX + 3B = (C+D)X+3D+10I_2$$ 
+
+Donde:
+
+$$A =\begin{pmatrix}0 & 4\\2 & 1\end{pmatrix},\quad B =\begin{pmatrix}1 & -1\\ 2 & 3\end{pmatrix},\quad C =\begin{pmatrix}1 & 2\\ 3 & -2\end{pmatrix},\quad D =\begin{pmatrix}-2 & 1\\ -1 & 1\end{pmatrix},\quad I_2 =\begin{pmatrix}1 & 0\\ 0 & 1\end{pmatrix}$$
+
+Pasando los términos multiplicados por $X$ a la izquierda y los que no a la derecha, obtenemos:
+
+$$AX-(C+D)X = 3D-3B+10I_2$$
+
+Sacando factor común $X$ por la derecha en el primer término y factor común 3 en el segundo término, tenemos:
+
+$$(A-(C+D))X = 3(D-B)+10I_2$$
+
+Nuestras matrices, definidas en Octave, son:
+
+```{octave}
+A = [0 4; 2 1]; 
+B = [1 -1; 2 3]; 
+C = [1 2; 3 -2];
+D = [-2 1; -1 1]; 
+I = [1 0; 0 1];
+```
+
+La matriz que multiplica a $X$, a la que llamaremos $M$ y la matriz $N$. Las definimos en Octave.
+
+```{octave}
+A = [0 4; 2 1]; B = [1 -1; 2 3]; C = [1 2; 3 -2];
+D = [-2 1; -1 1]; I = [1 0; 0 1]; 
+M = A-(C+D);
+N = 3*(D-B)+10*I;
+```
+
+Una vez calculadas $M$ y $N$, tenemos la ecuación matricial de la forma $MX = N$. Entonces, la podemos resolver realizando lo siguiente:
+
+```{octave}
+A = [0 4; 2 1]; B = [1 -1; 2 3]; C = [1 2; 3 -2];
+D = [-2 1; -1 1]; I = [1 0; 0 1]; 
+M = A-(C+D); N = 3*(D-B)+10*I;
+X = linsolve(M,N)
+```
+
+
+
+
+

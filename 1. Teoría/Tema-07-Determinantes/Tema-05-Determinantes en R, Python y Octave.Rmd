@@ -1,0 +1,119 @@
+---
+title: "Tema 4 - Determinantes en R, Python y Octave"
+author: "Ramon Ceballos"
+date: "27/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+knitr::opts_chunk$set(engine.path = list(octave ="C:/Program Files/GNU Octave/Octave-6.1.0/mingw64/bin/octave-cli-6.1.0.exe"), echo = TRUE)
+```
+
+# 1. Determinantes en R
+
+La función **`det()`** es la que nos calcula el determinante de cualquier matriz cuadrada en `R`. Se debe importar las siguientes librerías.
+
+```{r}
+library(matlib)
+library(Biodem)
+library(expm)
+```
+
+Calculemos el determinante de las siguientes matrices:
+
+$$A = \begin{pmatrix}
+1 & 2\\
+0 & -1
+\end{pmatrix}\qquad B = \begin{pmatrix}
+1 & 2 & 3\\
+0 & -1 & 5\\
+10 & 2 & -5
+\end{pmatrix}$$
+
+```{r}
+A = rbind(c(1,2), c(0,-1))
+B = matrix(c(1,2,3,0,-1,5,10,2,-5), nrow = 3, ncol = 3, byrow = TRUE)
+```
+
+Una vez definidas aplicamos la función **det()**.
+
+```{r}
+det(A)
+det(B)
+```
+
+
+
+
+
+
+# 2. Determinantes en Python
+
+La función **`numpy.linalg.det()`** es la que nos calcula el determinante de cualquier matriz cuadrada en `Python`.
+
+
+Calculemos el determinante de las matrices:
+
+$$A = \begin{pmatrix}
+1 & 2\\
+0 & -1
+\end{pmatrix}\qquad B = \begin{pmatrix}
+1 & 2 & 3\\
+0 & -1 & 5\\
+10 & 2 & -5
+\end{pmatrix}$$
+
+```{python}
+import numpy as np
+A = np.array([[1, 2], [0,-1]])
+B = np.array([[1, 2,3], [0,-1,5], [10,2,-5]])
+```
+
+Una vez definidas aplicamos la función **numpy.linalg.det()**.
+
+```{python}
+int(np.linalg.det(A))
+int(np.linalg.det(B))
+```
+
+
+
+
+
+# 3. Determinantes en Octave
+
+La función **`det()`** es la que nos calcula el determinante de cualquier matriz cuadrada en `Octave`.
+
+
+Calculemos el determinante de las matrices:
+
+$$A = \begin{pmatrix}
+1 & 2\\
+0 & -1
+\end{pmatrix}\qquad B = \begin{pmatrix}
+1 & 2 & 3\\
+0 & -1 & 5\\
+10 & 2 & -5
+\end{pmatrix}$$
+
+```{octave}
+A = [1, 2; 0,-1]; B = [1, 2,3; 0,-1,5; 10,2,-5];
+detA = det(A)
+detB = det(B)
+```
+
+
+
+
+
+
+
+
+
+
+
+

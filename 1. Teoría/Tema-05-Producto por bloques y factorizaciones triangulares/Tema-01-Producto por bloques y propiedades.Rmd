@@ -1,0 +1,150 @@
+---
+title: "Tema 3 - Producto por bloques y factorizaciones triangulares"
+author: "Ramon Ceballos"
+date: "24/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# **Producto por bloques**
+
+## 1. Definicion general 
+
+En el `Tema 1` vimos como multiplicar matrices. Resumiéndolo, consistía en realizar productos de filas por columnas pertinentes.
+
+En caso de tener matrices (no necesariamente cuadradas) de órdenes elevados, cuyo producto pueda llevarse a cabo, los cálculos pueden resultar mucho más sencillos si dividimos las matrices en bloques y realizamos el producto por bloques.
+
+Para llevar esto a cabo, hay que dividir las dos matrices que queramos multiplicar, $A$ y $B$, en bloques o submatrices, de forma que cada fila de bloques de la primera matriz sea multiplicable por cada columna de bloques de la segunda.
+
+Es decir, sean $A$,$B$ matrices las cuales hemos dividido del siguiente modo:
+
+$$A = \begin{pmatrix}C & | & D\\ --&|&--\\E & | & F\end{pmatrix}\qquad B = \begin{pmatrix}G & | & H\\ --&|&--\\J & | & K\end{pmatrix}$$
+
+Podremos multiplicar $A$ por $B$ por bloques de la siguiente forma, siempre que los productos de matrices indicados en la siguiente matriz puedan llevarse a cabo:
+
+$$AB = \begin{pmatrix}CG+DJ & | & CH+DK\\ -----&|&-----\\EG+FJ & | & EH+FK\end{pmatrix}$$
+
+### Ejemplo 1
+
+Supongamos que queremos multiplicar las matrices siguientes:
+
+$$A = \begin{pmatrix}1 & -1 & 2 & 4\\
+-2 &0&5&5\\ 
+1 & 1 & 2 & -3\\
+2 & 3 & 4 & 0\end{pmatrix}\qquad B = \begin{pmatrix} 1 & 4 & 3\\
+2 & -1 & 0\\
+-3 & 2 & 1\\
+0 & 1 & 2\end{pmatrix}$$
+
+Como $A\in\mathcal{M}_{4}(\mathbb{R})$ y $B\in\mathcal{M}_{4\times 3}(\mathbb{R})$, sabemos que el producto puede llevarse a cabo.
+
+No obstante, en vez de multiplicar a lo bruto, dividamos las matrices en bloques del siguiente modo:
+
+$$A = \begin{pmatrix}
+1 & -1 &|& 2 & 4\\ 
+-2 &0&|&5&5\\ 
+-- & -- & | & -- & --\\
+1 & 1 &|& 2 & -3\\
+2 & 3 &|& 4 & 0\end{pmatrix}\qquad B = \begin{pmatrix} 
+1 & 4 &|& 3\\
+2 & -1  &|& 0\\
+-- & -- & | & -- \\
+-3 & 2 &|& 1\\
+0 & 1 &|& 2\end{pmatrix}$$
+
+
+Vemos que esta división es correcta ya que si nombramos a cada uno de los bloques tal y como se indica a continuación:
+
+$$A = \begin{pmatrix}C & | & D\\ --&|&--\\E & | & F\end{pmatrix}\qquad B = \begin{pmatrix}G & | & H\\ --&|&--\\J & | & K\end{pmatrix}$$
+
+Tenemos que las submatrices $C,D,E,F,G,J\in\mathcal{M}_2(\mathbb{R})$ mientras que las submatrices $H,K\in\mathcal{M}_{2\times 1}(\mathbb{R})$.
+
+Una vez comprobado que todos los productos de matrices pueden llevarse a cabo, hay que hacer las siguientes operaciones para finalmente obtener:
+
+$$AB = \begin{pmatrix}CG+DJ & | & CH+DK\\ -----&|&-----\\EG+FJ & | & EH+FK\end{pmatrix}$$
+
+$$CG = \begin{pmatrix}1 & -1\\ 
+-2 &0\end{pmatrix}\begin{pmatrix}1 & 4\\
+2 & -1\end{pmatrix} = \begin{pmatrix}-1 & 5\\ -2 & -8\end{pmatrix}$$
+
+$$DJ = \begin{pmatrix}2 &4 \\ 
+ 5&5\end{pmatrix}\begin{pmatrix}-3 & 2\\
+0 &1 \end{pmatrix} = \begin{pmatrix}-6 & 8\\ -15 & 15\end{pmatrix}$$
+
+$$CH = \begin{pmatrix}1 & -1\\ 
+-2 &0\end{pmatrix}\begin{pmatrix}3 \\
+ 0\end{pmatrix} = \begin{pmatrix} 3\\ -6 \end{pmatrix}$$
+ 
+$$DK = \begin{pmatrix} 2& 4\\ 
+ 5&5\end{pmatrix}\begin{pmatrix}1 \\
+ 2 \end{pmatrix} = \begin{pmatrix} 10 \\ 15  \end{pmatrix}$$
+
+$$EG = \begin{pmatrix}1 & 1\\ 
+ 2&3\end{pmatrix}\begin{pmatrix} 1&4 \\
+ 2&-1 \end{pmatrix} = \begin{pmatrix} 3& 3\\ 8 & 5\end{pmatrix}$$
+ 
+$$FJ = \begin{pmatrix} 2&-3 \\ 
+4 &0\end{pmatrix}\begin{pmatrix} -3& 2\\
+ 0&1 \end{pmatrix} = \begin{pmatrix} -6& 1\\  -12& 8\end{pmatrix}$$
+
+
+$$EH = \begin{pmatrix} 1&1 \\ 
+ 2&3\end{pmatrix}\begin{pmatrix}3 \\
+0 \end{pmatrix} = \begin{pmatrix} 3\\6 \end{pmatrix}$$
+ 
+$$FK = \begin{pmatrix} 2& -3\\ 
+ 4&0\end{pmatrix}\begin{pmatrix}1 \\
+2 \end{pmatrix} = \begin{pmatrix} -4\\ 4\end{pmatrix}$$
+
+$$CG+DJ = \begin{pmatrix}-1 & 5\\ -2 & -8\end{pmatrix}+\begin{pmatrix}-6 & 8\\ -15 & 15\end{pmatrix} = \begin{pmatrix}-7 & 13\\ -17 & 7\end{pmatrix}$$
+
+$$CH + DK = \begin{pmatrix} 3\\ -6 \end{pmatrix} + \begin{pmatrix} 10 \\ 15  \end{pmatrix} = \begin{pmatrix} 13 \\ 9  \end{pmatrix}$$
+
+$$EG + FJ = \begin{pmatrix} 3& 3\\ 8 & 5\end{pmatrix} + \begin{pmatrix} -6& 1\\  -12& 8\end{pmatrix} = \begin{pmatrix} -3& 4\\  -4& 13\end{pmatrix}$$
+
+$$EH + FK = \begin{pmatrix} 3\\6 \end{pmatrix} + \begin{pmatrix} -4\\ 4\end{pmatrix} = \begin{pmatrix} -1\\ 10\end{pmatrix}$$ 
+
+Con lo cual, obtenemos el producto de $A\cdot B$ a continuación:
+
+$$A\cdot B = \left(\begin{matrix}-7 & 13 & 13\\ -17 & 7 & 9\\ -3 & 4 & -1\\-4 & 13 & 10\end{matrix}\right)$$
+
+
+## 2. Propiedades del producto por bloques
+
+El producto por bloques resulta ser más interesante cuando alguna de las submatrices es muy sencilla con muchos 0's o bien es una matriz diagonal, una matriz identidad o directamente una matriz nula.
+
+### Ejemplo 2
+
+Supongamos que las matrices $A$ y $B$ son de la forma:
+
+$$A = \begin{pmatrix}I_n &|& C\\ --&|&--\\ 0 &|& I_n\end{pmatrix}\qquad B = \begin{pmatrix}I_n &|& D\\ --&|&--\\0 &|& I_n\end{pmatrix}$$
+
+Donde $C,D\in\mathcal{M}_n(\mathbb{R})$ e $I_n$ representa la matriz identidad de orden $n$. Entonces tenemos que :
+
+$$AB = \begin{pmatrix}I_n\cdot I_n+C\cdot0 &|& I_n\cdot D+C\cdot I_n\\ -------&|&-------\\ 0\cdot I_n + I_n\cdot 0&|&0\cdot D+I_n\cdot I_n\end{pmatrix} = \begin{pmatrix}I_n &|&D+C\\----&|&----\\ 0 &|&I_n\end{pmatrix}$$
+
+Por otro lado, tenemos que $B\cdot A$ sería:
+
+$$BA = \begin{pmatrix}I_n\cdot I_n+D\cdot0 &|& I_n\cdot C+D\cdot I_n\\ -------&|&-------\\ 0\cdot I_n + I_n\cdot 0&|&0\cdot C+I_n\cdot I_n\end{pmatrix} = \begin{pmatrix}I_n &|&C+D\\----&|&----\\ 0 &|&I_n\end{pmatrix}$$
+Con lo cual, en este caso el producto de A y B es conmutativo para cualquier matriz $C,D$.
+
+
+### 2.1 **Cálculo de inversas**
+
+A la hora de calcular matrices inversas, tenemos casos de matrices por bloques en los cuales el cálculo de la inversa se simplifica considerablemente.
+
+<l class = "prop">**Proposición.**</l> Sea $A$ una matriz cuadrada dividida en bloques del siguiente modo: 
+
+$$A = \begin{pmatrix}B &|&C\\--&|&--\\0 & |& D\end{pmatrix}$$
+
+Donde $B\in\mathcal{M}_p(\mathbb{R}),\ C\in\mathcal{M}_{p\times q}(\mathbb{R}),\ D\in\mathcal{M}_q(\mathbb{R})$. Entonces, $A$ es invertible si, y solo si, lo son $B$ y $D$, y entonces:
+
+$$A^{-1} = \begin{pmatrix}B^{-1} &|&-B^{-1}CD^{-1}\\--&|&------\\0 & |& D^{-1}\end{pmatrix}$$
+
+En particular, si $C = 0$, $A$ es invertible si, y solo si, lo son $B$ y $D$, y entonces:
+$$A^{-1} = \begin{pmatrix}B^{-1} &|&0\\--&|&--\\0 & |& D^{-1}\end{pmatrix}$$

@@ -1,0 +1,139 @@
+---
+title: "Factorizaciones LU con R"
+author: "Ramon Ceballos"
+date: "27/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# **Factorizaciones LU con R**
+
+## 1. Obtener las matrices LU en R
+
+Para realizar una factorización LU con `R`, podemos utilizar la función **`LU()`** introduciendo por parámetro una matriz cuadrada.
+
+Para su empleo se necesitan cargan las siguientes librerías.
+
+```{r}
+library(Biodem)
+library(matlib)
+library(expm)
+```
+
+
+La función devolverá una lista con tres componentes: $P$, $L$ y $U$.
+
+Veámoslo con un ejemplo.
+
+### Ejemplo sin permutación de filas
+
+Encontremos la factorización LU de la siguiente matriz:
+
+$$A = \begin{pmatrix}1 & 3 & 0 & -1\\
+2 & 1 & -1& 5\\
+0 & -2& 3 & -1\\
+1 & 1 & 3 & 1\end{pmatrix}$$
+
+
+```{r}
+A = rbind(c(1,3,0,-1), c(2,1,-1,5), c(0,-2,3,-1), c(1,1,3,1))
+luA = LU(A)
+```
+
+```{r}
+luA$P
+```
+
+En este caso, como no se han permutado filas, la matriz $P$ es la matriz identidad.
+
+Las matrices L y U son las siguientes.
+
+```{r}
+#Matriz L
+luA$L
+
+#mATRIZ u
+luA$U
+```
+
+### Ejemplo con permutación entre filas
+
+Encontremos ahora la factorización LU de la matriz :
+
+$$A = \begin{pmatrix}0 & 1 & 3\\
+1 & 3& -2\\
+-3 & -2 & -1
+\end{pmatrix}$$
+
+```{r}
+A = matrix(c(0,1,3,1,3,-2,-3,-2,-1), byrow = T, nrow = 3, ncol = 3)
+luA = LU(A)
+```
+
+```{r}
+luA$P
+```
+
+En este caso, podemos ver como sí se han permutado filas, ya que la matriz $P$ no es la matriz identidad.
+
+Las matrices L y U son las siguientes.
+
+```{r}
+luA$L
+luA$U
+```
+
+## 2. Resolver sistemas de ecuaciones con matrices LU en R
+
+Finalmente, también podemos resolver sistemas de ecuaciones lineales aplicando antes la factorización LU a la matriz de coeficientes.
+
+Esto se lleva a cabo con la misma función utilizada hasta el momento: **`LU()`**, pero añadiendo un parámetro más (este parámetro debe de ser el vector de términos independientes del sistema). Lo que implica que además de las matrices $P$,$L$ y $U$, la función nos devuelve dos vectores más: $d$ y $x$.
+
+- $x$ es la solución del sistema.
+- $d$ es el vector solución del sistema $Ld = b$, que luego nos sirve para resolver $Ux = d$.
+
+### Ejemplo resolución de sistemas
+
+Consideremos el sistema:
+
+$$\left\{\begin{matrix}
+&&x_2&+&3x_3&=&1\\
+x_1&+&3x_2&-&2x_3 &=& 3\\
+-3x_1&-&2x_2&-&x_3&=&-2
+\end{matrix}\right.$$
+
+```{r}
+A = rbind(c(0,1,3), c(1,3,-2), c(-3,-2,-1))
+b = c(1,3,-2)
+sistema = LU(A,b) 
+```
+
+Vemos que hubo una permutación entre la 2ª y la 1ª fila.
+
+```{r}
+sistema$P
+```
+
+Matrices L y U.
+
+```{r}
+sistema$L
+sistema$U
+```
+
+Matriz d que refiere a la solución de $Ux = d$; y la matriz x que e sla solución del sistema.
+
+```{r}
+sistema$d
+sistema$x
+```
+
+
+
+
+
