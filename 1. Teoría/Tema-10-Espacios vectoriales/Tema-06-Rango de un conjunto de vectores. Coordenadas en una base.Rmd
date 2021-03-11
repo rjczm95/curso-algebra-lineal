@@ -1,0 +1,85 @@
+---
+title: "Tema 6 - Espacios vectoriales"
+author: "Ramon Ceballos"
+date: "11/3/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# **Rango de un conjunto de vectores. Coordenadas en una base.**
+
+# 1. Rango de un conjunto de vectores
+
+<l class = "definition">**Rango de un conjunto de vectores.**</l> Sea $E$ un $\mathbb{K}$-espacio vectorial cualquiera, se llama rango de vectores $\vec{u}_1,\vec{u}_2,\dots,\vec{u}_n\in E$ a la dimensión del subespacio vectorial que generan. Matemáticamente:
+
+$$\text{rg}\{\vec{u}_1,\dots,\vec{u}_n\} = \dim(\langle\vec{u}_1,\dots,\vec{u}_n\rangle)$$
+
+Así, coincide con el número máximo de vectores LI que se pueden extraer del conjunto $\{\vec{u}_1,\dots,\vec{u}_n\}$.
+
+
+Otra definición de rango sería la siguiente.
+
+<l class = "definition">**Rango de un conjunto de vectores.**</l> Dados $\vec{u}_1,\dots,\vec{u}_n\in E$, se dice que tiene rango $r\le n$ ($n$ es el nº de vectores) si existe como mínimo un subconjunto de $r$ vectores LI entre ellos y no existe ninguno de $r+1$ que sea LI.
+
+En otras palabras, como bien se dijo anteriormente, es el número máximo de vectores LI que pueden extraerse del conjunto.
+
+
+
+# 2. Coordenadas en una base
+
+El rango de $n$ vectores está relacionado con el rango de una matriz tal y como veremos a continuación.
+
+En primer lugar, recordemos que dado un $\mathbb{K}$-espacio vectorial de dimensión $n$ y $B=\{e_1,\dots,e_n\}$ una base cualquiera de $E$, todo vector $x\in E$ se escribe de manera única como combinación lineal de la base $B$ de la forma:
+
+$$x = \sum_{i = 1}^n\alpha_i\cdot e_i = \alpha_1\cdot e_1+\cdots+\alpha_n\cdot e_n$$
+
+Por tanto, podemos dar la siguiente definición:
+
+<l class = "definition">**Coordenadas de un vector en base $B$.**</l> Son los escalares $\alpha_1,\dots,\alpha_n$ de la combinación lineal anterior.
+
+Más formalmente:
+
+<l class = "definition">**Coordenadas en una base.**</l> Dado un $\mathbb{K}$-espacio vectorial $E$ con una base $B = \{e_1,\dots,e_n\}$ y un vector $u\in E$, se sabe que existen unos únicos escalares $\alpha_1,\dots,\alpha_n\in\mathbb{K}$ tales que:
+
+$$u = \sum_{i = 1}^n\alpha_i\cdot e_i$$
+
+Estos escalares se denominan coordenadas del vector $u$ en la base $B$.
+
+$$u = (\alpha_1,\dots,\alpha_n)_B$$
+
+
+## 2.1 Proposición
+
+<l class = "prop">**Proposición.**</l> Sea $E$ un $\mathbb{K}$-espacio vectorial de dimensión finita $n$ y $B=\{e_1,\dots,e_n\}$ una base de $E$. Sean $u_1,\dots,u_m\in E$ vectores de forma que cada $u_j$ tiene coordenadas en la base $B$ dadas por:
+
+$$u_j = \sum_{i = 1}^n a_{ij}\cdot e_i = a_{1j}\cdot e_1+\cdots+a_{nj}\cdot e_n$$
+
+Entonces:
+
+- $u_1,\dots,u_m$ son LI si, y solo si, $\text{rg}(A) = m\le n$. La letra $m$ refiere al nº de vectores que tenemos y $\text{rg}(A)$ es el rango de los coeficientes (coordenadas).
+
+- $\text{rg}(u_1,\dots,u_m) = \text{rg}(A)$
+
+
+**Ejercicio 25.** Demostrar formalmente esta Proposición.
+
+
+
+Por la proposición anterior, un método para calcular el rango de un conjunto de vectores consiste en construir una matriz utilizando los vectores como columnas (o filas) y definir el rango de la matriz como el rango de sus vectores columna (o fila). 
+
+
+<l class = "observ">**Observación.**</l> Si se nos facilitan las coordenadas de un vector sin especificar la base, se sobreentiende que se trata de la base canónica. 
+
+También reciben el nombre de <l class = "definition">**coordenadas cartesianas**</l> y son las que en temas anteriores hemos definido como las componentes de un vector.
+
+
+
+
+
+
+

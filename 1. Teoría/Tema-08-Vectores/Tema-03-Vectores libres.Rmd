@@ -1,0 +1,102 @@
+---
+title: "Tema 5 - Vectores"
+author: "Ramon Ceballos"
+date: "28/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# **Vectores libres**
+
+Como acabamos de ver, todos los vectores fijos equivalentes entre sí tienen las mismas componentes.
+
+En este sentido, es posible establecer una relación de equivalencia correspondiente, el <l class = "definition">**vector libre**</l>.
+
+Este representante define un conjunto infinito de vectores y los representa a todos ellos.
+
+# 1. Definiciones generales
+
+## Vector libre
+
+<l class = "definition">**Vector libre.**</l> Conjunto de todos los vectores fijos equivalentes entre sí.
+
+Un vector libre no tiene un origen fijo, sino que se puede ubicar en cualquier punto del espacio.
+
+Cada vector fijo es un representante del vector libre.
+
+<div class = "center">
+![<l class = "phototext">Ejemplos de vectores libres: $\vec{u},\vec{v},\vec{w}$</l>](Images/vector4.png)
+</div>
+
+## Vector fijo en el origen
+
+<l class = "definition">**Vector fijo en el origen.**</l> Es el representante del vector libre que tiene su punto origen en el origen de coordenadas.
+
+En este caso, las coordenadas del punto extremo coinciden numéricamente con las componentes del vector, ya que el punto de origen es $0 = (0,0)$.
+
+<div class = "center">
+![<l class = "phototext">Vector fijo en el origen</l>](Images/vector5.png)
+</div>
+
+Por tanto, todo vector libre tiene un representante situado en el origen de coordenadas donde el punto extremo tiene las mismas coordenadas que las componentes del vector. Entonces, en este sentido podemos decir:
+
+<l class = "prop">**Proposición.**</l> Existe una correspondencia uno a uno entre los vectores libres y los puntos según el cual cada punto $P = (p_x,p_y)$ del plano se identifica con un vector $\vec{OP} = (p_x,p_y)$.
+
+
+# 2. Caracterización de un vector libre
+
+## 2.1 Método I
+
+<l class = "prop">**Caracterización de un vector libre (I).**</l> Para caracterizar un vector libre se necesita:
+
+- <l class = "definition">**Módulo.**</l> Al igual que para los vectores fijos, viene dado por la longitud del segmento
+
+- <l class= "definition">**Dirección.**</l> Viene dado por el ángulo que forma el vector con la dirección positiva del eje $OX$
+
+- <l class= "definition">**Sentido.**</l> Viene dado por el ángulo que forma el vector con la dirección positiva del eje $OX$
+
+
+## 2.2 Método II
+
+<l class = "prop">**Caracterización de un vector libre (II).**</l> También se puede caracterizar un vector libre si se conocen las componentes.
+
+### Ejemplo 4
+
+Dado el vector $(7,-5)$, calculemos su módulo, dirección y sentido.
+
+Empecemos por el módulo. Recordemos que el vector, cuyo origen hemos situado en el origen de coordenadas, forma un triángulo rectángulo junto con sus componentes.
+
+<div class = "center">
+![<l class = "phototext">Triángulo rectángulo que forman el vector (7,-5) y sus componentes. La componente verde es la positiva y la roja, la negativa</l>](Images/vector6.png)
+</div>
+
+Como conocemos la longitud del segmento verde: 7 unidades; y también la del segmento rojo: 5 unidades, por el Teorema de Pitágoras podemos hallar la longitud del segmento $OA$.
+
+$$|OA|^2 = 7^2+5^2\Rightarrow |OA| = \sqrt{74}$$
+
+Con lo cual, el módulo del vector $(7,-5)$ es $\sqrt{74}$.
+
+Ahora nos interesa saber el ángulo que forma el vector $(7,-5)$ con el eje $OX$. Éste se consigue calculando lo siguiente.
+
+Nosotros sabemos que, si denominamos $\alpha$ al ángulo que estamos buscando, entonces tenemos:
+
+$$\tan{(\alpha)} = -\frac{5}{7}$$
+
+Con lo cual, $\alpha = \arctan{(-\frac{5}{7})} = -0.6202495$ radianes, lo que equivale, haciendo la respectiva conversión, a:
+
+$$-0.6202495\ rad\cdot\frac{360º}{2\pi\ rad} = -35.53768º$$
+
+O, equivalentemente, $360º-35.53768º = 324.4623º$.
+
+
+<div class = "center">
+![<l class = "phototext">Ángulo que forma el vector $\vec{OA}$ con el eje $\vec{OX}$</l>](Images/vector7.png)
+</div>
+
+
+

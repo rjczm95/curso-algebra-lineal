@@ -1,0 +1,53 @@
+---
+title: "Tema 5 - Vectores"
+author: "Ramon Ceballos"
+date: "28/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# **Propiedades de las operaciones con vectores**
+
+Al definir las operaciones de suma y producto por un escalar, conviene tener presentes las diferencias y similitudes entre ambos.
+
+# 1. Ley de composición interna
+
+<l class = "definition">**Ley de composición interna.**</l> La suma de vectores se denomina ley de composición interna ya que opera entre elementos de un conjunto dado, $\mathbb{K}^n$ y el resultado es otro elemento de este conjunto.
+
+$$\begin{matrix}f:\mathbb{K}^n\times \mathbb{K}^n&\longrightarrow& \mathbb{K}^n\\ (\vec{u},\vec{v})&\mapsto&\vec{u}+\vec{v}\end{matrix}$$
+
+# 2. Ley de composición externa
+
+<l class = "definition">**Ley de composición externa.**</l> El producto de un escalar por un vector tiene como operandos conjuntos diferentes: escalares por un lado y vectores por el otro. El resultado cae del lado de los vectores y la operación se denomina ley de composición externa.
+
+$$\begin{matrix}f:\mathbb{K}\times \mathbb{K}^n&\longrightarrow& \mathbb{K}^n\\ (\lambda,\vec{u})&\mapsto&\lambda\vec{u}\end{matrix}$$
+
+# 3. Propiedades de la suma de vectores
+
+<l class = "prop">**Propiedades de la suma de vectores.**</l> Sean $\vec{u},\vec{v},\vec{w}\in\mathbb{K}^n$
+
+- Ley asociativa: $$(\vec{u}+\vec{v})+\vec{w} = \vec{u}+(\vec{v}+\vec{w})$$
+
+- Ley conmutativa: $$\vec{u}+\vec{v} = \vec{v}+\vec{u}$$
+
+- Elemento neutro de la suma: $$\vec{u}+\vec{0} = \vec{0}+\vec{u} = \vec{u}$$
+
+- Vector opuesto: $$\vec{u}+(-\vec{u}) = (-\vec{u})+\vec{u} = 0$$
+
+# 4. Propiedades del producto por un escalar
+
+<l class = "prop">**Propiedades del producto por un escalar.**</l> Sean $\vec{u},\vec{v}\in\mathbb{K}^n$ y $\alpha,\beta\in\mathbb{K}$
+
+- Ley distributiva del producto por un escalar para la suma de vectores: $$\alpha(\vec{u}+\vec{v}) = \alpha\vec{u}+\alpha\vec{v}$$
+
+- Ley distributiva del producto de un vector por la suma de escalares: $$(\alpha+\beta)\vec{u} = \alpha\vec{u}+\beta\vec{u}$$
+
+- Ley asociativa del producto entre escalares y vectores: $$(\alpha\beta)\vec{u} = \alpha(\beta\vec{u}) = \beta(\alpha\vec{u})$$
+
+- Elemento unidad: $$1\vec{u} = \vec{u}$$
+

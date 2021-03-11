@@ -1,0 +1,290 @@
+---
+title: "Tarea de Vectores en R y python"
+author: "Ramon Ceballos"
+date: "4/3/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# **Tarea de Vectores en R y python**
+
+# Pregunta 1
+
+Crear una función que encuentre un vector CD equivalente a AB donde A = (1, 2) y B = (0, 3) y tal que su origen esté en el punto C = (−1, 0).
+
+Defino la función **equiv**.
+
+```{r}
+equiv = function(A, B, C){
+  AB = B - A
+  CD = C + AB
+  D = C + CD
+  print ("El vector CD es:")
+  print(CD)
+  print ("El punto D es:")
+  print(D)
+}
+```
+
+Empleo los vectores dados para calcular CD y D.
+
+```{r}
+A = c(1,2)
+B = c(0,3)
+C = c(-1,0)
+
+equiv(A,B,C)
+```
+
+# Pregunta 2
+
+Encontrar el módulo y dirección del vector de componentes (9, −10).
+
+Las componentes del vector u son:
+
+```{r}
+u = c(9,-10)
+
+mod_u = sqrt((u[1]^2)+(u[2]^2))
+
+alpha_u = atan(u[2]/u[1])*360/(2*pi)
+
+print ("El módulo de u es:")
+mod_u
+print("El ángulo en grados del vector u es:")
+alpha_u
+
+```
+
+# Pregunta 3
+
+Dados los vectores u = (9, 1, 0), v = (−3, 5, 1) y w = (1, 10, −5).
+
+Defino los vectores:
+
+```{r}
+u = c(9,1,0)
+v = c(-3,5,1)
+w = c(1,10,-5)
+```
+
+
+• Comprobad que el producto escalar cumple la propiedad conmutativa.
+
+Defino el producto escalar entre dos vectores.
+
+```{r}
+productoEscalar = function(x,y){
+if (length(x) == length(y)){
+sum(x*y)}
+}
+```
+
+Hago la comprobación.
+
+```{r}
+productoEscalar(u,v)
+productoEscalar(v,u)
+```
+
+
+• Comprobad que el producto escalar cumple la propiedad distributiva.
+
+```{r}
+productoEscalar(u,v+w)
+
+productoEscalar(u,v) + productoEscalar(u,w)
+```
+
+
+• Comprobad que el producto escalar cumple la propiedad asociativa entre escalares y vectores.
+
+```{r}
+3*productoEscalar(u,v)
+productoEscalar(3*u,v)
+productoEscalar(u,3*v)
+
+```
+
+# Pregunta 4
+
+Dado u = (11, 20, −13):
+
+```{r}
+u = c(11,20,-13)
+```
+
+• Calculad su norma
+
+```{r}
+library(pracma)
+norm_u = Norm(u)
+norm_u
+```
+
+
+• Comprobad que: ||5u|| = 5||u||
+
+```{r}
+Norm(5*u) == 5*Norm(u)
+```
+
+
+• Comprobad que: ||(−9)u|| = | − 9| · ||u|| = 9||u||
+
+```{r}
+Norm(-9*u) == abs(-9)*Norm(u)
+abs(-9)*Norm(u) == 9 * Norm(u)
+```
+
+• Comprobad que si se divide por su norma se obtiene otro vector que es unitario
+
+```{r}
+u_unit = u / norm_u
+u_unit
+
+Norm(u_unit)
+```
+
+# Pregunta 5
+
+Dados los puntos A = (1, −2, 0), B = (10, −11, 7) y C = (−15, −7, 3).
+
+```{r}
+A = c(1,-2,0)
+B = c(10,-11,7)
+C = c(-15,-7,3)
+```
+
+
+• Calcula la distancia entre A y B
+
+Defino una función para el cálculo de la distancia.
+
+```{r}
+distance = function(x,y){
+if (length(x) == length(y)){
+Norm(x-y)
+}}
+```
+
+Hago el cálculo.
+
+```{r}
+distance(A,B)
+```
+
+• Calcula la distancia entre A y C
+
+```{r}
+distance(A,C)
+```
+
+
+• Calcula la distancia entre B y C
+
+```{r}
+distance(B,C)
+```
+
+# Pregunta 6
+
+Dados los puntos A = (1, −2, 0), B = (10, −11, 7) y C = (−15, −7, 3).
+
+```{r}
+A = c(1,-2,0)
+B = c(10,-11,7)
+C = c(-15,-7,3)
+```
+
+
+• Encuentra el ángulo que forman los vectores AB y AC
+
+Define la función para el cálculo del angulo.
+
+```{r}
+angleGrados = function(x,y){
+if (length(x) == length(y)){
+acos(productoEscalar(x,y)/(Norm(x)*Norm(y)))*360/(2*pi)
+}}
+```
+
+Hago el cálculo.
+
+```{r}
+AB = B-A
+AC = C-A
+
+angleGrados(AB,AC)
+```
+
+
+• Calcula el producto vectorial de los vectores CB y AC
+
+```{r}
+CB = B-C
+
+angleGrados(CB,AC)
+```
+
+
+# Pregunta 7
+
+Crea una función a la que le des un vector de $R^2$ y te devuelva uno de sus vectores ortogonales.
+
+Como el producto escalar u*x debe de dar 0, entonces:
+
+```{r}
+proyecOrtog = function(u){
+if (length(u) == 2){
+ortog_u = c(-u[2],u[1])
+ortog_u
+}}
+```
+
+Si u = (1,2), entonces:
+
+```{r}
+u = c(1,2)
+proyecOrtog(u)
+```
+
+Mejora dicha función para que te devuelva todos los posibles vectores ortogonales.
+
+Defino una función de dos parámetros donde u es el vector y $a$ es la primera componente del vector ortogonal.
+
+```{r}
+Ortog_general = function(u,a){
+if (length(u) == 2){
+ortog_u = c(a,-u[1]*a/u[2])
+ortog_u
+}}
+```
+
+```{r}
+Ortog_general(u,10)
+```
+
+Mejórala más aún y que te devuelva los vectores ortogonales unitarios.
+
+```{r}
+Ortog_unit = function(u,a){
+if (length(u) == 2){
+ortog_u = c(a,-u[1]*a/u[2])
+library(pracma)
+ortog_unit_u = ortog_u/Norm(ortog_u)
+ortog_unit_u
+}}
+```
+
+```{r}
+Ortog_unit(u,10)
+```
+
+
+

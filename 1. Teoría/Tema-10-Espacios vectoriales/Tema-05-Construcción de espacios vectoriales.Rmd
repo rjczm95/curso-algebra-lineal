@@ -1,0 +1,227 @@
+---
+title: "Tema 6 - Espacios vectoriales"
+author: "Ramon Ceballos"
+date: "10/3/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# **Construcción de espacios vectoriales**
+
+¿Cómo construimos nuevos espacios vectoriales a partir de otros conocidos?
+
+Esto es lo que veremos a lo largo de este apartado.
+
+# 1. Espacio vectorial producto
+
+<l class = "definition">**Espacio vectorial producto.**</l> Sean $E,F$ dos $\mathbb{K}$-espacios vectoriales. Definimos sobre el conjunto producto cartesiano $E\times F$ las siguientes operaciones:
+
+$$(u,v)+(u',v') = (u+u',v+v')$$
+$$\alpha\cdot(u,v) = (\alpha\cdot u,\alpha\cdot v)$$
+
+En donde $u,u'\in E$, $v,v'\in F$ y $\alpha\in\mathbb{K}$. Es inmediato ver que con estas operaciones, el conjunto $(E\times F,+,\cdot)$ es un $\mathbb{K}$-e.v. llamado <l class = "definition">**espacio vectorial producto**</l> o <l class = "definition">**espacio vectorial suma directa de $E$ y $F$**</l>. 
+
+Lo denotaremos habitualmente por $E\oplus F$.
+
+<l class = "observ">*Observación.*</l> El elemento neutro del $\mathbb{K}$-e.v. será $(0,0)$, donde el primer $0$ es el elemento neutro de $E$, mientras que el segundo, es el elemento neutro de $F$.
+
+De forma análoga, el opuesto de cualquier elemento $(u,v)\in E\oplus F$ será $(-u,-v)\in E\oplus F$.
+
+<l class = "important">**¡Atención!**</l> Anteriormente hemos hablado de suma directa de subespacios vectoriales y ahora de suma directa de espacios vectoriales. Ambos se denotan del mismo modo, $\oplus$.
+
+Así pues, dados dos subespacios vectoriales $F,G$ de un $\mathbb{K}$-e.v. $E$, tenemos que $F,G$ pueden ser considerados también como $\mathbb{K}$-e.v. y, por tanto $F\oplus G$ denota a la vez dos objetos inicialmente diferentes:
+
+- Suma directa de subespacios vectoriales de $E$:
+
+$$F\oplus G = \{z\in E\ |\ z = x+y\ \text{ para ciertos }x\in F,\ y\in G\}$$
+- Suma directa como $\mathbb{K}$-espacios vectoriales:
+
+$$F\oplus G = \{(x,y)\ |\ x\in F,\ y\in G\}$$
+
+Lo indicado en la diapositiva anterior no lleva a ninguna confusión porque, como veremos más adelante, los dos conjuntos corresponden a $\mathbb{K}$-espacios vectoriales isomorfos, es decir, identificables desde el punto de vista de la estructura de espacio vectorial que manejamos.
+
+La definición de espacio producto o espacio suma directa se puede generalizar a $n$ sumandos.
+
+<l class = "definition">**Espacio vectorial producto.**</l> Sean $E_1,\dots,E_n$ $\mathbb{K}$-e.v. cualesquiera. Definimos el $\mathbb{K}$-espacio vectorial producto o suma directa de $E_1,\dots,E_n$ como:
+
+$$E_1\oplus\cdots\oplus E_n = \{(\vec{u}_1,\dots,\vec{u}_n)\ |\ \vec{u}_i\in E_i,\ \text{ para }i= 1,\dots,n\}$$
+
+Con las operaciones suma y producto por escalares definidas componente a componente
+
+$$(\vec{u}_1,\dots,\vec{u}_n)+(\vec{v}_1,\dots,\vec{v}_n) = (\vec{u}_1+\vec{v}_1,\dots,\vec{u}_n+\vec{v}_n)$$$$\alpha\cdot(\vec{u}_1,\dots,\vec{u}_n) = (\alpha\cdot \vec{u}_1,\dots,\alpha\cdot\vec{u}_n)$$
+
+En donde $\vec{u}_i,\vec{v}_i\in E_i,\ \forall i = 1,\dots, n$ y $\alpha\in\mathbb{K}$
+
+
+### Ejemplo 12
+
+De la definición anterior, deducimos que el $\mathbb{K}$-espacio vectorial $\mathbb{K}^n$ lo podemos ver como la siguiente suma directa:
+
+$$\mathbb{K}^n = \mathbb{K}\oplus\cdots\oplus\mathbb{K}$$
+
+## 1.1 Proposiciones y propiedades
+
+<l class = "prop">**Proposición.**</l> Sean $E,F,E_1,\dots,E_n$ $\mathbb{K}$-e.v. entonces:
+
+- Si $E,F$ son de dimensión finita, entonces $E\oplus F$ también lo es y:
+
+$$\dim(E\oplus F) = \dim(E)+\dim(F)$$
+
+- Si todos los $E_i$ son de dimensión finita y $\dim(E_i) = n_i\ \forall i=1,\dots,n$, entonces $E_1\oplus\cdots\oplus E_n$ también es de dimensión finita y:
+
+$$\dim(E_1\oplus\cdots\oplus E_n)=\dim(E_1)+\cdots+\dim(E_n) = \sum_{i = 1}^n n_i$$
+
+
+**Ejercicio 21.** Demostrar formalmente esta Proposición.
+
+
+
+
+## 2. Espacio vectorial cociente
+
+Para hablar de espacio vectorial cociente, debemos de hablar en primer lugar de relaciones de equivalencia. Por ello vamos a definir la relación módulo F.
+
+<l class = "definition">**Relación módulo $F$.**</l> Sean $E$ un $\mathbb{K}$-espacio vectorial y $F$ un subespacio vectorial de $E$ cualquiera. Definimos sobre $E$ la siguiente relación llamada relación módulo $F$ del siguiente modo:
+
+$$x\sim_{F}y \Leftrightarrow x-y\in F$$
+
+Esta expresión matemática significa que dos elementos ($x, y$) del espacio vectorial $E$ se relacionan a través de $F$, si y solo si la resta de $x -y$ pertence a $F$. Según esta definición $x$ e $y$ poodrían no pertenecer a $F$ pero su resta sí.
+
+
+La relación definida anteriormente sobre $E$ es siempre una relación de equivalencia cualquiera que sea el subespacio vectorial $F$, ya que cumple las siguientes propiedades:
+
+- Propiedad Reflexiva, significa que todo elemento se relaciona consigo mismo. En este caso, para x pertenecerá a $F$ como el vector 0, que a su vez pertenece a todo espacio vectorial. Matemáticamente: $\forall x\in E$, tenemos que $x\sim_F x$ ya que $x-x = 0\in F$ por ser $F$ subespacio vectorial.
+
+- Propiedad Simétrica, significa que para todo $x-y$ habrá un $y-x$ opuesto en $F$, siendo la relación simétrica. Matemáticamente: $\forall x,y\in E$, si $x\sim_F y$, tenemos que $x-y\in F$ y, por tanto, su opuesto también pertenece a $F$, $y-x\in F$. Es decir, tenemos $y\sim_F x$.
+
+- Propiedad Trasitiva, significa que tanto $y$ como $x$ se relacionan con $z$, ya que $x$ se relaciona con $y$, de este modo $x$ se relaciona en $F$ con $z$. Matemáticamente: Si tenemos $x,y,z\in E$ tales que $x\sim_F y$ y $y\sim_F z$, entonces $x-y,y-z\in F$. Por tanto, su suma también es de $F$, es decir:
+
+$$(x-y)+(y-z) = x-z\in F\Leftrightarrow x\sim_F z$$
+
+
+En estas relaciones de equivalencia podemos considerar el <l class = "definition">**conjunto cociente**</l>, denotado como $E/F$ formado por todas las clases de equivalencia módulo $F$. Su definición viene comentada a continuación.
+
+<l class = "definition">**Clase de equivalencia módulo $F$**</l>. Dado $x\in E$, su clase de equivalencia módulo $F$ la denotamos por $[x]_F$ y viene dada por:
+
+$$[x]_F = \{y\in E\ |\ y\sim_F x\} = \{y\in E\ |\ y-x = z\in F\}$$ $$=\{y\in E\ |\ y = x+z,\ z\in F \} = \{x+z\ |\ z\in F\} = x+F$$
+
+Esto significa que para $x$ de $E$ , la clase de equivalencia módulo $F$ será la relación de todos los elementos $y$ de $E$ tal que la resta de $y - x$ da un elemento $z$ que pertenece a $F$. Finalmente se concluye que la clase de equivalencia mófulo $F$ de un elemento $x$ del espacio vectorial $E$ ($[x]_F$) se puede escribir como la suma de dicho elemento $x$ más cualquier otro vector del subespacio vectorial $F$.
+
+<l class = "observ">*Observación.*</l> La clase del $0$ coincide con el propio subespacio vectorial $F$, expresándose del siguiente modo:
+
+$$[0]_F = \{0+z\ |\ z\in F\} = F$$
+
+De hecho, más generalmente tenemos:
+
+$$[x]_F = [0]_F\Leftrightarrow x\sim_F0\Leftrightarrow x\in F\ \text{y en estos casos }[x]_F = F$$
+
+## 2.1 Variedad lineal
+
+Estas clases de equivalencia se denominan <l class = "definition">**variedades lineales**</l>. La definición aparece a continuación.
+
+<l class = "definition">**Variedad lineal.**</l> Es la suma de un vector y un subespacio vectorial.
+
+Como hemos visto, las variedades lineales solamente son subespacios vectoriales cuando $x\in F$, o equivalentemente, cuando la variedad contiene el $0\in E$, coincidiendo en estos casos con el propio subespacio vectorial $F$.
+
+
+En particular, dentro del conjunto cociente $E/F = \{[x]_F\ |\ x\in E\}$ (formado por todas las clases de equivalencia) podemos definir las siguientes operaciones de clases de equivalencia, a través de sus representantes:
+
+$$[u]_F +[v]_F = [u+v]_F$$
+
+$$\alpha\cdot[u]_F = [\alpha\cdot u]_F$$
+
+
+### **2.1.1 Operaciones de clases de equivalencia**
+
+Veamos que las operaciones anteriores están bien definidas. En otras palabras, comprobemos que no dependen del representante elegido:
+
+- **SUMA**: Supongamos que $[x]_F = [x']_F$ y que $[y]_F = [y']_F$. Queremos ver que si sumamos a través de los representantes $x,y$ o $x',y'$, el resultado es el mismo. Como era de esperar:
+
+$$[x]_F = [x']_F\Leftrightarrow x\sim_F x'\Leftrightarrow x-x'\in F$$
+
+$$[y]_F = [y']_F\Leftrightarrow y\sim_F y'\Leftrightarrow y-y'\in F$$ 
+Y consecuentemente sumando obtenemos que:
+
+$$x+y-(x'+y')\in F\Leftrightarrow (x+y)\sim_F(x'+y')\Leftrightarrow [x+y]_F = [x'+y']_F$$
+
+
+- **PRODUCTO por escalares**: De forma similar, si $\alpha\in\mathbb{K}$ y $[x]_F = [x']_F$, tenemos que $x-x'\in F$ y, entonces:
+
+$$\alpha\cdot(x-x')\in F\Leftrightarrow \alpha\cdot x-\alpha\cdot x'\in F\Leftrightarrow [\alpha\cdot x]_F = [\alpha\cdot x']_F$$
+
+## 2.2 Definición de un espacio vectorial cociente
+
+Con todo lo visto hasta el momento, es fácil ver que el conjunto cociente $E/F$ junto con estas operaciones es un $\mathbb{K}$-espacio vectorial.
+
+<l class = "definition">**Espacio vectorial cociente.**</l> Sea $E$ un $\mathbb{K}$-e.v. y $F$ un sub-e.v. de $E$ cualquiera. Definimos el espacio vectorial cociente de $E$ por $F$ al $\mathbb{K}$-espacio vectorial dado por $(E/F,+,\cdot)$ con las operaciones:
+
+$$[u]_F +[v]_F = [u+v]_F$$
+$$\alpha\cdot[u]_F = [\alpha\cdot u]_F$$
+
+En donde $\alpha\in\mathbb{K}$, $u,v\in E$
+
+### 2.2.1 **Proposiciones**
+
+<l class = "prop">**Proposición.**</l> Sea $E$ un $\mathbb{K}$-e.v. de dimensión finita, $\dim(E) = n$ y sea $F$ un subespacio vectorial. Entonces, $E/F$ es también de dimensión finita y:
+
+$$\dim(E/F) = \dim(E)-\dim(F)$$
+
+
+**Ejercicio 22.** Demostrar formalmente esta Proposición.
+
+
+
+
+
+# 3. Cociente por múltiplos de un polinomio
+
+En *dimensiones infinitas*, la fórmula anterior ($\dim(E/F) = \dim(E)-\dim(F)$) ya no sería válida. Un ejemplo de ello es el $\mathbb K$-espacio vectorial de los polinomios $\mathbb K[x]$. 
+
+Si $p(x)\in\mathbb K[x]$ es un polinomio no constante cualquiera, y consideramos el subconjunto de los múltiplos de $p(x)$ (los polinomios que son múltiplos de p(x)), que denotamos por:
+
+$$F=(p(x)) = \{p(x)q(x)| q(x)\in\mathbb K[x]\}$$
+
+Esto indica que los múltiplos de $p(x)$ se pueden obtener al multiplicar $p(x)$ por otro polinomio $q(x)$ perteneciente a $\mathbb K[x]\}$.
+
+Se puede demostrar fácilmente que $F=(p(x))$ es un subespacio vectorial de $\mathbb K[x]$, ya que la suma de múltiplos de $p(x)$ es múltiplo de $p(x)$ y el producto de un escalar por un múltiplo de $p(x)$ también es múltiplo de $p(x)$. Además es de dimensión infinita ya que podemos demostrar que no puede tener un número finito de generadores como ocurría con el caso de $\mathbb K[x]$.
+
+
+En este caso podemos definir **el $\mathbb K$-espacio vectorial cociente $\mathbb K[x]/F$ con $F=(p(x))$** donde la relación módulo $F$ sería:
+
+$$a(x)\sim_F b (x)\Longleftrightarrow a(x) - b(x) \in F = (p(x))$$
+
+<l class = "prop">**Proposición.**</l>  Sea $p(x)\in\mathbb{K}[x]$ un polinomio no constante y de grado $\deg(p(x)) = n\ge 1$. Entonces, dentro de cada clase no nula de un polinomio $a(x)\in \mathbb K[x]$, $[a(x)]_F$ hay un representante de grado menor a $n$.
+
+La idea es que frente a un polinomio cualquiera, este se puede expresar como un múltiplo de $p(x)$ más otro polinomio. Al hacer la división de un polinomio de $\mathbb K[x]\}$ entre $p(x)$, da lugar a un cociente y al resto (este resto tendrá un grado menor o igual a $n$).
+
+
+**Ejercicio 23.** Demostrar formalmente esta Proposición.
+
+
+
+
+<l class = "prop">**Proposición.**</l> Sea $p(x)\in\mathbb{K}[x]$ un polinomio no constante (que sea de grado superior a cero) de grado $\deg(p(x))= n\ge 1$. Entonces, las clases $[1],[x],[x^2],\dots,[x^{n-1}]$ forman una base de $\mathbb{K}[x]/(p(x))$, y, por lo tanto:
+
+$$\dim(\mathbb{K}[x]/(p(x))) = n = \deg(p(x))$$
+
+
+**Ejercicio 24.** Demostrar formalmente esta Proposición.
+
+
+
+
+<l class = "observ">**Observación.**</l> En el caso en que hiciésemos $\mathbb{K}[x]/(p(x))$ donde $p(x)$ fuese un polinomio constante (grado 0), entonces tendríamos que $(p(x)) = \mathbb{K}[x]$ ya que las constantes son invertibles y todo polinomio se puede poner como múltiplo de una constante cualquiera (ya que $p(x) = k(1/k\cdot p(x))\ \forall k\in \mathbb K^*$)
+
+De este modo, $\mathbb{K}[x]/(p(x))$ sería el $\mathbb{K}$-espacio vectorial trivial, el ${0}$.
+
+
+
+
+
+
+

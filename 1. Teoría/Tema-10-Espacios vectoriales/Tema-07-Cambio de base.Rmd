@@ -1,0 +1,254 @@
+---
+title: "Tema 6 - Espacios vectoriales"
+author: "Ramon Ceballos"
+date: "11/3/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# **Cambio de base**
+
+# 1. Introducción
+
+Sabemos que las coordenadas de un vector son únicas en cada base, pero distintas cuando cambian de base.
+
+Partiendo de este punto, el problema que se nos plantea es el de calcular las coordenadas de un vector en cierta base $B'$ dadas las coordenadas del mismo en otra base $B$.
+
+Se necesitará pues conocer la relación entre ambas bases.
+
+Dadas las bases $B_u = \{\vec{u}_1,\dots,\vec{u}_n\}$ y $B_v = \{\vec{v}_1,\dots,\vec{v}_n\}$ de un espacio vectorial $E$, si queremos calcular las coordenadas de los vectores de $B_u$ en la base $B_v$, se han de expresar los vectores $\vec{u}_i$ como combinación lineal de los vectores de $\vec{v}_i$
+
+### Ejemplo 13
+
+Dado el vector $\vec{u}\in\mathbb{R}^3$ de coordenadas $(-2,3,5)_B$ en la base:
+
+$$B = \{(2,4,0),(1,0,1),(-1,2,0)\}$$
+
+Calculemos sus coordenadas en la base canónica $C$.
+
+En primer lugar, tenemos que expresar los vectores de la base $B = \{\vec{u}_1,\vec{u}_2,\vec{u}_3\}$ en la base canónica $C = \{\vec{e}_1,\vec{e}_2,\vec{e}_3\}$:
+
+$$(2,4,0) = 2(1,0,0)+4(0,1,0)+0(0,0,1)$$
+$$(1,0,1) = 1(1,0,0)+0(0,1,0)+1(0,0,1)$$
+$$(-1,2,0) = -1(1,0,0)+2(0,1,0)+0(0,0,1)$$
+
+A continuación, lo que buscamos son 3 escalares $\alpha,\beta,\gamma\in\mathbb{R}$ tales que:
+
+$$\vec{u} = (\alpha,\beta,\gamma)_C = \alpha\vec{e}_1+\beta\vec{e}_2+\gamma\vec{e}_3$$
+
+
+Pero lo que nosotros sabemos es que: 
+
+$$\vec{u} = (-2,3,5)_B = -2\vec{u}_1+3\vec{u}_2+5\vec{u}_3$$
+$$ = -2(2\vec{e}_1+4\vec{e}_2)+3(\vec{e}_1+\vec{e}_3)+5(-\vec{e}_1+2\vec{e}_2) = (-4+3-5)\vec{e}_1 + (-8+10)\vec{e}_2+3\vec{e}_3 = -6\vec{e}_1+2\vec{e}_2+3\vec{e}_3$$
+
+Así pues, $\vec{u} = (-6,2,3)_C$
+
+
+**Ejercicio 26**
+
+Dadas las bases $B_u = \{\vec{u}_1,\vec{u}_2,\vec{u}_3\}$ y $B_v=\{\vec{v}_1,\vec{v}_2,\vec{v}_3\}$ de un espacio vectorial de dimensión 3 y sabiéndose que 
+
+$$\left\{\begin{matrix}
+\vec{v}_1 &=& 2\vec{u}_1&-&\vec{u}_2&+&\vec{u}_3\\
+\vec{v}_2 &=& &-&\vec{u}_2&+&2\vec{u}_3\\
+\vec{v}_3 &=& -\vec{u}_1&+&\vec{u}_2&-&3\vec{u}_3
+\end{matrix}\right.$$
+
+Considerad el vector $\vec{u} = (2,0,-1)_{B_u}$ y calculad sus coordenadas en la base $B_v$
+
+
+
+
+# 2. Proceso de cambio de base
+
+Veamos de dónde sale la relación anterior.
+
+Sea $E$ un $\mathbb{K}$-espacio vectorial de dimensión finita $n$ y sean $B_u = \{u_1,\dots,u_n\}$ y $B_v = \{v_1,\dots,v_n\}$ dos bases de $E$.
+
+Considremos un vector $x\in E$ y sean $(\alpha_1,\dots,\alpha_n)_{B_u}$ y $(\beta_1,\dots,\beta_n)_{B_v}$ las coordenadas del vector $x$ en las bases $B_u$ y $B_v$ respectivamente.
+
+Entonces:
+
+$$x = \sum_{i = 1}^n\alpha_i\cdot u_i\qquad x=\sum_{j = 1}^n\beta_j\cdot v_j$$
+
+
+Ahora bien, los elementos de la base $B_v$ tienen también unas coordenadas en la base inicial $B_u$.
+
+Digamos que $v_j = \sum_{i = 1}^n a_{ij}\cdot u_i\quad j=1,\dots,n$; y si sustituimos los $v_j$ por sus expresiones, obtenemos:
+
+$$x=\sum_{j = 1}^n\beta_j\cdot v_j = x=\sum_{j = 1}^n\beta_j\cdot \left(\sum_{i = 1}^n a_{ij}\cdot u_i\right)$$ $$= \sum_{j = 1}^n\sum_{i = 1}^n (\beta_j a_{ij})\cdot u_i = \sum_{i = 1}^n\left(\sum_{j = 1}^n \beta_ja_{ij}\right)\cdot u_i$$
+
+
+
+Ahora como que las coordenadas de $x$ en la base $B$ son únicas, se debe verificar que:
+
+$$\alpha_i = \sum_{j = 1}^n\beta_ja_{ij}\quad \text{para todo }i=1,\dots,n$$
+
+
+
+Esta expresión la podemos escribir de forma matricial como $PX_v = X_u$ donde $X_u$ es la matriz columna formada por las coordenadas de $x$ en la base $B_u$ (los $\alpha_i$), $X_v$ es la matriz columna de las coordenadas de $x$ en la base $B_v$ y $P$ es la matriz de las $a_{ij}$
+
+
+
+<l class = "observ">**Observación.**</l> La columna $j$-ésima de $P$ está formada por las coordenadas, en la base $B_u$, del correspondiente vector $v_j$ de la base $B_j$.
+
+De esta manera tenemos la ecuación en forma matricial:
+
+$$PB_v = B_u\Leftrightarrow \begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1n}\\
+a_{21} & a_{22} & \cdots & a_{2n}\\
+\vdots & \vdots & \ddots & \vdots\\
+a_{n1} & a_{n2} & \cdots & a_{nn}
+\end{pmatrix}\begin{pmatrix}
+\beta_1\\
+\beta_2\\
+\vdots\\
+\beta_n
+\end{pmatrix} = \begin{pmatrix}
+\alpha_1\\
+\alpha_2\\
+\vdots\\
+\alpha_n
+\end{pmatrix} $$
+
+Esto nos da las coordenadas de $x$ en la base $B_u$ en función de las coordenadas del propio $x$ en la base $B_v$.
+
+
+
+
+## 2.1 Matriz de cambio de base
+
+<l class = "definition">**Matriz de cambio de base ($P$).**</l> La matriz $P$ anterior es la matriz del cambio de la base $B_v$ a la base $B_u$ y se obtiene escribiendo los vectores de la base $B_v$ en columna como combinación lineal de la base $B_u$.
+
+Además, las coordenadas de un vector $x$ en la base $B_u$ se obtienen multiplicando las coordenadas de $x$ en la base $B_v$ por la matriz $P$ del cambio de base.
+
+
+### Ejemplo 14
+
+Dadas las bases $B_u = \{\vec{u}_1,\vec{u}_2,\vec{u}_3\}$ y $B_v=\{\vec{v}_1,\vec{v}_2,\vec{v}_3\}$ de un espacio vectorial de dimensión 3 y sabiéndose que:
+
+$$\left\{\begin{matrix}
+\vec{v}_1 &=& 2\vec{u}_1&-&\vec{u}_2&+&\vec{u}_3\\
+\vec{v}_2 &=& &-&\vec{u}_2&+&2\vec{u}_3\\
+\vec{v}_3 &=& -\vec{u}_1&+&\vec{u}_2&-&3\vec{u}_3
+\end{matrix}\right.$$
+
+Considerad el vector $\vec{u} = (2,0,-1)_{B_u}$ y calculad sus coordenadas en la base $B_v$ haciendo uso de matrices.
+
+Expresando el anterior sistema en su forma matricial, de la siguiente manera:
+
+$$\begin{pmatrix}2 & -1 & 1\\
+0 & -1 & 2\\
+-1 & 1 & -3\end{pmatrix}\begin{pmatrix}\vec{u}_1\\
+\vec{u}_2\\
+\vec{u}_3\end{pmatrix}= \begin{pmatrix}\vec{v}_1\\
+\vec{v}_2\\
+\vec{v}_3\end{pmatrix}$$
+
+O bien:
+
+$$\begin{pmatrix}\vec{u}_1 & \vec{u}_2 & \vec{u}_3\end{pmatrix}\begin{pmatrix}2 & 0 & -1\\
+-1 & -1 & 1\\
+1 & 2 & -3\end{pmatrix}= \begin{pmatrix}\vec{v}_1 & 
+\vec{v}_2 & 
+\vec{v}_3\end{pmatrix}$$
+
+
+En la primera forma, las filas de la matriz son las coordenadas de los vectores $\vec{v}_1,\vec{v}_2,\vec{v}_3$ mientras que en el segundo caso, las columnas son las coordenadas de dichos vectores en la base $B_u$.
+
+Por otro lado, se puede expresar el vector $\vec{u}$ en ambas bases de la siguiente manera:
+
+$$\vec{u} = 2\vec{u}_1-\vec{u}_3 = \begin{pmatrix}\vec{u}_1 & \vec{u}_2 & \vec{u}_3\end{pmatrix}\begin{pmatrix}2\\
+0\\
+-1\end{pmatrix} = \begin{pmatrix}2 & 0 & -1\end{pmatrix}\begin{pmatrix}\vec{u}_1\\
+\vec{u}_2\\
+\vec{u}_3\end{pmatrix}$$
+
+$$\vec{u} = \alpha\vec{v}_1+\beta\vec{v}_2+\gamma\vec{v}_3 = \begin{pmatrix}\vec{v}_1 & \vec{v}_2 & \vec{v}_3\end{pmatrix}\begin{pmatrix}\alpha\\
+\beta\\
+\gamma\end{pmatrix} = \begin{pmatrix}\alpha &\beta & \gamma\end{pmatrix}\begin{pmatrix}\vec{v}_1\\
+\vec{v}_2\\
+\vec{v}_3\end{pmatrix}$$
+
+Con lo cual, tenemos la siguiente igualdad:
+
+$$\begin{pmatrix}2 & 0 & -1\end{pmatrix}_{B_u}\begin{pmatrix}\vec{u}_1\\
+\vec{u}_2\\
+\vec{u}_3\end{pmatrix} = \begin{pmatrix}\alpha &\beta & \gamma\end{pmatrix}_{B_v}\begin{pmatrix}\vec{v}_1\\
+\vec{v}_2\\
+\vec{v}_3\end{pmatrix}$$
+
+
+
+Si ahora sustituimos en la igualdad anterior, nos queda:
+
+$$\begin{pmatrix}\vec{v}_1\\
+\vec{v}_2\\
+\vec{v}_3\end{pmatrix} = \begin{pmatrix}2 & -1 & 1\\
+0 & -1 & 2\\
+-1 & 1 & -3\end{pmatrix}\begin{pmatrix}\vec{u}_1\\
+\vec{u}_2\\
+\vec{u}_3\end{pmatrix}$$
+
+Lo que tenemos es:
+
+$$\begin{pmatrix}2 & 0 & -1\end{pmatrix}_{B_u}\begin{pmatrix}\vec{u}_1\\
+\vec{u}_2\\
+\vec{u}_3\end{pmatrix} = \begin{pmatrix}\alpha &\beta & \gamma\end{pmatrix}_{B_v}\begin{pmatrix}2 & -1 & 1\\
+0 & -1 & 2\\
+-1 & 1 & -3\end{pmatrix}\begin{pmatrix}\vec{u}_1\\
+\vec{u}_2\\
+\vec{u}_3\end{pmatrix}$$ $$= \begin{pmatrix}2\alpha-\gamma &-\alpha-\beta +\gamma& \alpha+2\beta-3\gamma\end{pmatrix}\begin{pmatrix}\vec{u}_1\\
+\vec{u}_2\\
+\vec{u}_3\end{pmatrix}$$
+
+Ahora ya solo falta resolver el sistema:
+
+$$\left\{\begin{matrix}2\alpha &&&-&\gamma &=& 2\\
+-\alpha & -&\beta&+&\gamma &=&0\\
+\alpha&+&2\beta&-&3\gamma &=&-1\end{matrix}\right.$$
+
+
+
+Cuya única solución es $(1,-1,0)$.
+
+Así pues:
+
+$$\begin{pmatrix}2 & 0 & -1\\
+-1 & -1 & 1\\
+1 & 2 & -3\end{pmatrix}\begin{pmatrix}
+1\\
+-1\\
+0\end{pmatrix}_{B_v} = \begin{pmatrix}
+2\\
+0\\
+-1
+\end{pmatrix}_{B_u}$$
+
+
+
+# 3. Proposiciones
+
+<l class = "prop">**Proposición.**</l> Las matrices de cambio de base son siempre invertibles y, si $P$ es la matriz del cambio de base de $B_u$ a $B_v$, entonces $P^{-1}$ es la matriz del cambio de base de $B_v$ a $B_u$.
+
+
+**Ejercicio 27.** Demostrar formalmente esta Proposición.
+
+
+
+
+<l class = "prop">**Proposición.**</l> Sea $E$ un $\mathbb{K}$-espacio vectorial de dimensión $n$ y sean $B,B',B''$ bases de $E$. Si $P$ es la matriz de cambio de base de $B$ a $B'$ y $Q$ es la matriz de cambio de base de $B'$ a $B''$, entonces la matriz de cambio de base de $B$ a $B''$ es $Q\cdot P$ 
+
+
+
+
+
+
+
+

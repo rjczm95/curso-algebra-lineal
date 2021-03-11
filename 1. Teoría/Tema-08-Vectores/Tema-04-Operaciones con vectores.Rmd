@@ -1,0 +1,138 @@
+---
+title: "Tema 5 - Vectores"
+author: "Ramon Ceballos"
+date: "28/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# **Operaciones con vectores**
+
+# 1. Suma de vectores
+
+**Primera forma**
+
+<l class = "definition">**Suma de vectores.**</l> Dados $\vec{u} = (u_1,\dots,u_n)$ y $\vec{v} = (v_1,\dots,v_n)$, su suma es:
+
+$$\vec{w} = \vec{u}+\vec{v} = (u_1+v_1,u_2+v_2,\dots,u_n+v_n)$$
+
+Geométricamente es el vector formado por la diagonal del paralelogramo que tiene los dos vectores sumandos como lados y origen el mismo que ambos:
+
+<div class = "center">
+![<l class = "phototext">Suma de vectores</l>](Images/vector8.png)
+
+</div>
+
+**Segunda forma**
+
+O bien, el vector que une el origen del primer sumando con el extremo del último, habiendo colocado cada origen de los vectores sumandos sobre el extremo del vector sumando precedente.
+
+<div class = "center">
+![<l class = "phototext">Suma de vectores</l>](Images/vector9.png)
+</div>
+
+
+Si se tuviesen que sumar más de dos vectores, resulta más útil la segunda forma que hemos mostrado,
+
+Basta con colocar cada origen de los vectores sumandos sobre el extremo del vector sumando precedente.
+
+<div class = "center">
+![<l class = "phototext">Suma de más de 2 vectores</l>](Images/vector10.png)
+</div>
+
+# 2. Resta de vectores
+
+<l class = "definition">**Resta de vectores.**</l> Dados $\vec{u} = (u_1,\dots,u_n)$ y $\vec{v} = (v_1,\dots,v_n)$, su resta es:
+
+$$\vec{w} = \vec{u}-\vec{v} = (u_1-v_1,u_2-v_2,\dots,u_n-v_n)$$
+
+
+Geométricamente, se realiza la suma entre el vector minuendo y el opuesto del sustraendo.
+
+<div class = "center">
+![<l class = "phototext">Resta de vectores</l>](Images/vector11.png)
+</div>
+
+
+<l class = "observ">**Observación.**</l> Al realizar la resta $\vec{u}-\vec{v}$ se busca un vector $\vec{w}$ tal que si se le suma al sustraendo ha de dar el minuendo.
+
+En definitiva, será:
+
+$$\vec{u}-\vec{v} = \vec{w}\Leftrightarrow \vec{v}+\vec{w} = \vec{u}$$
+
+
+Si se tiene un vector $\vec{AB}$ obtenido a partir de los puntos $A$ y $B$ y se dibujan los vectores $\vec{OA}$ y $\vec{OB}$.
+
+Entonces se puede ver como $\vec{AB},\ \vec{OA},\ \vec{OB}$ forman un triángulo vectorial que cumple las relaciones siguientes:
+
+$$\vec{OA}+\vec{AB}-\vec{OB} = \vec{0}\Leftrightarrow \vec{AB} = \vec{OB}-\vec{OA}$$
+<div class = "center">
+![<l class = "phototext">Obtención de las componentes de un vector</l>](Images/vector12.png)
+</div>
+
+# 3. Producto de un vector por un escalar
+
+<l class = "definition">**Producto por escalar.**</l> Dados $\vec{u} = (u_1,\dots,u_n)\in\mathbb{K}^n$ y $\lambda\in\mathbb{K}$, su producto es:
+
+$$\lambda\vec{u} = (\lambda u_1,\lambda u_2,\dots,\lambda u_n)$$
+
+<div class = "center">
+![<l class = "phototext">Producto por escalar</l>](Images/vector13.png)
+</div>
+
+
+El resultado de multiplicar un escalar $\lambda \ne 0$ por un vector $\vec{u}$ es otro vector $\vec{v}$ de la misma dirección que $\vec{u}$, de sentido igual o contrario dependiendo del signo del escalar (positivo o negativo, respectivamente) y de módulo igual a $\lambda$ veces el de $\vec{u}$.
+
+<div class = "center">
+![<l class = "phototext">Producto por escalar $\lambda$</l>](Images/vector14.png)
+</div>
+
+## 3.1. Vectores paralelos
+
+<l class = "definition">Vectores paralelos.</l> Dos vectores $\vec{u} = (u_1,\dots,u_n)$ y $\vec{v}=(v_1,\dots,v_n)$ son paralelos (o proporcionales) si existe un valor $\lambda\ne0$ tal que $\vec{u} = \lambda\vec{v}$
+
+Serán del mismo sentido si $\lambda>0$ y de sentidos opuestos si $\lambda<0$.
+
+# 4. Combinación lineal de vectores
+
+<l class = "definition">**Combinación lineal de vectores.** </l>Dados $V = \{\vec{v}_1, \vec{v}_2,\dots,\vec{v}_k\}$ un conjunto de vectores de $\mathbb{K}^n$ y $\alpha_1,\alpha_2,\dots,\alpha_k\in\mathbb{K}$ se define la combinación lineal de los vectores de $V$ como el vector $\vec{w}$ tal que:
+
+$$\vec{w} = \sum_{i=1}^k\alpha_i\vec{v}_i = \alpha_1\vec{v}_1+\cdots+\alpha_k\vec{v}_k$$
+
+
+La combinación lineal de vectores no es una operación nueva, sino que reune en un mismo lugar la suma de vectores y el porducto por escalares.
+
+Para poder hacer combinaciones lineales de vectores, es necesario que todos ellos tengan el mismo número de componentes y el resultado será otro vector de estas mismas características.
+
+### Ejemplo 5
+
+¿Es el vector $(2,3)$ combinación lineal de $(3,1)$ y $(-6,-2)$?
+
+En otras palabras, ¿existen escalares $a,b\in\mathbb{R}$ tales que $(2,3) = a(3,1)+b(-6,-2)$?
+
+Si lo pensamos de otra forma, lo anterior equivale a probar si existe solución al sistema de dos ecuaciones y dos incógnitas siguiente:
+
+$$\left\{\begin{matrix}3a&-&6b &=& 2\\a&-&2b&=&3\end{matrix}\right.$$
+
+Veamos de qué tipo de sistema se trata haciendo uso del Teorema de Rouché-Frobenius.
+
+En primer lugar, $\det(A) = \begin{vmatrix}3&-6\\1&-2\end{vmatrix} = 0$
+
+Sin embargo, si sustituimos la segunda columna por el vector de términos independientes, tenemos:
+
+$$\begin{vmatrix}3 & 2\\1 & 3 \end{vmatrix} = 7\ne 0$$
+
+Con lo cual, acabamos de ver que $rg(A) = 1$ mientras que $rg(A|B) = 2$. Por tanto, el sistema es incompatible, lo que nos lleva a concluir que no, $(2,3)$ no es combinación lineal de $(3,1)$ y $(-6,-2)$.
+
+
+
+
+
+
+
+

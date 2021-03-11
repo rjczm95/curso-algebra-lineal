@@ -1,0 +1,198 @@
+---
+title: "Tema 6 - Espacios vectoriales"
+author: "Ramon Ceballos"
+date: "6/3/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# **Bases de un espacio vectorial**
+
+# 1. Definición general
+
+<l class = "definition">**Base de $E$.**</l> Se define que un conjunto de vectores $\vec{u}_1,\vec{u}_2,\dots,\vec{u}_n\in E$ son una base de $E$ si:
+
+- $\vec{u}_1,\vec{u}_2,\dots,\vec{u}_n$ es un sistema generador de $E$.
+
+- $\vec{u}_1,\vec{u}_2,\dots,\vec{u}_n$ son linealmente independientes.
+
+
+# 2. Teorema y proposiciones
+
+## 2.1 Teorema de cuando $B$ es una base de $E$
+
+<l class = "prop">**Teorema.**</l> Sean $E$ un $\mathbb{K}$-e.v. y $B\subseteq E$. Entonces, $B$ es una base de $E$ si, y solo si todo vector $\vec{u}\in E$ se puede expresar como una combinación lineal de $\vec{u}_1,\vec{u}_2,\dots,\vec{u}_n\in B$ de manera única.
+
+$$\forall\vec{u}\in E,\ \exists!\alpha_1,\alpha_2,\dots,\alpha_n\in\mathbb{K}:\ \vec{u} = \sum_{i = 1}^n\alpha_i\vec{u}_i$$
+
+**Ejercicio 13.** Demostrar formalmente este Teorema.
+
+De este teorema podemos extraer una propiedad o proposición muy importante que viene descrita a continuación.
+
+<l class = "prop">**Proposición.**</l> Sea $E$ un $\mathbb{K}$-e.v. finitamente generado y sea $S=\{u_1,\dots,u_n\}$ un conjunto de generadores. Entonces $E$ tiene una base finita $B$ de forma que $B\subseteq S$.
+
+**Ejercicio 14.** Demostrar formalmente esta Proposición.
+
+
+## 2.2 Teorema de Steinitz
+
+<l class = "prop">**Teorema de Steinitz.**</l>  Sea $E$ un $\mathbb{K}$-e.v., sea $B = \{u_1,\dots,u_n\}$ una base de $E$ y sean $v_1,\dots,v_m$ vectores linealmente independientes. Entonces, se pueden sustituir $m$ vectores cualesquiera de la base $B$ por los $v_1,\dots,v_m$ obteniendo así una nueva base. En particular, necesariamente se tiene que $m\le n$.
+
+**Ejercicio 15.** Demostrar formalmente este Teorema.
+
+
+## 2.3 Teorema 
+
+<l class = "prop">**Teorema.**</l> Sea $E$ un $\mathbb{K}$-e.v. Si $E$ tiene una base finita, digamos $B = \{u_1,\dots,u_n\}$, entonces todas las bases de $E$ son finitas y tienen exactamente $n$ elementos.
+
+**Ejercicio 16.** Demostrar formalmente este Teorema.
+
+Como hemos visto hasta ahora, un espacio vectorial tiene infinitas bases. En cada espacio vectorial, hay una que tiene características especiales. Esta no es otra que la <l class = "definition">**base canónica**</l>.
+
+### Ejemplo 8. Base canónica
+
+- En $\mathbb{R}^2$, la base canónica es $\{\vec{e}_1,\vec{e}_2\}$ donde:
+
+$$\vec{e}_1 = (1,0)\qquad \vec{e}_2 = (0,1)$$
+
+- En $\mathbb{R}^3$, la base canónica es $\{\vec{e}_1,\vec{e}_2,\vec{e}_3\}$ donde:
+
+$$\vec{e}_1 = (1,0,0)\qquad \vec{e}_2 = (0,1,0)\qquad \vec{e}_3= (0,0,1)$$
+
+- En $\mathbb{R}^n$, la base canónica es $\{\vec{e}_1,\vec{e}_2,\dots,\vec{e}_n\}$ donde $\vec{e}_i = (0,\dots,0,1,0,\dots,0)\quad \forall i = 1,2,\dots,n$. Es decir, todas las componentes del vector son 0 a excepción de la $i-$ésima que vale 1.
+
+
+# 3. Dimensión de un espacio vectorial
+
+Como también hemos visto que el número de elementos de una base de un espacio vectorial $E$ dado es único, tiene sentido definir la dimensión de $E$.
+
+## 3.1 Dimensión finita
+
+<l class = "definition">**$E$ de dimensión finita.**</l> Sea $E\ne\{0\}$ (no nulo) un $\mathbb{K}$-e.v. Diremos que $E$ es de dimensión finita si existe $n\in\mathbb{Z}^+$ y una base de $E$ (y, por tanto, todas) formada por $n$ vectores (dimensión de $n$). 
+
+<l class = "definition">**Dimensión de $E$.**</l> Es el número $n$ de vectores que conforman cualquiera de sus bases. Lo denotamos $\dim(E)$.
+
+<l class = "observ">*Observación.* </l>Si $E = \{0\}$, no tendrá base, pero diremos que es de dimensión finita y con $\dim(E) = 0$. Es decir, solo tiene dimensión 0.
+
+
+## 3.2 Dimensión infinita
+
+<l class = "definition">**$E$ de dimensión infinita.**</l> Si $E$ no tiene ninguna base finita. En este caso, lo denotaremos como $\dim(E) = +\infty$
+
+### Ejemplo 9. Ejemplos de Dimensión de un espacio vectorial
+
+- $\dim(\mathbb{K}^n) = n$ (vectores)
+
+- $\dim(\mathbb{K}_n[x]) = n+1$ (polinomios de grado menor o igual que $n$)
+
+- $\dim(\mathbb{K}[x]) = +\infty$ (polinomios en una variable)
+
+- $\dim(\mathcal{M}_{m\times n}(\mathbb{K})) = m\times n$ (dimensión de las matrices la multiplicación $mxn$)
+
+
+<l class = "important">**¡Ojo!**</l> Puede que a veces nos haga falta escribir la dimensión indicando sobre que cuerpo estamos trabajando.
+
+Entonces, lo que haremos será escribir $\dim_{\mathbb{K}}(E)$.
+
+### Ejemplo 10. Dimensión de espacios vectoriales que relacionan diferentes cuerpos
+
+- $\dim_{\mathbb{Q}}(\mathbb{R}) = +\infty$ (relación de los numeros reales en base a los racionales)
+
+- $\dim_{\mathbb{R}}(\mathbb{R}) = 1$ (relación de los reales respecto a los reales)
+
+- $\dim_{\mathbb{R}}(\mathbb{C}) = 2$, ya que $\{1,i\}$ es una base de $\mathbb{C}$ como $\mathbb{R}-$e.v. (complejos)
+
+
+## 3.3 Proposiciones
+
+<l class = "prop">**Proposición.**</l> Sea $E$ un $\mathbb{K}$-e.v. de dimensión finita y sea $B = \{u_1,\dots,u_n\}$ una base de $E$, entonces:
+
+1. Si $v_1,\dots,v_n$ son L.I., entonces son base de $E$
+
+2. Si $v_1,\dots,v_n$ generan todo $E$, entonces son base de $E$
+
+3. La dimensión de $E$, coincide con el máximo número de vectores LI y con el mínimo número de generadores
+
+4. Todo conjunto de vectores LI de $E$ se puede completar hasta una base de $E$
+
+5. Si $F$ es un sub-e.v. de $E$, entonces $F$ también es de dimensión finita y $\dim(F)\le\dim(E)$. Además, $\dim(F) = \dim(E)$ si, y solo si $F = E$
+
+**Ejercicio 17.** Demostrar formalmente esta Proposición.
+
+Consecuencia de la proposición (colorario) obtenemos lo siguiente:
+
+<l class = "prop">**Corolario.**</l> Sea $E$ un $\mathbb{K}$-e.v. Entonces $E$ es de dimensión infinita si, y solo si, podemos encontrar conjuntos de vectores LI de cardinal finito tan grandes como queramos.
+
+
+**Ejercicio 18.** Demostrar formalmente este Corolario.
+
+
+<l class = "prop">**Corolario.**</l> Si $E$ es un $\mathbb{K}$-e.v. y $E = \langle u_1,\dots,u_n\rangle$ entonces $E$ es de dimensión finita y $\dim(E)\le n$. Es decir, todo $\mathbb{K}$-espacio vectorial finitamente generado es de dimensión finita menor o igual al número de generadores.
+
+### Ejemplo 11
+
+Sea $F$ el subespacio vectorial de $\mathbb{R}^3$ dado por:
+
+$$F = \{(x,y,z)\in\mathbb{R}^3\ |\ x-y+z = 0\}$$
+
+Todos los vectores de $F$ se pueden escribir como $(x,x+z,z)$ variando $x,z$ en $\mathbb{R}$ y, por tanto:
+
+$$(x,x+z,z) = x\cdot(1,1,0)+z\cdot(0,1,1)$$
+
+Es evidente que $u_1 = (1,1,0)$ y $u_2 = (0,1,1)$ generan $F$. También son LI. Por lo tanto, forman una base de $F$.
+
+Veamos ahora como completarla hasta una base de $\mathbb{R}^3$.
+
+Siguiendo el Teorema de Steinitz, lo que haremos será ir introduciendo sucesivamente $u_1,u_2$ a una base conocida, como por ejemplo la base canónica $e_1 = (1,0,0),\ e_2 = (0,1,0),\ e_3 = (0,0,1)$.
+
+- Como que $u_1 = (1,1,0) = 1\cdot e_1+1\cdot e_2$, podemos sustituir por ejemplo $e_2$ por $u_1$ obteniendo así una nueva base $e_1,u_1,e_3$
+
+Para introducir $u_2$, primero lo escribimos como combinación lineal de la nueva base:
+
+$$u_2 = (0,1,1) = -(1,0,0)+(1,1,0)+(0,0,1) = (-1)\cdot e_1+1\cdot u_1+1\cdot e_3$$
+
+Por tanto, podemos sustituir cualquiera de los restantes ya que todos los escalares son distintos a 0. Así, según el Teorema de Steinitz, $u_1,u_2,e_3$ es una base de $\mathbb{R}^3$ que evidentemente completa a la de $F$
+
+
+# 4. Fórmula de Grassman
+
+<l class = "prop">**Teorema. Fórmula de Grassmann.** </l>Sea $E$ un $\mathbb{K}$-e.v. de dimensión finita y sean $F$ y $G$ subespacios vectoriales de $E$. Entonces se verfica:
+
+$$\dim(F+G)+\dim(F\cap G) = \dim(F)+\dim(G)$$
+
+**Ejercicio 19.** Demostrar formalmente este Teorema.
+
+
+<l class = "observ">*Observación.*</l> Notemos que si tenemos una suma directa, $F\oplus G$, tenemos que $F\cap G = \{0\}$, lo que equivale a decir $\dim(F\cap G) = 0$. Por tanto, por el `Teorema` anterior, tenemos:
+
+$$\dim(F\oplus G) = \dim(F) + \dim(G)$$ 
+
+## 4.1 Colorario
+
+<l class = "prop">**Corolario.**</l> Sean $E$ un $\mathbb{K}$-e.v. de dimensión finita y $F,G$ sub-e.v. de $E$. Entonces las siguientes afirmaciones son equivalentes:
+
+- $F$ y $G$ son complementarios ($E = F\oplus G$)
+
+- $F\cap G = \{0\}$ y $\dim(E)= \dim(F)+\dim(G)$
+
+
+<l class = "prop">**Corolario.**</l> Sea $E$ un $\mathbb{K}$-espacio vectorial de dimensión finita, entonces todo subespacio vectorial $F$ admite al menos un complementario.
+
+
+**Ejercicio 20.** Demostrar formalmente este Corolario.
+
+
+
+
+
+
+
+
+
+
+

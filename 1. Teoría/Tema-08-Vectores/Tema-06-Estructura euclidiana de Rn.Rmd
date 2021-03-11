@@ -1,0 +1,222 @@
+---
+title: "Tema 5 - Vectores"
+author: "Ramon Ceballos"
+date: "28/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# **Estructura euclidiana de $\mathbb{R}^n$**
+
+# 1. Producto escalar
+
+El producto escalar es un número real que se escribe del modo $\langle\vec{u},\vec{v}\rangle$.
+
+<l class = "definition">**Producto escalar.**</l> Sean $\vec{u} = (u_1,\dots,u_n)$ y $\vec{v} = (v_1,\dots,v_n)$ dos vectores de $\mathbb{R}^n$. Se define el producto escalar $\vec{u}\cdot\vec{v}\text{ o } \langle\vec{u},\vec{v}\rangle$ como el número real:
+
+$$\langle\vec{u},\vec{v}\rangle = u_1v_1+u_2v_2+\cdots+u_nv_n$$
+
+El producto escalar es la tercera operación básica entre vectores de $\mathbb{R}^n$.
+
+Del producto escalar es de donde se derivan los conceptos métricos como la ortogonalidad, la norma, el ángulo y se abre camino a múltiples aplicaciones geométricas y físicas del álgebra lineal.
+
+### Ejemplo 6
+
+Sean $\vec{u} = (2,3,0)$ y $\vec{v} = (-1,3,2)$ dos vectores de $\mathbb{R}^3$.
+
+Su producto escalar será:
+
+$$\langle\vec{u},\vec{v}\rangle = 2\cdot(-1)+3\cdot3+0 = 7$$
+
+## 1.1. Propiedades del producto escalar
+
+<l class = "prop">**Propiedades del producto escalar.**</l>
+
+- Conmutativa: $\langle\vec{u},\vec{v}\rangle = \langle\vec{v},\vec{u}\rangle$
+
+- Distributiva respecto de la suma: $$\langle\vec{u},(\vec{v}+\vec{w})\rangle = \langle\vec{u},\vec{v}\rangle+\langle\vec{u},\vec{w}\rangle$$
+
+- Asociativa y conmutativa entre escalares y vectores: $$\begin{matrix}\langle(\lambda\vec{u}),\vec{v}\rangle = \lambda\langle\vec{u},\vec{v}\rangle\\ \langle\vec{u},(\lambda\vec{v})\rangle = \lambda\langle\vec{u},\vec{v}\rangle\end{matrix}$$
+
+- Si $\vec{u} = 0$, entonces $\langle\vec{u},\vec{u}\rangle = 0$
+
+- Si $\vec{u}\ne 0$, entonces $\langle\vec{u},\vec{u}\rangle >0$
+
+
+
+
+# 2. Norma o longitud de un vector
+
+Se calcula a partir del producto escalar (raíz cuadrada del producto escalar del vector dado). La norma de un vector se denota como $||\vec{u}||$. 
+
+<l class = "definition">**Norma.**</l> Dado $\vec{u} = (u_1,u_2,\dots,u_n)\in\mathbb{R}^n$ su norma o longitud viene dada por:
+
+$$||\vec{u}|| = \sqrt{\langle\vec{u},\vec{u}\rangle} = \sqrt{{u}_1^2+{u}_2^2+\cdots+{u}_n^2}$$
+
+## 2.2. Propiedades de la norma de un vector
+
+<l class = "prop">**Propiedades de la norma.**</l> 
+
+- $||\vec{u}||>0,\ \forall\vec{u}\ne\vec{0}$, es decir, será positiva para cualquier vector que no sea el vector 0.
+
+- $||\lambda\vec{u}|| = |\lambda|||\vec{u}||$, es decir, se puede multiplicar el valor absoluto del escalar por la norma.
+
+- Desigualdad triangular: $||\vec{u}+\vec{v}||\le ||\vec{u}||+||\vec{v}||$
+
+- Teorema de Pitágoras: $||\vec{u}+\vec{v}||^2 = ||\vec{u}||^2+||\vec{v}||^2\Leftrightarrow \vec{u}\perp\vec{v}$ (siempre y cuando sean perpendiculares se cumplirá)
+
+- Desigualdad de Cauchy-Schwarz: $|\langle\vec{u},\vec{v}\rangle|\le||\vec{u}||\cdot||\vec{v}||$. Se dice que el valor absoluto del producto escalar de dos vectores es menor o igual que multiplicar el módulo de uno de los vectores por el módulo del otro.
+
+### **Demostración Desigualdad de Cauchy-Schwarz**
+
+Tal y como vimos anteriormente, una de las propiedades de la norma  es que el producto escalar en valor absoluto de dos vectores es menor o igual al producto de sus normas.
+
+$$|\langle\vec{u},\vec{v}\rangle|\le||\vec{u}||\cdot||\vec{v}||$$
+
+A partir de la igualdad siguiente:
+
+$$\cos(\alpha) = \frac{\langle\vec{u},\vec{v}\rangle}{||\vec{u}||\cdot||\vec{v}||}$$
+
+Si tenemos en cuenta que el valor absoluto del coseno para cualquier ángulo es siempre menor o igual a 1, obtenemos:
+
+$$|\cos(\alpha)| = \left|\frac{\langle\vec{u},\vec{v}\rangle}{||\vec{u}||\cdot||\vec{v}||}\right|\le 1\Leftrightarrow |\langle\vec{u},\vec{v}\rangle|\le||\vec{u}||\cdot||\vec{v}||$$
+
+## 2.2. Vector unitario
+
+<l class = "definition">**Vector unitario.**</l> Un vector $\vec{e}$ es unitario si tiene norma 1. Es decir, si:
+
+$$||\vec{e}|| = 1$$
+
+
+
+# 3. Distancia entre dos puntos
+
+<l class = "definition">**Distancia entre dos puntos.**</l> Dados dos puntos $A$ y $B$, se define la distancia entre ambos como $\text{d}(A,B) = ||\vec{AB}|| = \sqrt{\langle\vec{AB},\vec{AB}\rangle}$
+
+Por tanto, la distancia entre A y B es la raíz cuadrada del producto escalar del vector $\vec{AB}$ consigo mismo.
+
+## 3.1. Teoremas
+
+<l class = "prop">**Teorema.**</l> Dados dos vectores $\vec{u}$ y $\vec{v}$ y $\alpha$ el ángulo que forman ambos, entonces se cumple que: 
+
+$$\langle\vec{u},\vec{v}\rangle = ||\vec{u}||\cdot||\vec{v}||\cdot \cos(\alpha)$$
+
+<div class = "center">
+![<l class = "phototext">Idea gráfica de lo que nos dice el Teorema</l>](Images/vector15.png)
+</div>
+
+
+<l class = "prop">**Teorema del coseno.**</l> En un triángulo $\triangle{ABC}$ cualquiera y siendo $\alpha,\beta,\gamma$ los ángulos y $a,b,c$ los lados opuestos a los ángulos anteriores, entonces:
+
+$$a^2 = b^2+c^2-2bc\cos{\alpha}$$
+
+Se le conoce también como el Teorema de Pitágoras generalizado.
+
+<div class = "center">
+![<l class = "phototext">Triángulo descrito en el Teorema</l>](Images/vector16.png)
+</div>
+
+### **Demostración del teorema**
+
+A continuación demostraremos el Teorema que nos da la igualdad:
+
+$$ \langle\vec{u},\vec{v}\rangle= ||\vec{u}||\cdot||\vec{v}||\cdot \cos(\alpha)$$
+
+
+Consideremos el vector $\vec{u}-\vec{v}$. Éste, junto con los vectores $\vec{u}$ y $\vec{v}$ formarán un triángulo.
+
+Aplicando $||\vec{w}||^2 = \langle\vec{w},\vec{w}\rangle$ al vector $\vec{u}-\vec{v}$, resulta que:
+
+$$||\vec{u}-\vec{v}||^2 = \langle\vec{u}-\vec{v},\vec{u}-\vec{v}\rangle = \langle\vec{u},\vec{u}\rangle+\langle\vec{v},\vec{v}\rangle-2\langle\vec{u},\vec{v}\rangle = ||\vec{u}||^2+||\vec{v}||^2-2\langle\vec{u},\vec{v}\rangle$$
+
+Por otro lado, aplicando el Teorema del coseno al triángulo antes mencionado, tenemos:
+
+$$||\vec{u}-\vec{v}||^2 = ||\vec{u}||^2+||\vec{v}||^2-2||\vec{u}||\cdot||\vec{v}||\cdot\cos{(\alpha)}$$
+
+Comparando ambas expresiones, obtenemos que:
+
+$$\langle\vec{u},\vec{v}\rangle = ||\vec{u}||\cdot||\vec{v}||\cdot\cos{(\alpha)}$$
+
+
+
+
+# 4. Ángulo entre dos vectores
+
+<l class = "definition">**Ángulo entre dos vectores.**</l> Se define el ángulo que forman dos vectores como el valor real $\alpha$ tal que: 
+
+$$\cos(\alpha) = \frac{\langle\vec{u},\vec{v}\rangle}{||\vec{u}||\cdot||\vec{v}||}$$
+
+## 4.1. Vectores ortogonales o perpendiculares
+
+<l class = "definition">**Vectores ortogonales.**</l> Dos vectores son ortogonales si su producto escalar es 0. Para que se cumpla esto para cuando los vectores **v** y **u** son distintos de cero, se tiene que dar que el coseno de $\alpha$ sea cero y por tanto valga $\frac{\pi}{2}$, que son 90 grados.
+
+$$\vec{u}\perp\vec{v}\Leftrightarrow \langle\vec{u},\vec{v}\rangle= 0\Leftrightarrow \alpha =\frac{\pi}{2}$$
+
+## 4.2. Vectores ortonormales
+
+<l class = "definition">**Vectores ortonormales.**</l> Dos vectores son ortonormales si son ortogonales y la norma de ambos es 1, es decir, son vectores unitarios.
+
+
+**Ejercicio 2**
+
+Encontrar el valor de $a$ para el cual $(a,0,-1,3)$ sea perpendicular a $(1,7,a-1,2a+3)$
+
+
+# 5. Proyección Ortogonal
+
+<l class = "definition">**Proyección ortogonal.**</l> La proyección ortogonal de un vector $\vec{v}$ sobre otro vector $\vec{u}$ es un vector paralelo a $\vec{u}$ tal que sumado a otro perpendicular a $\vec{u}$ dará $\vec{v}$.
+
+<div class = "center">
+![<l class = "phototext">Idea gráfica del significado de proyección ortogonal</l>](Images/vector17.png)
+</div>
+
+## 5.1. Cálculo de la proyección ortogonal
+
+Se trata de obtener $P_{\vec{v}}(\vec{u}) = \vec{v}_1$ conociendo los vectores $\vec{u}$ o $\vec{v}$.
+
+1. Se descompone el vector $\vec{v} = \vec{v}_1+\vec{v}_2$ donde $\vec{v}_1||\vec{u}$ (paralela) y $\vec{v}_2\perp\vec{u}$ (perpendicular) son sus componentes.
+
+2. $\vec{v}_1 = \lambda\vec{u}$ por paralelismo, ya que ambos vectores son paralelos.
+
+3. Se sustituye en base a lo anterior, obteniendo lo siguiente: $\vec{v}= \lambda\vec{u}+\vec{v}_2\Rightarrow\vec{v}_2 = \vec{v}-\lambda\vec{u}$. 
+
+4. Debido a la perpendicularidad se cumple que $\langle\vec{v}_2,\vec{u}\rangle = 0\Rightarrow\langle(\vec{v}-\lambda\vec{u}),\vec{u}\rangle = 0$ por ortogonalidad.
+
+5. Con todo lo dictado se obtiene que:
+
+$$\lambda = \frac{\langle\vec{v},\vec{u}\rangle}{\langle\vec{u},\vec{u}\rangle} =\frac{\langle\vec{u},\vec{v}\rangle}{||\vec{u}||^2} $$
+
+Por lo tanto, la proyección ortogonal del vector **v** sobre el vector **u** se calcula del siguiente modo:
+
+$$P_{\vec{v}}(\vec{u}) = \vec{v}_1= \lambda\vec{u} = \frac{\langle\vec{u},\vec{v}\rangle}{||\vec{u}||^2}\vec{u} $$
+
+### Ejemplo 7
+
+Calcular la proyección ortogonal del vector $\vec{v} = (1,2)$ sobre $\vec{u} = (3,1)$.
+
+Por el resultado anterior:
+
+$$P_{\vec{v}}(\vec{u}) =  \frac{\langle\vec{u},\vec{v}\rangle}{||\vec{u}||^2}\vec{u} $$
+
+En primer lugar, calculemos:
+
+$$\langle\vec{u},\vec{v}\rangle = \langle(1,2),(3,1)\rangle = 5$$
+
+Por otro lado:
+
+$$||\vec{u}||^2 = 10$$
+
+Con lo cual:
+
+$$P_{\vec{v}}(\vec{u}) = \frac{5}{10}\vec{u} = \frac{1}{2}(3,1)$$
+
+
+
+
+
+

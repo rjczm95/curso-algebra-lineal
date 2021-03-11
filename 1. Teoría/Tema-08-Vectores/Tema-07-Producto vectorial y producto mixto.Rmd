@@ -1,0 +1,134 @@
+---
+title: "Tema 5 - Vectores"
+author: "Ramon Ceballos"
+date: "28/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# **Producto vectorial y producto mixto**
+
+Solo va a tene rsentido su aplicación en $R^3$.
+
+# 1. Producto vectorial
+
+<l class = "definition">**Producto vectorial ($\vec{u}\wedge\vec{v}$).**</l> Sean $\vec{u} = (u_1,u_2,u_3)$ y $\vec{v} = (v_1,v_2,v_3)$ dos vectores de $\mathbb{R}^3$. El producto vectorial de $\vec{u}$ y $\vec{v}$ se define como el vector:
+
+$$\vec{u}\wedge\vec{v} = (u_2v_3-u_3v_2,u_3v_1-u_1v_3,u_1v_2-u_2v_1)$$
+
+## 1.1. Propiedades del producto vectorial
+
+
+### A. Ortogonalidad del producto vectorial con el producto escalar de cada vector que lo forma
+
+<l class = "prop">**Propiedades del producto vectorial.**</l> Si se multiplica escalarmente el producto escalar de $\vec{u}$ por el producto vectorial de $\vec{u}\wedge\vec{v}$ dará 0, y viceversa.
+
+$$\langle\vec{u},(\vec{u}\wedge\vec{v})\rangle = 0$$
+$$\langle\vec{v},(\vec{u}\wedge\vec{v})\rangle = 0$$
+
+Donde se deduce que tanto $\vec{u}$ como $\vec{v}$ son ortogonales (perpendiculares) a su producto vectorial.
+
+
+### B. Área de un paralelogramo en el producto vectorial
+
+<l class = "prop">**Propiedades del producto vectorial.**</l>
+Geométricamente, el módulo del producto vectorial, $\vec{u}\wedge\vec{v}$, representa el área del paralelogramo determinado por los dos vectores $\vec{u}$ y $\vec{v}$.
+
+$$||\vec{u}\wedge\vec{v}|| = ||\vec{u}||\cdot h = ||\vec{u}||\cdot||\vec{v}||\cdot\sin(\alpha)$$
+
+<div class = "center">
+![<l class = "phototext">Interpretación geométrica del producto vectorial</l>](Images/vector18.png)
+</div>
+
+
+
+### C. Producto vectorial como determinante
+
+<l class = "prop">**Producto vectorial como determinante.**</l>
+
+$$\vec{u}\wedge\vec{v} = (u_2v_3-u_3v_2,u_3v_1-u_1v_3,u_1v_2-u_2v_1)$$ 
+$$\vec{u}\wedge\vec{v} = (u_2v_3-u_3v_2)\vec{i}+(u_3v_1-u_1v_3)\vec{j}+(u_1v_2-u_2v_1)\vec{k}$$
+
+$$\vec{u}\wedge\vec{v} = \begin{vmatrix}
+\vec{i} & \vec{j}& \vec{k}\\
+u_1 & u_2 & u_3\\
+v_1 & v_2 & v_3\end{vmatrix}$$
+
+
+
+### D. Propiedades generales del producto vectorial
+
+<l class = "prop">**Propiedades del producto vectorial.**</l>
+
+- Propiedad anticonmutativa: $\vec{u}\wedge\vec{v} = -\vec{v}\wedge\vec{u}$
+
+- Propiedad distributiva:
+
+$$\vec{u}\wedge(\vec{v}+\vec{w}) = \vec{u}\wedge\vec{v}+\vec{u}\wedge\vec{w}\\ (\vec{v}+\vec{w})\wedge\vec{u} = \vec{v}\wedge\vec{u}+\vec{w}\wedge\vec{u}$$
+
+- Propiedad asociativa de vectores y escalares:
+
+$$\alpha(\vec{u}\wedge\vec{v}) = (\alpha\vec{u})\wedge\vec{v}=\vec{u}\wedge\alpha\vec{v}$$
+
+- $\vec{u}\wedge\vec{0}=\vec{0}\wedge\vec{u} = \vec{0}$
+
+- $\vec{u}\wedge\vec{u} = 0$
+
+
+# 2. Producto mixto 
+
+<l class = "definition">**Producto mixto. ($\{\vec{u},\vec{v},\vec{w}\}$)**</l> Sean $\vec{u} = (u_1,u_2,u_3), \vec{v} =(v_1,v_2,v_3)$ y $\vec{w} = (w_1,w_2,w_3)$ tres vectores de $\mathbb{R}^3$ distintos del 0. Entonces, el producto mixto de $\vec{u},\vec{v}$ y $\vec{w}$ se define como el vector:
+
+$$\{\vec{u},\vec{v},\vec{w}\} = \langle\vec{u},\vec{v}\wedge\vec{w}\rangle = \begin{vmatrix}
+u_1 & u_2 & u_3\\
+v_1 & v_2 & v_3\\
+w_1 & w_2 & w_3\end{vmatrix}$$
+
+## 2.1. Vectores coplanarios
+
+<l class = "definition">**Vectores coplanarios.**</l> Si $\{\vec{u},\vec{v},\vec{w}\} = 0$
+
+Si el producto mixto da cero, tenemos que los vectores son coplanarios.
+
+Esto ocurre porque si el determinante mostrado anteriormente vale 0, entonces tenemos que una de las filas es combinación lineal de las otras dos.
+
+## 2.2. Propiedades del producto mixto
+
+### A. Generalidades
+
+<l class = "prop">**Propiedades del producto mixto.**</l>
+
+- La fórmula del producto misxto será: $\{\vec{u},\vec{v},\vec{w}\} = u_1v_2w_3-u_1v_3w_2+u_2v_3w_1-u_2v_1w_3+u_3v_1w_2-u_3v_2w_1$. Se obtiene aplicando la regla de Sarrus a la matriz anterior.
+
+- Si se cambia una fila por otra, el determinante cambia de signo. Si se cambian dos filas, el determinante mantiene el signo. De esto se extrae lo siguiente: $\{\vec{u},\vec{v},\vec{w}\} = \{\vec{v},\vec{w},\vec{u}\} = \{\vec{w},\vec{u},\vec{v}\} = -\{\vec{v},\vec{u},\vec{w}\} = -\{\vec{u},\vec{w},\vec{v}\} = -\{\vec{w},\vec{v},\vec{u}\}$
+
+- Si los tres vectores son coplanarios, entonces: $\{\vec{u},\vec{v},\vec{w}\} = 0$
+
+- Si $\{\vec{u},\vec{v},\vec{w}\} = 0$, entonces o algún vector es $\vec{0}$ o los tres vectores son coplanarios.
+
+<div class = "center">
+![<l class = "phototext">3 vectores coplanarios</l>](Images/vector19.png)
+</div>
+
+
+### B. Volumen del paralelepípedo y producto mixto de vectores
+
+<l class = "prop">**Propiedades del producto mixto.**</l> Geométricamente, el producto mixto, $\{\vec{u},\vec{v},\vec{w}\}$, representa el volumen del paralelepípedo determinado por los tres vectores **u, v, w**.
+
+<l class = "observ">**Observación.**</l> $\{\vec{u},\vec{v},\vec{w}\} = ||\vec{u}||\cdot||\vec{v}\wedge\vec{w}||\cdot\cos(\alpha)$ donde $||\vec{v}\wedge\vec{w}||$ es el área de la base del paralelepípedo y $||\vec{u}||\cos(\alpha)$ es la proyección escalar del vector $\vec{u}$ sobre la dirección perpendicular a la base, es decir, la altura del paralelepípedo. Esto da el volumen del paralelepípedo.
+
+<div class = "center">
+![<l class = "phototext">Interpretación geométrica del producto mixto</l>](Images/vector20.png)
+</div>
+
+
+
+
+
+
+

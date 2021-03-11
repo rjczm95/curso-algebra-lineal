@@ -1,0 +1,232 @@
+---
+title: "Tema 6 - Espacios vectoriales"
+author: "Ramon Ceballos"
+date: "5/3/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# **Subespacios vectoriales**
+
+# 1. Definición general
+
+<l class = "definition">**Subespacio vectorial.**</l> Sea $F\subseteq E$ un subconjunto no vacío del espacio vectorial $E$ sobre un cuerpo $\mathbb{K}$. Diremos que $F$ es un subespacio vectorial de $E$ si, y solo si, se verifica:
+
+- La suma de dos elementos de $F$ es otro elemento de $F$: 
+
+$$\forall\vec{x},\vec{y}\in F\Rightarrow\vec{x}+\vec{y}\in F$$
+
+- El producto de un escalar por un elemento $F$ es otro elemento de $F$: 
+
+$$\forall\vec{x}\in F,\ \alpha\in\mathbb{K}\Rightarrow\alpha\vec{x}\in F$$
+
+## 1.1. Subespacios triviales
+
+Cualquier espacio vectorial siempre va a tener dos subespacios vectoriales triviales.
+
+<l class = "definition">**Subespacios triviales.**</l> Si $E$ es un $\mathbb{K}$-espacio vectorial, se verifica siempre que $E$ y $\{0\}$ (conjunto cero, en el que solo consta el elemento neutro) son subespacios vectoriales de $E$. Estos se denominan **subespacios vectoriales triviales de $E$ o impropios**.
+
+De lo anterior, se deduce fácilmente la siguiente proposición.
+
+<l class = "prop">**Proposición.**</l> Si $F$ es un subespacio vectorial de $E$, entonces: 
+
+- $\vec{0}\in F$. Cualquier subespacio vectorial debe de contener el vector $\vec{0}$ del espacio.
+
+- Si $\vec{x}\in F$, entonces $-\vec{x}\in F$. Debe estar presente en el subespacio vectorial cualquier elemento opuesto de cada elemento contenido.
+
+Una gran utilidad de esta proposición es que si se comprueba que $\vec{0}\not\in F$, entonces este conjunto no puede ser nunca un espacio vectorial.
+
+
+**Ejercicio 3.** Demostrar formalmente esta proposición.
+
+
+
+# 2. Proposiciones para un subespacio vectorial
+
+## 2.1 Proposiciones generales
+
+<l class = "prop">**Proposición.**</l> Sea $E$ un $\mathbb{K}$-e.v. (espacio vectorial) y $F$ un subconjunto no vacío, entonces son equivalentes las siguientes afirmaciones:
+
+- $F$ es un subespacio vectorial
+- $F$ es un $\mathbb{K}$-espacio vectorial con las mismas operaciones de $E$ restringidas a $F$
+- $F$ verifica $ax+by\in F\quad\forall a,b\in\mathbb{K}$ y $\forall x,y\in F$
+- Cualquier combinación lineal de vectores de $F$ es un vector de $F$, es decir, $\sum a_ix_i\in F\quad\forall a_i\in\mathbb{K}$ y $\forall x_i\in F$
+
+
+**Ejercicio 4.** Demostrar formalmente esta proposición.
+
+
+## 2.2 Proposición de intersección y suma de familia de suespacios vectoriales
+
+<l class = "prop">**Proposición.**</l> Sea $E$ un $\mathbb{K}$-espacio vectorial si:
+
+- Si $(F_i)_{i\in I}$ es una familia cualquiera de subespacios vectoriales de $E$, entonces $\bigcap_{i\in I}F_i$ (la intersección de todas las familias, es decir, los vectores que pertenecen a la vez a todos los subespacios vectoriales) es un subespacio vectorial de $E$ contenido en todos los $F_i$ con $i\in I$. Este será el subespacio vectorial más grande contenido a la vez en todos y cada uno de los $F_i$.
+
+- Si $F_1,\dots,F_n$ son subespacios vectoriales de $E$, entonces la suma de todos los subespacios:
+
+$$\sum_{i = 1}^nF_i = F_i+\cdots+F_n = \{x_1+\cdots+x_n\ |\ x_i\in F_i,\ i = 1,\dots, n\}$$
+
+Esta suma es un subespacio vectorial de $E$ llamado **subespacio vectorial suma** que contiene todos los $F_i$ con $i = 1,\dots, n$. Este será el subespacio vectorial más pequeño que contiene a todos y cada uno de los $F_i$.
+
+**Ejercicio 5.** Demostrar formalmente esta proposición.
+
+Lo que nos dice la proposición anterior, en otras palabras, es que la **intersección** infinita de subespacios vectoriales, es a su vez un subespacio vectorial.
+
+No obstante, la **unión** (finita o arbitraria) de subespacios vectoriales no es subespacio vectorial. 
+
+Por su parte, una **suma finita** de subespacios vectoriales sí es subespacio vectorial y sus elementos son de la forma descrita anteriormente.
+
+
+
+### Ejemplo 3
+
+En el $\mathbb{R}$ espacio vectorial $\mathbb{R}^2$, consideremos los subespacios vectoriales $F,G$ dados por los ejes de coordenadas cartesianas. Así pues:
+
+$$F = \{(x,0)\ |\ x\in\mathbb{R}\}\qquad G = \{(0,y)\ |\ y\in\mathbb{R}\}$$
+
+Entonces, es fácil ver que $F\cap G =\{(0,0)\}$ y que $F+G = \mathbb{R}^2$, que son efectivamente subespacios vectoriales (de hecho son los impropios).
+
+En cambio, si hacemos la unión, tenemos $F\cup G = \{(x,y)\in\mathbb{R}^2\ |\ x=0\text{ o }y = 0\}$, que no es subespacio vectorial de $\mathbb{R}^2$, ya que tomando los elementos $(1,0), (0,1)\in F\cup G$, tenemos que su suma, $(1,1)\not\in F\cup G$ 
+
+
+# 3. Suma directa de subespacios vectoriales
+
+En un subespacio vectorial, la suma $F+G$ tiene una particularidad ya que en este nuevo subespacio vectorial, la expresión de cada elemento como suma de un elemento de $F$ más un elemento de $G$ no tiene por qué ser única y, por lo general, no lo es.
+
+En este sentido, podemos dar las siguientes definiciones:
+
+1. **Suma directa para dos subvectores.** Sean $E$ un $\mathbb{K}$-e.v. y $F,G$ subespacios vectoriales de $E$. Entonces, si cada elemento del subespacio vectorial suma $F+G$ se escribe de manera única como suma de un elemento de $F$ más un elemento de $G$, se dice que la suma de $F$ y $G$ es directa y se denota por **$F\oplus G$**
+
+2. **Complementarios en $E$.** Si además de tener $F\oplus G$ se verifica $E = F\oplus G$, se dice que $F$ y $G$ son complementarios en $E$.
+
+
+<l class = "prop">**Proposición.**</l> Sean $F$ y $G$ dos subespacios vectoriales de un $\mathbb{K}$-e.v. $E$. Entonces, la suma de $F$ y $G$ es directa si, y solo si, $F\cap G = \{0\}$ (la intersección entre F y G es el vector 0).
+
+**Ejercicio 6.** Demostrar formalmente esta proposición.
+
+Consecuencia de esta proposición surge el concepto de colorario que viene definido a continuación.
+
+<l class = "prop">**Corolario.**</l> Sean $E$ un $\mathbb{K}$-e.v. y $F,G$ subespacios vectoriales de $E$. Los subespacios $F,G$ serán complementarios si verifican:
+
+- $\forall x\in E$, $\exists y\in F,\ z\in G\ :\ x = y+z$. Indica que para cualquier vector $\vec{x}$ del espacio $E$, existe un vector $\vec{y}$ del subespacio $F$ y un vector $\vec{z}$ del subespacio de $G$ de modo que $\vec{x} = \vec{y} + \vec{z}$.
+
+- $F\cap G = \{0\}$. La intersección entre $F$ y $G$ es el vector nulo $\vec{0}$.
+
+
+El concepto de suma directa lo podemos generalizar a $n$ sumandos del siguiente modo.
+
+<l class = "definition">**Suma directa para $n$ subvectores.**</l> Sean $E$ un $\mathbb{K}$-e.v. y $F_1,\dots,F_n$ subespacios vectoriales de $E$. Entonces, diremos que la suma $F_1+\cdots +F_n$ es directa si cada elemento de $F_1+\cdots +F_n$ se escribe de manera única como suma de elementos de $F_1,\dots,F_n$. Se denota por $F_1\oplus\cdots\oplus F_n$
+
+
+### Ejemplo 3 (colorario)
+
+Recordemos el `Ejemplo 3`. En el $\mathbb{R}$-e.v $\mathbb{R}^2$ habíamos considerado:
+
+$$F = \{(x,0)\ |\ x\in\mathbb{R}\}\qquad G = \{(0,y)\ |\ y\in\mathbb{R}\}$$
+
+También, habíamos visto que $F+G = \mathbb{R}^2$ y que $F\cap G = \{0\}$.
+
+Con lo cual, tenemos que $F\oplus G = \mathbb{R}^2$
+
+
+**Ejercicio 7**
+
+Se puede demostrar de forma parecida al caso $n = 2$, que la suma $F_1+\cdots +F_n$ es directa si, y solo si, para todo $i = 2,\dots,n$ se tiene que el único punto en común para cada $F_i$ sea el vector $\vec{0}$.
+
+$$F_i\cap(F_1+\cdots+F_{i-1}) = \{0\}$$
+
+
+# 4. Subespacio vectorial generado por $S$
+
+En ocasiones disponemos de un subconjunto $S$ de $E$ que no es subespacio vectorial, pero estamos interesados en buscar el subespacio vectorial más pequeño (con respecto a la inclusión de todos los elementos del subconjunto $S$) que contiene este subconjunto $S$.
+
+Este subespacios siempre existe ya que solo debemos considerar la familia de todos los subespacios vectoriales de $E$ que contienen a $S$ y entonces sabemos que su intersección es otro subespacio vectorial que, evidentemente, contiene a $S$ y este será el más pequeño con la propiedad.
+
+<l class = "definition">**Subespacio vectorial generado por $S$.**</l> Será el subespacio más pequeño que contiene a todos los vectores del conjunto $S$. Lo denotamos por $\langle S\rangle$
+
+
+Diremos también que $S$ es un conjunto o sistema generador o que $S$ genera a $\langle S\rangle$.
+
+En definitiva, hemos visto que el subespacio vectorial generado por $S$ será la intersección de todos los subespacios $F$ de $E$ que contienen a $S$. Esto se expresa del siguiente modo:
+
+$$\langle S\rangle = \bigcap_{\begin{matrix}S\subseteq F\\
+F\text{ subespacio}\end{matrix}}F$$
+
+
+**De forma más general**, definimos sistema generador del siguiente modo.
+
+- <l class = "definition">**Sistema generador.**</l> Dado un conjunto de vectores $\vec{u}_1,\vec{u}_2,\dots,\vec{u}_n\in E$ (estos son los elementos del conjunto $S$), se dice que forman un sistema generador del espacio vectorial $E$ si cualquier vector $\vec{u}\in E$ se puede expresar como una combinación lineal de ellos. Es decir:
+
+$$\forall\vec{u}\in E,\ \exists\alpha_1,\alpha_2,\dots,\alpha_n\in\mathbb{K}:\ \vec{u} = \sum_{i = 1}^n\alpha_i\vec{u}_i$$
+
+
+
+## 4.1 Proposiciones
+
+**PROPOSICIÓN 1**
+
+<l class = "prop">**Proposición.**</l> Sea $S$ un subconjunto cualquiera de un $\mathbb{K}$-e.v. $E$. Entonces, el subespacio vectorial generado por S ($\langle S \rangle$) será las combinaciones lineales posibles de los elementos del conjunto $S$. Es decir:
+
+$$\langle S \rangle = \{\alpha_1\cdot x_1+\cdots +\alpha_n\cdot x_n\ |\ n\in\mathbb{Z}^+;\ x_i\in S;\ \alpha_i\in\mathbb{K},\ i = 1,\dots,n\}$$
+
+Es decir, $\langle S\rangle$ es el subespacio formado por todas las combinaciones lineales posibles de elementos de $S$.
+
+**Ejercicio 8.** Demostrar formalmente esta proposición.
+
+<l class = "observ">**Observación.**</l> A partir de la caracterización de un subespacio generado por un subconjunto, queda claro que si tenemos dos subconjuntos de $E$ de forma que $S\subseteq S'$ ($S$ está contenido en $S'$), entonces $\langle S\rangle\subseteq\langle S'\rangle$.
+
+En el caso en que $S$ es finito, $S = \{x_1,\dots,x_n\}$, entonces se puede escribir:
+
+$$\langle S\rangle = \langle x_1,\dots,x_n\rangle = \{\alpha_1\cdot x_1 +\cdots +\alpha_n\cdot x_n\ |\ \alpha_i\in\mathbb{K},\ i=1,\dots,n\}$$
+
+### Ejemplo 4
+
+Los vectores $(1,0,0,\dots,0),\ (0,1,0,\dots,0),\ (0,0,1,\dots,0),\dots,(0,0,0,\dots,1)$ forman un sistema generador de $\mathbb{K}^n$. 
+
+Por lo tanto, podemos decir que $\mathbb{K}^n$ está finitamente generado.
+
+### Ejemplo 5
+
+Análogamente, los vectores $\{1,x,x^2,\dots,x^n\}$ forman un conjunto de generadores del $\mathbb{K}$-e.v. $\mathbb{K}_n[x]$, que es por lo tanto finitamente generado.
+
+En cambio, $\mathbb{K}[x]$ es un $\mathbb{K}$-e.v. que no es finitamente generado. Si suponemos que $p_1(x),\dots,p_k(x)$ forma un conjunto finito de generadores de este espacio vectorial, considerando $n = \max{(\deg(p_1),\dots,\deg(p_k))}$, todo polinomio de grado superior a $n$ no podría ser expresado como combinación lineal de los $p_i(x)$, $i= 1,\dots,k$. Llegamos así a contradicción. Observemos pues que $\mathbb{K}[x]$ tiene un conjunto infinito (numerable) de generadores: $\{1,x,\dots,x^n,\dots\}$
+
+### Ejemplo 6
+
+Dentro de $\mathbb{R}^3$ consideramos el subconjunto $F = \{(x,y,z)\ |\ 5x-y+3z = 0\}$.
+
+Entonces, está claro que $F$ es un subespacio vectorial y que además, todo elemento de $F$ es de la forma $(x,5x+3z,z)$ variando $x,z\in\mathbb{R}$. Así, todo elemento de $F$ se escribe de la forma:
+
+$$u = x\cdot (1,5,0)+z\cdot (0,3,1)$$ 
+
+Por tanto, los vectores $(1,5,0)$ y $(0,3,1)$ generan todo $F$.
+
+
+**Ejercicio 9**
+
+- Demostrar que $F$ es un subespacio vectorial de $E$
+- Detallar por qué los elementos de $F$ tienen esa forma
+
+
+
+**PROPOSICIÓN 2**
+
+<l class = "prop">**Proposición.**</l> Sea $E$ un $\mathbb{K}$-e.v. y $S\subseteq E$ ($S$ es un subconjunto de $E$). Si $u\in\langle S\rangle$, entonces se tiene $\langle S\cup \{u\}\rangle = \langle S\rangle$
+
+Lo que nos viene a decir esta proposición es que un mismo espacio o subespacio vectorial puede tener conjuntos de generadores diferentes.
+
+
+**Ejercicio 10.** Demostrar formalmente esta proposición.
+
+
+
+
+
+
+
+

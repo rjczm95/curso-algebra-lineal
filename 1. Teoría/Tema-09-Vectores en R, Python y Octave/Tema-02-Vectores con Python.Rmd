@@ -1,0 +1,232 @@
+---
+title: "Tema 5 - Vectores con R, Python y Octave"
+author: "Ramon Ceballos"
+date: "2/3/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# **Vectores con Python**
+
+# 1. Definir vectores en `Python`
+
+Para crear un vector en `Python`, utilizamos **`numpy.array()`**.
+
+```{python}
+import numpy as np
+x = np.array([1,2,3,4,5,6,7,8,9,0])
+x
+```
+
+Para calcular la longitud (la dimensión), utilizamos la función **`len()`**.
+
+```{python}
+len(x)
+```
+
+
+
+# 2. Operaciones básicas con vectores en `Python`
+
+**Sumar y restar** dos o más vectores es muy simple, siempre y cuando sean de la misma dimensión:
+
+```{python}
+x = np.array([0, 3, -1, 3, 5])
+y = np.array([1, 2, 3, -1, 0])
+x+y
+x-y
+```
+
+El **producto por un escalar** también funciona de forma sencilla:
+
+```{python}
+x = np.array([1,0,-1,0,2,0,-2])
+2*x
+-2*x
+5*x
+```
+
+
+
+# 3. Producto escalar en `Python`
+
+Simplemente, lo que hace la función anterior es calcular el producto escalar de dos vectores, siempre y cuando estos tengan la misma dimensión. 
+
+Si no, salta un mensaje explicando el error cometido.
+
+```{python}
+def productoEscalar(x,y):
+  if len(x) == len(y):
+    suma = 0
+    for i in range(0,len(x)):
+      suma = suma + x[i]*y[i]
+    return suma
+  else:
+   return "ERROR: las longitudes de los vectores no coinciden"
+x = np.array([0, 3, -1, 3, 5])
+y = np.array([1, 2, 3, -1, 7])
+productoEscalar(x,y)
+```
+Además de esto, Python tiene ne la librería NumPy una función para el cálculo del producto escalar: **np.dot()**.
+
+```{python}
+import numpy as np
+np.dot(x,y)
+
+```
+
+
+
+# 4. Norma Euclídea con `Python`
+
+Para calcular la norma de un vector, lo que hacemos es utilizar la función **`numpy.linalg.norm()`**.
+
+```{python}
+x = np.array([1,2,0,3,-1,1])
+np.linalg.norm(x)
+```
+
+
+# 5. Calcular Distancia Euclídea entre dos puntos con `Python`
+
+Para calcular la distancia entre dos puntos, la definimos la norma del vector que los une, es decir $d(x,y)=||x−y||$. En nuestro caso vamos a utilizar la función **`distancia()`**, la cual definimos del siguiente modo:
+
+```{python}
+def distancia(x,y):
+  import numpy as np
+  if len(x) == len(y):
+    dist =  np.linalg.norm(x-y)
+    return dist
+  else:
+   return "ERROR: las longitudes de los vectores no coinciden"
+```
+
+```{python}
+x = np.array([0, 3, -1, 3, 5])
+y = np.array([1, 2, 3, -1, 0])
+distancia(x,y)
+```
+
+
+# 6. Ángulo entre dos vectores en `Python`
+
+Si queremos calcular el ángulo entre dos vectores, debemos definir nosotros mismos la función, atendiendo al **teorema del coseno**.
+
+```{python}
+def angleRad(x,y):
+  import numpy as np
+  import math
+  if len(x) == len(y):
+    angle = math.acos(productoEscalar(x,y)/(np.linalg.norm(x)*np.linalg.norm(y)))
+    return angle
+  else:
+    return "ERROR: Las dimensiones no coinciden" 
+          
+x = np.array([0, 3, -1, 3, 5])
+y = np.array([1, 2, 3, -1, 0])
+angleRad(x,y)
+```
+
+
+Si lo que queremos es el resultado en grados, entonces:
+
+```{python}
+def angleGrad(x,y):
+  import numpy as np
+  import math
+  if len(x) == len(y):
+    angle = math.acos(productoEscalar(x,y)/(np.linalg.norm(x)*np.linalg.norm(y)))
+    return angle/(2*math.pi)*360
+  else:
+    return "ERROR: Las dimensiones no coinciden" 
+          
+x = np.array([0, 3, -1, 3, 5])
+y = np.array([1, 2, 3, -1, 0])
+angleGrad(x,y)
+```
+
+
+# 7. Calcular la proyección ortogonal de $\vec{v}$ sobre $\vec{u}$ con `Python`
+
+También definimos una función que calcule la proyección ortoganol de un vector **`v`** sobre el vector **`u`**.
+
+$$P_{\vec{v}}(\vec{u}) = \vec{v}_1= \lambda\vec{u} = \frac{\langle\vec{u},\vec{v}\rangle}{||\vec{u}||^2}\vec{u}$$
+
+```{python}
+def proyeccionOrt(u,v):
+  import numpy as np
+  if len(u) == len(v):
+    proy = (productoEscalar(u,v)/pow(np.linalg.norm(u),2))*u
+    return proy
+  else:
+    return "ERROR: Las dimensiones no coinciden"
+    
+u = np.array([3,1])
+v = np.array([1,2])
+proyeccionOrt(u,v)
+proyeccionOrt(v,u)
+```
+
+
+# 8. Producto vectorial con `Python`
+
+Desarrollamos la función del producto vectorial como hemos visto en clase.
+
+
+```{python}
+def productoVectorial(x,y):
+  import numpy as np
+  if len(x) == len(y) and len(x) == 3:
+    z = np.array([x[1]*y[2] - x[2]*y[1], -(x[0]*y[2]-x[2]*y[0]), x[0]*y[1]-x[1]*y[0]])
+    return z
+  else:
+    return "ERROR" 
+```
+
+
+```{python}
+x = np.array([1,2,3])
+y = np.array([0,-1,1])
+productoVectorial(x,y)
+```
+
+Además con la función de Numpy denominada **np.cross** se puede obtener el producto vectorial de forma directa.
+
+```{python}
+np.cross(x,y)
+```
+
+
+
+# 9. Producto mixto con `Python` 
+
+Desarrollamos la función del producto mixto como hemos visto en clase.
+
+```{python}
+def productoMixto(x,y,z):
+  import numpy as np
+  if len(x) == len(y) and len(x) == len(z) and len(z) == 3:
+    return np.linalg.det(np.array([x,y,z]))
+  else:
+    return "ERROR"
+```
+
+
+```{python}
+x = np.array([1,2,3])
+y = np.array([0,-1,1])
+z = np.array([2,0,-3])
+productoMixto(x,y,z)
+```
+
+Otro método sería:
+
+```{python}
+np.dot(x,np.cross(y,z))
+```
+
+
+

@@ -1,0 +1,111 @@
+---
+title: "Tema 6 - Espacios vectoriales"
+author: "Ramon Ceballos"
+date: "6/3/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# **Dependencia e Independencia Lineal de vectores**
+
+# 1. Combinaciones lineales
+
+Recordemos la definición de Combinación Lineal (CL).
+
+<l class = "definition">**Combinación lineal.**</l> Dados $p$ vectores $\vec{u}_1,\vec{u}_2,\dots,\vec{u}_p\in\mathbb{K}^n$ y los escalares $\alpha_1,\alpha_2,\dots,\alpha_p\in\mathbb{K}$, una combinación lineal de esos $p$ vectores es un vector dado por una expresión de la forma:
+
+$$\alpha_1\vec{u}_1+\alpha_2\vec{u}_2+\cdots+\alpha_p\vec{u}_p\in\mathbb{K}^n$$
+
+### Ejemplo 7
+
+Expresar el vector $(2,-4)$ como combinación lineal de los vectores $(1,1)$ y $(-2,0)$.
+
+Necesitamos $\alpha,\beta\in\mathbb{R}$ tales que:
+
+$$(2,-4) = \alpha(1,1)+\beta(-2,0)$$
+
+Con lo cual, se trata de resolver el sistema:
+
+$$\left\{\begin{matrix}
+\alpha &-&2\beta &=& 2\\
+&& \alpha&=& -4\end{matrix}\right.$$
+
+Así pues, ya tenemos que $\alpha = -4$. Con lo cual:
+
+$$2\beta = \alpha-2 = -6\Rightarrow\beta = -3$$
+
+Entonces, la combinación lineal que buscábamos es:
+
+$$(2,-4) = (-4)(1,1)+(-3)(-2,0)$$
+
+
+
+# 2. Dependencia lineal de vectores
+
+<l class = "definition">**Dependencia lineal.**</l> Dados los vectores $\vec{u}_1,\vec{u}_2,\dots,\vec{u}_p\in\mathbb{K}^n$, diremos que son linealmente dependientes (LD) si la ecuación vectorial es:
+
+$$\sum_{i = 1}^p\alpha_i\vec{u}_i = \vec{0}$$
+
+Para tener dependencia lineal ésta tiene infinitas soluciones y, por tanto, los escalares $\alpha_i\in\mathbb{K}$ pueden tomar valores no nulos.
+
+
+<l class = "definition">**Dependencia lineal.**</l> Dados los vectores $\vec{u}_1,\vec{u}_2,\dots,\vec{u}_p\in\mathbb{K}^n$, diremos que son linealmente dependientes (LD) si alguno de ellos se puede expresar como una combinación lineal del resto:
+
+$$\exists1\le i\le p:\ \sum_{k\ne i}\alpha_k\vec{u}_k = \vec{u}_i$$
+
+# 3. Independencia lineal de vectores
+
+<l class = "definition">**Independencia lineal.**</l> Dados los vectores $\vec{u}_1,\vec{u}_2,\dots,\vec{u}_p\in\mathbb{K}^n$, diremos que son linealmente independientes (LI) si la ecuación vectorial es:
+
+$$\sum_{i = 1}^p\alpha_i\vec{u}_i = \vec{0}$$
+
+Para tener independencia lineal, esta expresión tiene como única solución la solución trivial. Es decir, $\alpha_i = 0\ \forall i=1,2,\dots,p$
+
+
+<l class = "definition">**Independencia lineal.**</l> Dados los vectores $\vec{u}_1,\vec{u}_2,\dots,\vec{u}_p\in\mathbb{K}^n$, diremos que son linealmente independientes (LI) si no es posible expresarlos como una combinación lineal del resto.
+
+$$\not\exists1\le i\le p:\ \sum_{k\ne i }\alpha_k\vec{u}_k  = \vec{u}_i$$
+
+
+
+En el caso de un conjunto $S\ne\emptyset$, $S\subseteq E$ finito o no, diremos que $S$ es linealmente independiente si cualquier subconjunto finito de $S$ lo es.
+
+Es dedir, si cualquier combinación lineal de un número finito de elementos de $S$ es igual a 0, implica que todos los escalares deben ser 0.
+
+De forma análoga, diremos que $S$ es linealmente dependiente si existen un número finito de elementos de $S$ y una combinación suya igual a 0 donde no todos los escalares son 0.
+
+# 4. Resultados de la Dependencia e Independencia Lineal de vectores
+
+## 4.1 Proposición
+
+### **PROPOSICIÓN 1**
+
+<l class = "prop">**Proposición.**</l> Sea $E$ un $\mathbb{K}$-espacio vectorial, entonces los vectores $x_1,x_2,\dots,x_n\in E$ son linealmente dependientes si, y solo si, uno de ellos es combinación lineal del resto.
+
+
+<l class = "observ">**Observación.** </l>Como habréis notado, nosotros habíamos dado como definición alternativa de dependencia lineal esta proposición. En muchos casos es así y en otros muchos se toma como propiedad. Por eso aquí hemos incluído ambas opciones.
+
+
+<div class = "exercise">
+**Ejercicio 11.** Demostrar formalmente esta proposición.
+</div>
+
+### **PROPOSICIÓN 2**
+
+<l class = "prop">**Proposición.**</l> Sea $E$ un $\mathbb{K}$-espacio vectorial y $S\subseteq E$ un conjunto linealmente independiente. Si $u\not\in \langle S\rangle$, entonces $S\cup\{u\}$ es linealmente independiente.
+
+<div class = "exercise">
+**Ejercicio 12.** Demostrar formalmente esta proposición.
+</div>
+
+
+
+
+
+
+

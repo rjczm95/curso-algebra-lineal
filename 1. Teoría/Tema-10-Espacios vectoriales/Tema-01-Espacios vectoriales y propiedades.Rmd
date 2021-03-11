@@ -1,0 +1,137 @@
+---
+title: "Tema 6 - Espacios vectoriales"
+author: "Ramon Ceballos"
+date: "5/3/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# **Espacios vectoriales**
+
+El espacio vectorial no tiene por qué estar compuesto exclusivamente de vectores, pudiendo estar compuesto de matrices, funciones,...
+
+# 1. Definición general
+
+<l class = "definition">**Espacio vectorial.**</l> Un espacio vectorial sobre un cuerpo conmutativo $\mathbb{K}$ es un conjunto $E$ no vacío (debe de tener elementos) y cerrado con las siguientes operaciones definidas:
+
+- *Ley de composición interna*. Esta ley dice que sumando elementos del espacio $E$ deben de salir elementos de dicho espacio $E$. La siguiente expresión matemática hace referencia a ello.
+
+$$\forall\vec{x},\vec{y}\in E\Rightarrow \vec{x}+\vec{y}\in E$$
+
+- *Ley de composición externa*. Dado un elemento del espacio $E$ y un escalar del cuerpo $\mathbb{K}$ sobre el que está montado el espacio vectorial, el producto del escalar por el elemento del espacio vectorial debe pertenecer al espacio $E$. La siguiente expresión matemática hace referencia a ello.
+
+$$\forall\vec{x}\in E,\alpha\in\mathbb{K}\Rightarrow\alpha\vec{x}\in E$$
+
+<l class = "definition">**Vectores.** </l>Nombre que reciben los elementos de $E$.
+
+<l class = "definition">**Escalares.** </l>Nombre que reciben los elementos de $\mathbb{K}$.
+
+
+
+# 2. Condiciones de todo espacio vectorial
+
+Se cumplen las siguientes condiciones en todo espacio vectorial.
+
+## 2.1 Condiciones de la ley de composición interna
+
+<l class = "prop">**Condiciones de la ley de composición interna.**</l>
+
+- Propiedad conmutativa: $$\vec{x}+\vec{y} = \vec{y}+\vec{x}\quad \forall\vec{x},\vec{y}\in E$$
+
+- Propiedad asociativa: $$\vec{x}+(\vec{y}+\vec{z}) = (\vec{x}+\vec{y})+\vec{z}\quad \forall\vec{x},\vec{y},\vec{z}\in E$$
+
+- Elemento neutro de la suma: $\exists\vec{0}\in E:\ \vec{x}+\vec{0}= \vec{x}\quad \forall\vec{x}\in E$
+- Existencia del opuesto: $\forall\vec{x}\in E,\ \exists-\vec{x}\in E:\ \vec{x}+(-\vec{x}) = (-\vec{x})+\vec{x} = \vec{0}$
+
+## 2.2 Condiciones de la ley de composición externa
+
+<l class = "prop">**Condiciones de la ley de composición externa.**</l>
+
+- Propiedad asociativa: $$\alpha(\beta\vec{x}) = (\alpha\beta)\vec{x}\quad \forall\vec{x}\in E,\alpha,\beta\in\mathbb{K}$$
+
+- Elemento neutro del producto (no tendría por qué ser 1, el elemento neutro): $$\exists1\in\mathbb{K}:\ 1\vec{x} = \vec{x}\quad \forall\vec{x}\in E$$
+
+- Propiedad distributiva del producto respecto de la suma de vectores:$$\alpha(\vec{x}+\vec{y}) = \alpha\vec{x}+\alpha\vec{y}\quad \forall\vec{x},\vec{y}\in E,\alpha\in\mathbb{K}$$
+
+- Propiedad distributiva del producto respecto de la suma de escalares:$$(\alpha+\beta)\vec{x} = \alpha\vec{x}+\beta\vec{x}\quad \forall\vec{x}\in E,\alpha,\beta\in\mathbb{K}$$
+
+
+<l class = "observ">**Observación.** </l> En la definición anterior y en las propiedades aparecen **dos sumas diferentes** que denotamos del mismo modo por `+`. La suma de los elementos de $E$ (la suma de vectores) y la suma de los elementos de $\mathbb{K}$ (la suma de escalares). Del mismo modo, los elementos neutros de ambas sumas también los denotamos iguales, por 0, aunque sean diferentes (uno es un vector y, el otro, es un escalar). El contexto nos dirá en cada momento a qué suma y a qué elemento neutro nos estamos refiriendo.
+
+**Ocurre lo mismo con el producto**. En caso de que pueda haber confusión, no se denotará ningún símbolo a la hora de referirnos a un producto de escalares, mientras que el producto de un escalar por un vector lo denotaremos por $\alpha\cdot \vec{x}$. Aunque no siempre seremos capaces de mantener esa notación, del mimso modo que denotaremos indistintamente como vectores $x$ o $\vec{x}$.
+
+
+### Ejemplo 1
+
+A continuación se muestran ejemplos de espacios vectoriales:
+
+- $\mathbb{R}^n$ formado por los vectores de $n$ componentes $(x_1,x_2,\dots,x_n)$.
+
+- El conjunto $P_n(\mathbb{K}) = \{a_nx^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0:\ a_i\in\mathbb{K},\ \forall0\le i\le n\}$.
+
+- El espacio $\mathcal{M}_2(\mathbb{K})$ de las matrices de orden 2 con coeficientes sobre $\mathbb{K}$.
+
+- El conjunto de las funciones continuas definidas sobre un cuerpo $\mathbb{K}$.
+
+### Ejemplo 2
+
+No son espacios vectoriales:
+
+- El conjunto de matrices $\mathcal{M}_{m\times n}(\mathbb{Z})$.
+
+- El conjunto de polinomios de grado exactamente igual a 3 con coeficientes reales.
+
+
+**Ejercicio 1**
+
+¿Por qué los conjuntos anteriores no son espacios vectoriales?
+
+
+# 3. Proposiciones de los espacios vectoriales
+
+## 3.1 Elemento neutro y puesto de un elemento
+
+<l class = "prop">**Proposición 1.** </l>Sea $E$ un $\mathbb{K}$-e.v. (espacio vectorial), entonces el neutro y el puesto de un elemento cualquiera $x\in E$ son únicos.
+
+**Demostración**
+
+Para ver la unicidad del elemento neutro, supongamos que $0_1$ y $0_2$ son dos neutros del espacio vectorial $E$. Entonces: $$0_1 = 0_1 + 0_2 = 0_2$$
+
+Con lo cual, $0_1 = 0_2$ tal y como queríamos ver.
+
+Ahora, para ver la unicidad del elemento opuesto, supongamos que $x\in E$ tiene dos elementos opuestos: $y,z$. Entonces, tendríamos $$y = y+0 = y + (x+z) = (y+x)+z = 0+z = z$$
+
+Con lo cual, $y = z$ tal y como queríamos demostrar.
+
+
+## 3.2 Propiedades generales de la definición $\mathbb{K}$-e.v.
+
+<l class = "prop">**Proposición 2.** </l> De la definición de $\mathbb{K}$-e.v. se deducen las siguientes propiedades:
+
+- $0\cdot \vec{x} = \vec{0}$
+
+- $\lambda\cdot \vec{0} = \vec{0}$
+
+- Si $\lambda\cdot \vec{x} = \vec{0}$, entonces $\vec{x} = \vec{0}$ o $\lambda = 0$
+
+- $(-\lambda)\cdot \vec{x} = -(\lambda\cdot \vec{x}) = \lambda\cdot \vec{(- x)}$. En particular, $(-1)\cdot \vec{x} = \vec{-x}$
+
+- $\lambda\cdot (\vec{x} - \vec{y}) = \lambda\cdot \vec{x} -\lambda \cdot \vec{y}$
+
+- $(\lambda-\mu)\cdot \vec{x} = \lambda \cdot \vec{x}-\mu\cdot \vec{x}$
+
+
+**Ejercicio 2.** Demostrar estas 6 propiedades formalmente. Video 181
+
+
+
+
+
+
+
+

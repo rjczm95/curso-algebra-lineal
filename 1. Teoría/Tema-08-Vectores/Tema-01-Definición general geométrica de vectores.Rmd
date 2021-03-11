@@ -1,0 +1,52 @@
+---
+title: "Tema 5 - Vectores"
+author: "Ramon Ceballos"
+date: "28/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# **Vectores**
+
+# 1. Definición general
+
+Los vectores son un tipo de matriz que solo tienen una fila/columna.
+
+Los vectores tienen un papel fundamental no solo en matemáticas sino también en la física, la ingeniería e incluso otros campos científicos.
+
+Los vectores en general tienen dos vertientes íntimamente ligadas: la algebraica y la geométrica.
+
+## 1.1 Vertiente geométrica
+
+En primer lugar, veremos los vectores desde un punto de vista geométrico.
+
+Sea $\mathbb{K}$ un cuerpo, entonces podemos establecer las siguientes definiciones.
+
+<l class = "definition">**Punto en la recta $\mathbb{K}$.**</l> Dados un origen y una unidad de longitud, cada punto de la recta viene definido por un, y solo un, escalar del cuerpo $\mathbb{K}$ y viceversa.
+
+<l class = "definition">**Punto en el plano $\mathbb{K}^2$.**</l> Dados un origen, dos ejes (rectas) y una unidad de longitud, un punto del plano es un par $(x,y)$ donde $x$ e $y$ son dos elementos del cuerpo $\mathbb{K}$.
+
+<l class = "definition">**Punto en el espacio $\mathbb{K}^3$.**</l> Dados un origen, 3 ejes (rectas) y una unidad de longitud, un punto del espacio es una terna $(x,y,z)$ donde $x,y$ y $z$ son tres elementos del cuerpo $\mathbb{K}$.
+
+La **definición general** será la siguiente.
+
+<l class = "definition">**Punto en $\mathbb{K}^n$.**</l> Se define como una $n$-tupla de números como la siguiente:
+
+$$X = (x_1,\dots,x_n)$$ 
+
+En essta tupla, $x_1,\dots,x_n\in\mathbb{K}$ y $n$ es la <l class = "definition">**dimensión**</l> del espacio $\mathbb{K}^n$.
+
+<l class = "definition">**Coordenadas de un punto.**</l> Son los valores $x_1,\dots,x_n\in\mathbb{K}$ del punto $X$.
+
+
+
+
+
+
+
+

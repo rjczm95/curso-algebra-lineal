@@ -1,0 +1,120 @@
+---
+title: "Tema 5 - Vectores"
+author: "Ramon Ceballos"
+date: "28/2/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# **Vectores fijos**
+
+# 1. Definiciones generales
+
+El vector fijo viene definido por el pto en el que empieza y por el punto en el que acaba.
+
+<l class = "definition">**Vector fijo.**</l> Es un par fijo de puntos $P$ y $Q$ que se denotará por $\vec{PQ}$.
+
+<l class = "definition">**Origen.**</l> Punto $P$ del vector $\vec{PQ}$.
+
+<l class = "definition">**Extremo.**</l> Punto $Q$ del vector $\vec{PQ}$.
+
+Normalmente los vectores en el plano o en el espacio de tres dimensiones se suelen representar mediante segmentos acabados en una punta de flecha en uno de sus dos extremos.
+ 
+## 1.1. Componentes cartesianas
+ 
+<l class = "definition">**Componentes cartesianas de un vector $\vec{PQ}$ fijo.**</l> Vectores que se obtienen al proyectar el vector $\vec{PQ}$ sobre los ejes de un sistema de coordenadas situado en el origen, $P$, de dicho vector.
+
+<div class = "center">
+![<l class = "phototext">Componentes de un vector. El color rojo es para componentes positivas y el verde, para componentes negativas</l>](Images/componentes.png)
+
+Si denotamos $P = (p_x,p_y)$ y $Q = (q_x,q_y)$, entonces las componentes del vector $\vec{PQ}$ se obtienen restando las coordenadas del punto extremo $Q$ al punto de origen $P$.
+
+$$\vec{PQ} = (q_x-p_x,q_y-p_y)$$
+
+El valor absoluto de las componentes del vector coincide con la de los catetos del triángulo rectángulo formado y tal que el vector sea su hipotenusa:
+
+<div class = "center">
+![<l class = "phototext">Triángulo rectángulo formado por las componentes del vector como catetos y el propio vector como hipotenusa</l>](Images/vector.png)
+</div>
+
+
+### Ejemplo 1
+
+Consideremos el vector $\vec{AB}$ donde $A = (1,2)$ y $B = (5,4)$.
+
+Sus componentes serán:
+
+$$\vec{AB} = (5-1,4-2) = (4,2)$$
+
+En este caso, ambas componentes son positivas.
+
+<div class = "center">
+![<l class = "phototext">Componentes del vector $\vec{AB}$</l>](Images/vector2.png)
+</div>
+
+
+### Ejemplo 2
+
+Consideremos el vector $\vec{AB}$ donde $A = (1,4)$ y $B = (5,2)$.
+
+Sus componentes serán:
+
+$$\vec{AB} = (5-1,2-4) = (4,-2)$$
+
+En este caso, su componente del eje horizontal será positiva, mientras que la componente del eje vertical será negativa.
+
+<div class = "center">
+![<l class = "phototext">Componentes del vector $\vec{AB}$</l>](Images/vector3.png)
+</div>
+
+
+
+# 2. Caracterización de un vector fijo
+
+## 2.1. Metodo I
+
+<l class = "prop">**Caracterización de un vector fijo (I).**</l> En el contexto geométrico, las 4 características de un vector fijo son:
+
+- **Origen.** Punto de aplicación donde empieza el vector.
+
+- **Módulo.** Longitud del segmento.
+
+- **Dirección.** Dirección de la recta a la cual pertenece el vector.
+
+- **Sentido.** Lo determina la punta de la flecha del vector.
+
+
+## 2.2. Metodo II
+
+<l class = "prop">**Caracterización de un vector fijo (II).**</l> Un vector fijo también queda completamente determinado por:
+
+- Sus componentes.
+- El punto origen.
+
+
+## 2.3. Metodo III
+
+<l class = "prop">**Caracterización de un vector fijo (III).**</l> Un vector fijo queda determinado si se conocen:
+
+- Las coordenadas del punto origen.
+- Las coordenadas del punto extremo.
+
+
+## 2.4.Vectores equivalentes
+
+<l class = "definition">**Vectores equivalentes.**</l> Diremos que dos vectores $\vec{AB}$ y $\vec{CD}$ son equivalentes si tienen las mismas componentes. Es decir, si:
+
+$$(b_x-a_x,b_y-a_y) = (d_x-c_x,d_y-c_y)$$
+
+### Ejemplo 3
+
+Dados $A = (5,3),\ B = (1,4),\ C = (4,2),\ D = (0,3)$. Los vectores $\vec{AB}$ y $\vec{CD}$ son equivalentes a pesar de tener diferentes orígenes y extremos ya que:
+
+$$\vec{AB} = (1-5,4-3) = (-4,1)$$
+$$\vec{CD} = (0-4,3-2) = (-4,1)$$
+
